@@ -1,0 +1,7 @@
+/vendor/
+/temp/cache/
+/log/*.log
+/config/local.neon
+/www/uploads/
+*.local.neon
+.env

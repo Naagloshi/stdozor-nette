@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Wrapper: runs Composer inside Docker container with correct UID/GID
+set -euo pipefail
+
+PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+
+docker compose -f "$PROJECT_DIR/docker-compose.yml" exec \
+    --user "$(id -u):$(id -g)" \
+    php composer "$@"

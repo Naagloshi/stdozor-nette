@@ -1,0 +1,4 @@
+{
+	"php.validate.executablePath": "/usr/bin/php8.3",
+	"php.version": "8.3"
+}

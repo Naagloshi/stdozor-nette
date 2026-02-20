@@ -1,0 +1,8 @@
+services:
+	- App\Router\RouterFactory::createRouter
+	- App\Model\Repository\UserRepository
+	- App\Model\Security\UserAuthenticator
+	- App\Model\Security\EmailVerificationService
+	- App\Model\Security\PasswordResetService
+	- App\Model\Security\PwnedPasswordChecker
+	- App\Model\Security\MailService

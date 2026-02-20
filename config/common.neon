@@ -1,0 +1,35 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+database:
+	dsn: 'mysql:host=mariadb;dbname=stdozor_nette;charset=utf8mb4'
+	user: stdozor
+	password: stdozor_password
+
+
+mail:
+	smtp: true
+	host: mailpit
+	port: 1025
+
+
+extensions:
+	translation: Contributte\Translation\DI\TranslationExtension
+
+
+translation:
+	locales:
+		default: cs
+		fallback: [cs]
+	dirs:
+		- %appDir%/../translations

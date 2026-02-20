@@ -1,0 +1,1100 @@
+<!DOCTYPE html><!-- "' --></textarea></script></style></pre></xmp></a></iframe></noembed></noframes></noscript></option></select></template></title></table></p></code>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex">
+	<meta name="generator" content="Tracy by Nette Framework">
+
+	<title>User Warning: The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions earlier or disable the SessionResolver.</title>
+	<!-- in /var/www/html/vendor/contributte/translation/src/LocalesResolvers/Session.php:44 -->
+	<!-- CLI (PID: 427): &apos;Standard input code&apos; -->
+
+	<style class="tracy-debug">:root{--tracy-space: 16px}@media (max-width: 600px){:root{--tracy-space: 8px}}tracy-div:not(a b),tracy-div:not(a b) *{font: inherit;line-height: inherit;color: inherit;background: transparent;margin: 0;padding: 0;border: none;text-align: inherit;list-style: inherit;opacity: 1;border-radius: 0;box-shadow: none;text-shadow: none;box-sizing: border-box;text-decoration: none;text-transform: inherit;white-space: inherit;float: none;clear: none;max-width: initial;min-width: initial;max-height: initial;min-height: initial}tracy-div:not(a b) *:hover{color: inherit;background: transparent}tracy-div:not(a b) *:not(svg):not(img):not(table){width: initial;height: initial}tracy-div:not(a b):before,tracy-div:not(a b):after,tracy-div:not(a b) *:before,tracy-div:not(a b) *:after{all: unset}tracy-div:not(a b) b,tracy-div:not(a b) strong{font-weight: bold}tracy-div:not(a b) small{font-size: smaller}tracy-div:not(a b) i,tracy-div:not(a b) em{font-style: italic}tracy-div:not(a b) big{font-size: larger}tracy-div:not(a b) small,tracy-div:not(a b) sub,tracy-div:not(a b) sup{font-size: smaller}tracy-div:not(a b) ins{text-decoration: underline}tracy-div:not(a b) del{text-decoration: line-through}tracy-div:not(a b) table{border-collapse: collapse}tracy-div:not(a b) pre{font-family: monospace;white-space: pre}tracy-div:not(a b) code,tracy-div:not(a b) kbd,tracy-div:not(a b) samp{font-family: monospace}tracy-div:not(a b) input{background-color: white;padding: 1px;border: 1px solid}tracy-div:not(a b) textarea{background-color: white;border: 1px solid;padding: 2px;white-space: pre-wrap}tracy-div:not(a b) select{border: 1px solid;white-space: pre}tracy-div:not(a b) article,tracy-div:not(a b) aside,tracy-div:not(a b) details,tracy-div:not(a b) div,tracy-div:not(a b) figcaption,tracy-div:not(a b) footer,tracy-div:not(a b) form,tracy-div:not(a b) header,tracy-div:not(a b) hgroup,tracy-div:not(a b) main,tracy-div:not(a b) nav,tracy-div:not(a b) section,tracy-div:not(a b) summary,tracy-div:not(a b) pre,tracy-div:not(a b) p,tracy-div:not(a b) dl,tracy-div:not(a b) dd,tracy-div:not(a b) dt,tracy-div:not(a b) blockquote,tracy-div:not(a b) figure,tracy-div:not(a b) address,tracy-div:not(a b) h1,tracy-div:not(a b) h2,tracy-div:not(a b) h3,tracy-div:not(a b) h4,tracy-div:not(a b) h5,tracy-div:not(a b) h6,tracy-div:not(a b) ul,tracy-div:not(a b) ol,tracy-div:not(a b) li,tracy-div:not(a b) hr{display: block}tracy-div:not(a b) a,tracy-div:not(a b) b,tracy-div:not(a b) big,tracy-div:not(a b) code,tracy-div:not(a b) em,tracy-div:not(a b) i,tracy-div:not(a b) small,tracy-div:not(a b) span,tracy-div:not(a b) strong{display: inline}tracy-div:not(a b) table{display: table}tracy-div:not(a b) tr{display: table-row}tracy-div:not(a b) col{display: table-column}tracy-div:not(a b) colgroup{display: table-column-group}tracy-div:not(a b) tbody{display: table-row-group}tracy-div:not(a b) thead{display: table-header-group}tracy-div:not(a b) tfoot{display: table-footer-group}tracy-div:not(a b) td{display: table-cell}tracy-div:not(a b) th{display: table-cell}tracy-div:not(a b) .tracy-sortable>:first-child>tr:first-child>*{position: relative}tracy-div:not(a b) .tracy-sortable>:first-child>tr:first-child>*:hover:before{position: absolute;right: .3em;content:"\21C5";opacity: .4;font-weight: normal}tracy-div:not(a b) .tracy-dump div{padding-left: 3ex}tracy-div:not(a b) .tracy-dump div div{border-left: 1px solid rgba(0,0,0,.1);margin-left: .5ex}tracy-div:not(a b) .tracy-dump div div:hover{border-left-color: rgba(0,0,0,.25)}tracy-div:not(a b) .tracy-dump{background: #FDF5CE;padding: .4em .7em;border: 1px dotted silver;overflow: auto}tracy-div:not(a b) table .tracy-dump.tracy-dump{padding: 0;margin: 0;border: none}tracy-div:not(a b) .tracy-dump-location{color: gray;font-size: 80%;text-decoration: none;background: none;opacity: .5;float: right;cursor: pointer}tracy-div:not(a b) .tracy-dump-location:hover,tracy-div:not(a b) .tracy-dump-location:focus{color: gray;background: none;opacity: 1}tracy-div:not(a b) .tracy-dump-array,tracy-div:not(a b) .tracy-dump-object{color: #C22}tracy-div:not(a b) .tracy-dump-string{color: #35D;white-space: break-spaces}tracy-div:not(a b) div.tracy-dump-string{position: relative;padding-left: 3.5ex}tracy-div:not(a b) .tracy-dump-lq{margin-left: calc(-1ex - 1px)}tracy-div:not(a b) div.tracy-dump-string:before{content:'';position: absolute;left: calc(3ex - 1px);top: 1.5em;bottom: 0;border-left: 1px solid rgba(0,0,0,.1)}tracy-div:not(a b) .tracy-dump-virtual span,tracy-div:not(a b) .tracy-dump-dynamic span,tracy-div:not(a b) .tracy-dump-string span{color: rgba(0,0,0,0.5)}tracy-div:not(a b) .tracy-dump-virtual i,tracy-div:not(a b) .tracy-dump-dynamic i,tracy-div:not(a b) .tracy-dump-string i{font-size: 80%;font-style: normal;color: rgba(0,0,0,0.5);user-select: none}tracy-div:not(a b) .tracy-dump-number{color: #090}tracy-div:not(a b) .tracy-dump-null,tracy-div:not(a b) .tracy-dump-bool{color: #850}tracy-div:not(a b) .tracy-dump-virtual{font-style: italic}tracy-div:not(a b) .tracy-dump-public::after{content:' pub'}tracy-div:not(a b) .tracy-dump-protected::after{content:' pro'}tracy-div:not(a b) .tracy-dump-private::after{content:' pri'}tracy-div:not(a b) .tracy-dump-public::after,tracy-div:not(a b) .tracy-dump-protected::after,tracy-div:not(a b) .tracy-dump-private::after,tracy-div:not(a b) .tracy-dump-hash{font-size: 85%;color: rgba(0,0,0,0.5)}tracy-div:not(a b) .tracy-dump-indent{display: none}tracy-div:not(a b) .tracy-dump-highlight{background: #C22;color: white;border-radius: 2px;padding: 0 2px;margin: 0 -2px}tracy-div:not(a b) span[data-tracy-href]{border-bottom: 1px dotted rgba(0,0,0,.2)}tracy-div:not(a b) .tracy-toggle:after{content:'';display: inline-block;vertical-align: middle;line-height: 0;border-top: .6ex solid;border-right: .6ex solid transparent;border-left: .6ex solid transparent;transform: scale(1,1.5);margin: 0 .2ex 0 .7ex;transition: .1s transform;opacity: .5}tracy-div:not(a b) .tracy-toggle.tracy-collapsed:after{transform: rotate(-90deg) scale(1,1.5) translate(.1ex,0)}tracy-div:not(a b) .tracy-tab-label{user-select: none}tracy-div:not(a b) .tracy-tab-panel:not(.tracy-active){display: none}html.tracy-bs-visible,html.tracy-bs-visible body{display: block;overflow: auto;position: static}#tracy-bs{font: 9pt/1.5 Verdana,sans-serif;background: white;color: #333;position: absolute;z-index: 20000;left: 0;top: 0;width: 100%;text-align: left}#tracy-bs a{text-decoration: none;color: #328ADC;padding: 0 4px;margin: 0 -4px}#tracy-bs a+a{margin-left: 0}#tracy-bs a:hover,#tracy-bs a:focus{color: #085AA3}#tracy-bs-toggle{position: absolute;right: .5em;top: .5em;text-decoration: none;background: #CD1818;color: white!important;padding: 3px}#tracy-bs-toggle.tracy-collapsed{position: fixed}.tracy-bs-main{display: flex;flex-direction: column;padding-bottom: 80vh}.tracy-bs-main.tracy-collapsed{display: none}#tracy-bs :where(:is( h1,h2,h3,h4,h5,h6,p,ol,ul,dl,pre,table,hr,.tracy-section-panel,.tracy-pane ):not(:first-child)){margin-top: var(--tracy-space)}#tracy-bs h1{font-size: 15pt;font-weight: normal;text-shadow: 1px 1px 2px rgba(0,0,0,.3)}#tracy-bs h1 span{white-space: pre-wrap}#tracy-bs h2{font-size: 14pt;font-weight: normal}#tracy-bs h3{font-size: 10pt;font-weight: bold}#tracy-bs pre,#tracy-bs code,#tracy-bs table{font: 9pt/1.5 Consolas,monospace!important}#tracy-bs pre,#tracy-bs table{background: #FDF5CE;padding: .4em .7em;border: 2px solid #ffffffa6;box-shadow: 1px 2px 6px #00000005;overflow: auto}#tracy-bs table pre{padding: 0;margin: 0;border: none;box-shadow: none}#tracy-bs table{border-collapse: collapse;width: 100%}#tracy-bs td,#tracy-bs th{vertical-align: top;text-align: left;padding: 2px 6px;border: 1px solid #e6dfbf}#tracy-bs th{font-weight: bold}#tracy-bs tr>:first-child{width: 20%}#tracy-bs tr:nth-child(2n),#tracy-bs tr:nth-child(2n) pre{background-color: #F7F0CB}#tracy-bs .tracy-footer--sticky{position: fixed;width: 100%;bottom: 0}#tracy-bs footer ul{font-size: 7pt;padding: var(--tracy-space);margin: var(--tracy-space) 0 0;color: #777;background: #F6F5F3;border-top: 1px solid #DDD;list-style: none}#tracy-bs .tracy-footer-logo{position: relative}#tracy-bs .tracy-footer-logo a{position: absolute;bottom: 0;right: 0;width: 100px;height: 50px;background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAAUBAMAAAD/1DctAAAAMFBMVEWupZzj39rEvbTy8O3X0sz9/PvGwLu8tavQysHq6OS0rKP5+Pbd2dT29fPMxbzPx8DKErMJAAAACXBIWXMAAAsTAAALEwEAmpwYAAACGUlEQVQoFX3TQWgTQRQA0MWLIJJDYehBTykhG5ERTx56K1u8eEhCYtomE7x5L4iLh0ViF7egewuFFqSIYE6hIHsIYQ6CQSg9CDKn4QsNCRlB59C74J/ZNHW1+An5+bOPyf6/s46oz2P+A0yIeZZ2ieEHi6TOnLKTxvWq+b52mxlVO3xnM1s7xLX1504XQH65OnW2dBqn7cCkYsFsfYsWpyY/2salmFTpEyzeR8zosYqMdiPDXdyU52K1wgEa/SjGpdEwUAxqvRfckQCDOyFearsEHe2grvkh/cFAHKvdtI3lcVceKQIOFpv+FOZaNPQBwJZLPp+hfrvT5JZXaUFsR8zqQc9qSgAharkfS5M/5F6nGJJAtXq/eLr3ucZpHccSxOOIPaQhtHohpCH2Xu6rLmQ0djnr4/+J3C6v+AW8/XWYxwYNdlhWj/P5fPSTQwVr0T9lGxdaBCqErNZaqYnEwbkjEB3NasGF3lPdrHa1nnxNOMgj0+neePUPjd2v/qVvUv29ifvc19huQ48qwXShy/9o8o3OSk0cs37mOFd0Ydgvsf/oZEnPVtggfd66lORn9mDyyzXU13SRtH2L6aR5T/snGAcZPfAXz5J1YlJWBEuxdMYqQecpBrlM49xAbmqyHA+xlA1FxBtqT2xmJoNXZlIt74ZBLeJ9ZGDqByNI7p543idzJ23vXEv7IgnsxiS+eNtwNbFdLq7+Bi4wQ0I4SVb9AAAAAElFTkSuQmCC') no-repeat;opacity: .6;padding: 0;margin: 0}#tracy-bs .tracy-footer-logo a:hover,#tracy-bs .tracy-footer-logo a:focus{opacity: 1;transition: opacity 0.1s}#tracy-bs .tracy-section{padding: var(--tracy-space)}#tracy-bs .tracy-section-panel{background: #5040200E;padding: var(--tracy-space);border-radius: 8px;box-shadow: inset 1px 1px 0px 0 #00000005;overflow: hidden}#tracy-bs .outer,#tracy-bs .tracy-pane{overflow: auto}#tracy-bs.tracy-mac .tracy-pane{padding-bottom: 12px}#tracy-bs .tracy-section--error{background: #CD1818;color: white}#tracy-bs .tracy-section--error p,#tracy-bs .tracy-section--error h1{font-size: 13pt;color: white}#tracy-bs .tracy-section--error::selection,#tracy-bs .tracy-section--error ::selection{color: black!important;background: #FDF5CE!important}#tracy-bs .tracy-section--error h1 a{color: #ffefa1!important}#tracy-bs .tracy-section--error span span{font-size: 80%;color: rgba(255,255,255,0.5);text-shadow: none}#tracy-bs .tracy-section--error a.tracy-action{color: white!important;opacity: 0;font-size: .7em;border-bottom: none!important}#tracy-bs .tracy-section--error:hover a.tracy-action{opacity: .6}#tracy-bs .tracy-section--error a.tracy-action:hover{opacity: 1}#tracy-bs .tracy-section--error i{color: #ffefa1;font-style: normal}#tracy-bs .tracy-section--error:has(.tracy-caused){border-radius: 0 0 0 8px;overflow: hidden}#tracy-bs .tracy-caused{margin: var(--tracy-space) calc(-1 * var(--tracy-space)) calc(-1 * var(--tracy-space));padding: .3em var(--tracy-space);background: #df8075;white-space: nowrap}#tracy-bs .tracy-caused a{color: white}#tracy-bs pre.tracy-code>div{min-width: fit-content;white-space: pre}#tracy-bs .tracy-code-comment{color: rgba(0,0,0,0.5);font-style: italic}#tracy-bs .tracy-code-keyword{color: #D24;font-weight: bold}#tracy-bs .tracy-code-var{font-weight: bold}#tracy-bs .tracy-line-highlight{background: #CD1818;color: white;font-weight: bold;font-style: normal;display: block;padding: 0 1ch;margin: 0 -1ch -1lh}#tracy-bs .tracy-column-highlight{display: inline-block;backdrop-filter: grayscale(1);margin: 0 -1px;padding: 0 1px}#tracy-bs .tracy-line{color: #9F9C7F;font-weight: normal;font-style: normal}#tracy-bs a.tracy-editor{color: inherit;border-bottom: 1px dotted rgba(0,0,0,.3);border-radius: 3px}#tracy-bs a.tracy-editor:hover{background: #0001}#tracy-bs span[data-tracy-href]{border-bottom: 1px dotted rgba(0,0,0,.3)}#tracy-bs .tracy-dump-whitespace{color: #0003}#tracy-bs .tracy-callstack{display: grid;overflow: auto;grid-template-columns: max-content 1fr;row-gap: calc(.5 * var(--tracy-space))}#tracy-bs .tracy-callstack-file{text-align: right;padding-right: var(--tracy-space);white-space: nowrap}#tracy-bs .tracy-callstack-callee{white-space: nowrap}#tracy-bs .tracy-callstack-additional{grid-column-start: 1;grid-column-end: 3}#tracy-bs .tracy-callstack-args tr:first-child>*{position: relative}#tracy-bs .tracy-callstack-args tr:first-child td:before{position: absolute;right: .3em;content:'may not be true';opacity: .4}#tracy-bs .tracy-panel-fadein{animation: tracy-panel-fadein .12s ease}@keyframes tracy-panel-fadein{0%{opacity: 0}}#tracy-bs .tracy-section--causedby{flex-direction: column;padding: 0}#tracy-bs .tracy-section--causedby:not(.tracy-collapsed){display: flex}#tracy-bs .tracy-section--causedby .tracy-section--error{background: #cd1818a6}#tracy-bs .tracy-section--error+.tracy-section--stack{margin-top: calc(1.5 * var(--tracy-space))}#tracy-bs .tracy-tab-bar{display: flex;list-style: none;padding-left: 0;margin: 0;width: 100%;font-size: 110%;column-gap: var(--tracy-space)}#tracy-bs .tracy-tab-bar a{display: block;padding: calc(.5 * var(--tracy-space)) var(--tracy-space);margin: 0;height: 100%;box-sizing: border-box;border-radius: 5px 5px 0 0;text-decoration: none;transition: all 0.1s}#tracy-bs .tracy-tab-bar>.tracy-active a{background: white}#tracy-bs .tracy-tab-panel{border-top: 2px solid white;padding-top: var(--tracy-space);overflow: auto}.tracy-collapsed{display: none}.tracy-toggle.tracy-collapsed{display: inline}.tracy-toggle{cursor: pointer;user-select: none;white-space: nowrap}.tracy-toggle:after{content:'';display: inline-block;vertical-align: middle;line-height: 0;border-top: .6ex solid;border-right: .6ex solid transparent;border-left: .6ex solid transparent;transform: scale(1,1.5);margin: 0 .2ex 0 .7ex;transition: .1s transform;opacity: .5}.tracy-toggle.tracy-collapsed:after{transform: rotate(-90deg) scale(1,1.5) translate(.1ex,0)}.tracy-sortable>:first-child>tr:first-child>*{position: relative}.tracy-sortable>:first-child>tr:first-child>*:hover:before{position: absolute;right: .3em;content:"\21C5";opacity: .4;font-weight: normal}.tracy-tab-label{user-select: none}.tracy-tab-panel:not(.tracy-active){display: none}.tracy-dump.tracy-light{text-align: left;color: #444;background: #fdf9e2;border-radius: 4px;padding: var(--tracy-space);margin: var(--tracy-space) 0;word-break: break-all;white-space: pre-wrap}.tracy-dump.tracy-light div{padding-left: 2.5ex}.tracy-dump.tracy-light div div{border-left: 1px solid rgba(0,0,0,.1);margin-left: .5ex}.tracy-dump.tracy-light div div:hover{border-left-color: rgba(0,0,0,.25)}.tracy-light .tracy-dump-location{color: gray;font-size: 80%;text-decoration: none;background: none;opacity: .5;float: right;cursor: pointer}.tracy-light .tracy-dump-location:hover,.tracy-light .tracy-dump-location:focus{opacity: 1}.tracy-light .tracy-dump-array,.tracy-light .tracy-dump-object{color: #C22;user-select: text}.tracy-light .tracy-dump-string{color: #35D;white-space: break-spaces}.tracy-light div.tracy-dump-string{position: relative;padding-left: 3.5ex}.tracy-light .tracy-dump-lq{margin-left: calc(-1ex - 1px)}.tracy-light div.tracy-dump-string:before{content:'';position: absolute;left: calc(3ex - 1px);top: 1.5em;bottom: 0;border-left: 1px solid rgba(0,0,0,.1)}.tracy-light .tracy-dump-virtual span,.tracy-light .tracy-dump-dynamic span,.tracy-light .tracy-dump-string span{color: rgba(0,0,0,0.5)}.tracy-light .tracy-dump-virtual i,.tracy-light .tracy-dump-dynamic i,.tracy-light .tracy-dump-string i{font-size: 80%;font-style: normal;color: rgba(0,0,0,0.5);user-select: none}.tracy-light .tracy-dump-number{color: #090}.tracy-light .tracy-dump-null,.tracy-light .tracy-dump-bool{color: #850}.tracy-light .tracy-dump-virtual{font-style: italic}.tracy-light .tracy-dump-public::after{content:' pub'}.tracy-light .tracy-dump-protected::after{content:' pro'}.tracy-light .tracy-dump-private::after{content:' pri'}.tracy-light .tracy-dump-public::after,.tracy-light .tracy-dump-protected::after,.tracy-light .tracy-dump-private::after,.tracy-light .tracy-dump-hash{font-size: 85%;color: rgba(0,0,0,0.35)}.tracy-light .tracy-dump-indent{display: none}.tracy-light .tracy-dump-highlight{background: #C22;color: white;border-radius: 2px;padding: 0 2px;margin: 0 -2px}span[data-tracy-href]{border-bottom: 1px dotted rgba(0,0,0,.2)}.tracy-light .tracy-dump-flash{animation: tracy-dump-flash .2s ease}@keyframes tracy-dump-flash{0%{background: #c0c0c033}}</style>
+</head>
+
+
+<body>
+<tracy-div id="tracy-bs" itemscope>
+	<a id="tracy-bs-toggle" href="#" class="tracy-toggle">&#xfeff;</a>
+
+	<div class="tracy-bs-main">
+<section class="tracy-section tracy-section--error">
+	<p>User Warning</p>
+
+	<h1>
+		<span>The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions earlier or disable the SessionResolver.</span>
+	</h1>
+
+</section>
+<section class="tracy-section">
+	<h2 class="tracy-section-label">
+		<a href="#" data-tracy-ref="^+" class="tracy-toggle">Source file</a>
+	</h2>
+
+	<div class="tracy-section-panel">
+			<p><b>File:</b> <a href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocalesResolvers%2FSession.php&amp;line=44&amp;search=&amp;replace=" title="/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Session.php:44" class="tracy-editor">.../contributte/translation/src/LocalesResolvers/<b>Session.php</b>:44</a></p>
+			<pre title="Ctrl-Click to open in editor" data-tracy-href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocalesResolvers%2FSession.php&amp;line=44&amp;search=&amp;replace=" class='tracy-code'><div><code><span class='tracy-line'>34:</span>        <span class='tracy-code-keyword'>{
+<span class='tracy-line'>35:</span>            </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>sessionSection<span class='tracy-code-keyword'>[</span>self<span class='tracy-code-keyword'>::</span><span class='tracy-code-var'>$parameter</span><span class='tracy-code-keyword'>] = </span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>;
+<span class='tracy-line'>36:</span>            return </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>;
+<span class='tracy-line'>37:</span>        }
+<span class='tracy-line'>38:</span>    
+<span class='tracy-line'>39:</span>        public function </span>resolve<span class='tracy-code-keyword'>(
+<span class='tracy-line'>40:</span>            </span>Translator <span class='tracy-code-var'>$translator
+<span class='tracy-line'>41:</span>        </span><span class='tracy-code-keyword'>): ?</span>string
+<span class='tracy-line'>42:</span>        <span class='tracy-code-keyword'>{
+<span class='tracy-line'>43:</span>            if (!</span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>session<span class='tracy-code-keyword'>-&gt;</span>isStarted<span class='tracy-code-keyword'>() &amp;&amp; </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>httpResponse<span class='tracy-code-keyword'>-&gt;</span>isSent<span class='tracy-code-keyword'>()) {
+</span><span class='tracy-line-highlight'>44:                trigger_error('The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions earlier or disable the SessionResolver.', E_USER_WARNING);</span>
+<span class='tracy-code-keyword'><span class='tracy-line'>45:</span>                return </span>null<span class='tracy-code-keyword'>;
+<span class='tracy-line'>46:</span>            }
+<span class='tracy-line'>47:</span>    
+<span class='tracy-line'>48:</span>            </span><span class='tracy-code-var'>$locale </span><span class='tracy-code-keyword'>= </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>sessionSection<span class='tracy-code-keyword'>[</span>self<span class='tracy-code-keyword'>::</span><span class='tracy-code-var'>$parameter</span><span class='tracy-code-keyword'>] ?? </span>null<span class='tracy-code-keyword'>;
+</span></code></div></pre>
+	</div>
+</section>
+<section class="tracy-section">
+	<h2 class="tracy-section-label">
+		<a href="#" data-tracy-ref="^+" class="tracy-toggle">Call stack</a>
+	</h2>
+
+	<div class="tracy-section-panel">
+		<div class="tracy-callstack">
+				<div class="tracy-callstack-file">
+						<a href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocalesResolvers%2FSession.php&amp;line=44&amp;search=&amp;replace=" title="/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Session.php:44" class="tracy-editor">.../contributte/translation/src/LocalesResolvers/<b>Session.php</b>:44</a>
+				</div>
+
+				<div class="tracy-callstack-callee">
+						<a href="#" data-tracy-ref="^div + div" class="tracy-toggle tracy-collapsed">
+<b>trigger_error</b> (...)
+					</a>
+				</div>
+
+					<div class="tracy-callstack-additional tracy-collapsed">
+							<pre title="Ctrl-Click to open in editor" data-tracy-href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocalesResolvers%2FSession.php&amp;line=44&amp;search=&amp;replace=" class='tracy-code'><div><code><span class='tracy-line'>34:</span>        <span class='tracy-code-keyword'>{
+<span class='tracy-line'>35:</span>            </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>sessionSection<span class='tracy-code-keyword'>[</span>self<span class='tracy-code-keyword'>::</span><span class='tracy-code-var'>$parameter</span><span class='tracy-code-keyword'>] = </span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>;
+<span class='tracy-line'>36:</span>            return </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>;
+<span class='tracy-line'>37:</span>        }
+<span class='tracy-line'>38:</span>    
+<span class='tracy-line'>39:</span>        public function </span>resolve<span class='tracy-code-keyword'>(
+<span class='tracy-line'>40:</span>            </span>Translator <span class='tracy-code-var'>$translator
+<span class='tracy-line'>41:</span>        </span><span class='tracy-code-keyword'>): ?</span>string
+<span class='tracy-line'>42:</span>        <span class='tracy-code-keyword'>{
+<span class='tracy-line'>43:</span>            if (!</span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>session<span class='tracy-code-keyword'>-&gt;</span>isStarted<span class='tracy-code-keyword'>() &amp;&amp; </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>httpResponse<span class='tracy-code-keyword'>-&gt;</span>isSent<span class='tracy-code-keyword'>()) {
+</span><span class='tracy-line-highlight'>44:                trigger_error('The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions earlier or disable the SessionResolver.', E_USER_WARNING);</span>
+<span class='tracy-code-keyword'><span class='tracy-line'>45:</span>                return </span>null<span class='tracy-code-keyword'>;
+<span class='tracy-line'>46:</span>            }
+<span class='tracy-line'>47:</span>    
+<span class='tracy-line'>48:</span>            </span><span class='tracy-code-var'>$locale </span><span class='tracy-code-keyword'>= </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>sessionSection<span class='tracy-code-keyword'>[</span>self<span class='tracy-code-keyword'>::</span><span class='tracy-code-var'>$parameter</span><span class='tracy-code-keyword'>] ?? </span>null<span class='tracy-code-keyword'>;
+</span></code></div></pre>
+
+							<table class="tracy-callstack-args">
+									<tr>
+										<th>$message</th>
+										<td><pre class="tracy-dump tracy-light" data-tracy-dump='{"string":"The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions e <span>…</span> nResolver.","length":188}'></pre>
+</td>
+									</tr>
+									<tr>
+										<th>$error_level</th>
+										<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-number">512</span></pre>
+</td>
+									</tr>
+							</table>
+					</div>
+				<div class="tracy-callstack-file">
+						<a href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocaleResolver.php&amp;line=51&amp;search=&amp;replace=" title="/var/www/html/vendor/contributte/translation/src/LocaleResolver.php:51" class="tracy-editor">.../vendor/contributte/translation/src/<b>LocaleResolver.php</b>:51</a>
+				</div>
+
+				<div class="tracy-callstack-callee">
+						<a href="#" data-tracy-ref="^div + div" class="tracy-toggle tracy-collapsed">
+					Contributte\Translation\LocalesResolvers\Session::<b>resolve</b> (...)
+					</a>
+				</div>
+
+					<div class="tracy-callstack-additional tracy-collapsed">
+							<pre title="Ctrl-Click to open in editor" data-tracy-href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocaleResolver.php&amp;line=51&amp;search=&amp;replace=" class='tracy-code'><div><code><span class='tracy-code-keyword'><span class='tracy-line'>41:</span>        }
+<span class='tracy-line'>42:</span>    
+<span class='tracy-line'>43:</span>        public function </span>resolve<span class='tracy-code-keyword'>(
+<span class='tracy-line'>44:</span>            </span>Translator <span class='tracy-code-var'>$translator
+<span class='tracy-line'>45:</span>        </span><span class='tracy-code-keyword'>): </span>string
+<span class='tracy-line'>46:</span>        <span class='tracy-code-keyword'>{
+<span class='tracy-line'>47:</span>            foreach (</span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>resolvers <span class='tracy-code-keyword'>as </span><span class='tracy-code-var'>$v1</span><span class='tracy-code-keyword'>) {
+<span class='tracy-line'>48:</span>                </span><span class='tracy-code-var'>$resolver </span><span class='tracy-code-keyword'>= </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>container
+<span class='tracy-line'>49:</span>                    <span class='tracy-code-keyword'>-&gt;</span>getByType<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$v1</span><span class='tracy-code-keyword'>);
+<span class='tracy-line'>50:</span>    
+</span><span class='tracy-line-highlight'>51:                $locale = $resolver-&gt;resolve($translator);</span>
+<span class='tracy-code-keyword'><span class='tracy-line'>52:</span>    
+<span class='tracy-line'>53:</span>                if (
+<span class='tracy-line'>54:</span>                    </span><span class='tracy-code-var'>$locale </span><span class='tracy-code-keyword'>!== </span>null <span class='tracy-code-keyword'>&amp;&amp;
+<span class='tracy-line'>55:</span>                    (
+</span></code></div></pre>
+
+							<table class="tracy-callstack-args">
+									<tr>
+										<th>$translator</th>
+										<td><pre class="tracy-dump tracy-light" data-tracy-dump='{"ref":7258}'></pre>
+</td>
+									</tr>
+							</table>
+					</div>
+				<div class="tracy-callstack-file">
+						<a href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTranslator.php&amp;line=245&amp;search=&amp;replace=" title="/var/www/html/vendor/contributte/translation/src/Translator.php:245" class="tracy-editor">.../html/vendor/contributte/translation/src/<b>Translator.php</b>:245</a>
+				</div>
+
+				<div class="tracy-callstack-callee">
+						<a href="#" data-tracy-ref="^div + div" class="tracy-toggle tracy-collapsed">
+					Contributte\Translation\LocaleResolver::<b>resolve</b> (...)
+					</a>
+				</div>
+
+					<div class="tracy-callstack-additional tracy-collapsed">
+							<pre title="Ctrl-Click to open in editor" data-tracy-href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTranslator.php&amp;line=245&amp;search=&amp;replace=" class='tracy-code'><div><code><span class='tracy-line'>235:</span>        <span class='tracy-code-keyword'>): </span>void
+<span class='tracy-line'>236:</span>        <span class='tracy-code-keyword'>{
+<span class='tracy-line'>237:</span>            </span>parent<span class='tracy-code-keyword'>::</span>addResource<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$format</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$resource</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$domain</span><span class='tracy-code-keyword'>);
+<span class='tracy-line'>238:</span>    
+<span class='tracy-line'>239:</span>            </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>resourcesLocales<span class='tracy-code-keyword'>[</span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>] = </span>true<span class='tracy-code-keyword'>;
+<span class='tracy-line'>240:</span>        }
+<span class='tracy-line'>241:</span>    
+<span class='tracy-line'>242:</span>        public function </span>getLocale<span class='tracy-code-keyword'>(): </span>string
+<span class='tracy-line'>243:</span>        <span class='tracy-code-keyword'>{
+<span class='tracy-line'>244:</span>            if (</span>parent<span class='tracy-code-keyword'>::</span>getLocale<span class='tracy-code-keyword'>() === </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>initLang<span class='tracy-code-keyword'>) {
+</span><span class='tracy-line-highlight'>245:                $this-&gt;setLocale($this-&gt;localeResolver-&gt;resolve($this));</span>
+<span class='tracy-code-keyword'><span class='tracy-line'>246:</span>            }
+<span class='tracy-line'>247:</span>    
+<span class='tracy-line'>248:</span>            return </span>parent<span class='tracy-code-keyword'>::</span>getLocale<span class='tracy-code-keyword'>();
+<span class='tracy-line'>249:</span>        }
+</span></code></div></pre>
+
+							<table class="tracy-callstack-args">
+									<tr>
+										<th>$translator</th>
+										<td><pre class="tracy-dump tracy-light" data-tracy-dump='{"ref":7258}'></pre>
+</td>
+									</tr>
+							</table>
+					</div>
+				<div class="tracy-callstack-file">
+						<a href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Ftranslation%2FTranslator.php&amp;line=231&amp;search=&amp;replace=" title="/var/www/html/vendor/symfony/translation/Translator.php:231" class="tracy-editor">.../www/html/vendor/symfony/translation/<b>Translator.php</b>:231</a>
+				</div>
+
+				<div class="tracy-callstack-callee">
+						<a href="#" data-tracy-ref="^div + div" class="tracy-toggle tracy-collapsed">
+					Contributte\Translation\Translator::<b>getLocale</b> ()
+					</a>
+				</div>
+
+					<div class="tracy-callstack-additional tracy-collapsed">
+							<pre title="Ctrl-Click to open in editor" data-tracy-href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Ftranslation%2FTranslator.php&amp;line=231&amp;search=&amp;replace=" class='tracy-code'><div><code><span class='tracy-code-keyword'><span class='tracy-line'>221:</span>            ) {
+<span class='tracy-line'>222:</span>                return </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>formatter<span class='tracy-code-keyword'>-&gt;</span>formatIntl<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$catalogue</span><span class='tracy-code-keyword'>-&gt;</span>get<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$id</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$domain</span><span class='tracy-code-keyword'>), </span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$parameters</span><span class='tracy-code-keyword'>);
+<span class='tracy-line'>223:</span>            }
+<span class='tracy-line'>224:</span>    
+<span class='tracy-line'>225:</span>            return </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>formatter<span class='tracy-code-keyword'>-&gt;</span>format<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$catalogue</span><span class='tracy-code-keyword'>-&gt;</span>get<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$id</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$domain</span><span class='tracy-code-keyword'>), </span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$parameters</span><span class='tracy-code-keyword'>);
+<span class='tracy-line'>226:</span>        }
+<span class='tracy-line'>227:</span>    
+<span class='tracy-line'>228:</span>        public function </span>getCatalogue<span class='tracy-code-keyword'>(?</span>string <span class='tracy-code-var'>$locale </span><span class='tracy-code-keyword'>= </span>null<span class='tracy-code-keyword'>): </span>MessageCatalogueInterface
+<span class='tracy-line'>229:</span>        <span class='tracy-code-keyword'>{
+<span class='tracy-line'>230:</span>            if (!</span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>) {
+</span><span class='tracy-line-highlight'>231:                $locale = $this-&gt;getLocale();</span>
+<span class='tracy-code-keyword'><span class='tracy-line'>232:</span>            } else {
+<span class='tracy-line'>233:</span>                </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>assertValidLocale<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>);
+<span class='tracy-line'>234:</span>            }
+<span class='tracy-line'>235:</span>    
+</span></code></div></pre>
+
+					</div>
+				<div class="tracy-callstack-file">
+						<a href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTranslator.php&amp;line=393&amp;search=&amp;replace=" title="/var/www/html/vendor/contributte/translation/src/Translator.php:393" class="tracy-editor">.../html/vendor/contributte/translation/src/<b>Translator.php</b>:393</a>
+				</div>
+
+				<div class="tracy-callstack-callee">
+						<a href="#" data-tracy-ref="^div + div" class="tracy-toggle tracy-collapsed">
+					Symfony\Component\Translation\Translator::<b>getCatalogue</b> (...)
+					</a>
+				</div>
+
+					<div class="tracy-callstack-additional tracy-collapsed">
+							<pre title="Ctrl-Click to open in editor" data-tracy-href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTranslator.php&amp;line=393&amp;search=&amp;replace=" class='tracy-code'><div><code><span class='tracy-code-keyword'><span class='tracy-line'>383:</span>                                [
+<span class='tracy-line'>384:</span>                                    </span><span class='tracy-dump-string'>'id' </span><span class='tracy-code-keyword'>=&gt; </span><span class='tracy-code-var'>$id</span><span class='tracy-code-keyword'>,
+<span class='tracy-line'>385:</span>                                    </span><span class='tracy-dump-string'>'domain' </span><span class='tracy-code-keyword'>=&gt; </span><span class='tracy-code-var'>$domain</span><span class='tracy-code-keyword'>,
+<span class='tracy-line'>386:</span>                                    </span><span class='tracy-dump-string'>'locale' </span><span class='tracy-code-keyword'>=&gt; </span><span class='tracy-code-var'>$locale </span><span class='tracy-code-keyword'>?? </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>getLocale<span class='tracy-code-keyword'>(),
+<span class='tracy-line'>387:</span>                                ]
+<span class='tracy-line'>388:</span>                            );
+<span class='tracy-line'>389:</span>                    }
+<span class='tracy-line'>390:</span>                }
+<span class='tracy-line'>391:</span>    
+<span class='tracy-line'>392:</span>                if (</span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>tracyPanel <span class='tracy-code-keyword'>!== </span>null<span class='tracy-code-keyword'>) {
+</span><span class='tracy-line-highlight'>393:                    if (!$this-&gt;getCatalogue($locale)-&gt;has($id, $domain)) {</span>
+<span class='tracy-code-keyword'><span class='tracy-line'>394:</span>                        </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>tracyPanel
+<span class='tracy-line'>395:</span>                            <span class='tracy-code-keyword'>-&gt;</span>addMissingTranslation<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$id</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$domain</span><span class='tracy-code-keyword'>);
+<span class='tracy-line'>396:</span>                    }
+<span class='tracy-line'>397:</span>                }
+</span></code></div></pre>
+
+							<table class="tracy-callstack-args">
+									<tr>
+										<th>$locale</th>
+										<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-null">null</span></pre>
+</td>
+									</tr>
+							</table>
+					</div>
+				<div class="tracy-callstack-file">
+						<a href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTranslator.php&amp;line=352&amp;search=&amp;replace=" title="/var/www/html/vendor/contributte/translation/src/Translator.php:352" class="tracy-editor">.../html/vendor/contributte/translation/src/<b>Translator.php</b>:352</a>
+				</div>
+
+				<div class="tracy-callstack-callee">
+						<a href="#" data-tracy-ref="^div + div" class="tracy-toggle tracy-collapsed">
+					Contributte\Translation\Translator::<b>trans</b> (...)
+					</a>
+				</div>
+
+					<div class="tracy-callstack-additional tracy-collapsed">
+							<pre title="Ctrl-Click to open in editor" data-tracy-href="editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTranslator.php&amp;line=352&amp;search=&amp;replace=" class='tracy-code'><div><code><span class='tracy-code-keyword'><span class='tracy-line'>342:</span>            }
+<span class='tracy-line'>343:</span>    
+<span class='tracy-line'>344:</span>            </span><span class='tracy-code-var'>$generator </span><span class='tracy-code-keyword'>= </span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>getTranslateKeyGenerator<span class='tracy-code-keyword'>();
+<span class='tracy-line'>345:</span>    
+<span class='tracy-line'>346:</span>            </span><span class='tracy-code-var'>$params </span><span class='tracy-code-keyword'>= </span>iterator_to_array<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$generator</span><span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$params</span><span class='tracy-code-keyword'>));
+<span class='tracy-line'>347:</span>    
+<span class='tracy-line'>348:</span>            if (</span>Validators<span class='tracy-code-keyword'>::</span>isNumeric<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$count</span><span class='tracy-code-keyword'>)) {
+<span class='tracy-line'>349:</span>                </span><span class='tracy-code-var'>$params </span><span class='tracy-code-keyword'>+= [</span><span class='tracy-dump-string'>'%count%' </span><span class='tracy-code-keyword'>=&gt; </span><span class='tracy-code-var'>$count</span><span class='tracy-code-keyword'>];
+<span class='tracy-line'>350:</span>            }
+<span class='tracy-line'>351:</span>    
+</span><span class='tracy-line-highlight'>352:            $translated = $this-&gt;trans($message, $params, $domain, $locale);</span>
+<span class='tracy-code-keyword'><span class='tracy-line'>353:</span>    
+<span class='tracy-line'>354:</span>            if (</span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>returnOriginalMessage<span class='tracy-code-keyword'>) {
+<span class='tracy-line'>355:</span>                if (!</span><span class='tracy-code-var'>$this</span><span class='tracy-code-keyword'>-&gt;</span>getCatalogue<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$locale</span><span class='tracy-code-keyword'>)-&gt;</span>has<span class='tracy-code-keyword'>(</span><span class='tracy-code-var'>$message</span><span class='tracy-code-keyword'>, </span><span class='tracy-code-var'>$domain</span><span class='tracy-code-keyword'>)) {
+<span class='tracy-line'>356:</span>                    return </span><span class='tracy-code-var'>$originalMessage</span><span class='tracy-code-keyword'>;
+</span></code></div></pre>
+
+							<table class="tracy-callstack-args">
+									<tr>
+										<th>$id</th>
+										<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-string" title="8 characters"><span>'</span>app.name<span>'</span></span></pre>
+</td>
+									</tr>
+									<tr>
+										<th>$parameters</th>
+										<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-array">array</span> (0)</pre>
+</td>
+									</tr>
+									<tr>
+										<th>$domain</th>
+										<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-string" title="8 characters"><span>'</span>messages<span>'</span></span></pre>
+</td>
+									</tr>
+									<tr>
+										<th>$locale</th>
+										<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-null">null</span></pre>
+</td>
+									</tr>
+							</table>
+					</div>
+				<div class="tracy-callstack-file">
+						<i>inner-code</i>:8
+				</div>
+
+				<div class="tracy-callstack-callee">
+						<a href="#" data-tracy-ref="^div + div" class="tracy-toggle tracy-collapsed">
+					Contributte\Translation\Translator::<b>translate</b> (...)
+					</a>
+				</div>
+
+					<div class="tracy-callstack-additional tracy-collapsed">
+
+							<table class="tracy-callstack-args">
+									<tr>
+										<th>$message</th>
+										<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-string" title="8 characters"><span>'</span>app.name<span>'</span></span></pre>
+</td>
+									</tr>
+							</table>
+					</div>
+		</div>
+	</div>
+</section>
+<section class="tracy-section">
+	<h2 class="tracy-section-label">
+		<a href="#" data-tracy-ref="^+" class="tracy-toggle tracy-collapsed">Exception</a>
+	</h2>
+
+	<div class="tracy-section-panel tracy-collapsed">
+		<pre class="tracy-dump tracy-light" data-tracy-dump='{"ref":7256}'></pre>
+
+	</div>
+</section>
+<section class="tracy-section">
+	<h2 class="tracy-section-label">
+		<a href="#" data-tracy-ref="^+" class="tracy-toggle tracy-collapsed">Environment</a>
+	</h2>
+
+	<div class="tracy-section-panel tracy-collapsed">
+		<div class="tracy-tabs">
+			<ul class="tracy-tab-bar">
+				<li class="tracy-tab-label tracy-active"><a href="#">$_SERVER</a></li>
+				<li class="tracy-tab-label"><a href="#">Configuration</a></li>
+			</ul>
+
+			<div>
+				<div class="tracy-tab-panel tracy-pane tracy-active">
+					<table class="tracy-sortable">
+							<tr>
+								<th>PATH</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="60 characters"><span>'</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>HOSTNAME</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="12 characters"><span>'</span>acbf800d62d4<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHPIZE_DEPS</th>
+								<td><pre class="tracy-dump tracy-light" data-tracy-dump='{"string":"autoconf <i>\\t</i>    <i>\\t</i>    dpkg-dev <i>\\t</i>    <i>\\t</i>    file <i>\\t</i>    <i>\\t</i>    g++ <i>\\t</i>    <i>\\t</i>    gcc <i>\\t</i>    <i>\\t</i>    libc-dev <i>\\t</i>    <i>\\t</i>    make <i>\\t</i>    <i>\\t</i>    pkg-config <i>\\t</i>    <i>\\t</i>    re2c","length":76}'></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_INI_DIR</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="18 characters"><span>'</span>/usr/local/etc/php<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_CFLAGS</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="83 characters"><span>'</span>-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_CPPFLAGS</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="83 characters"><span>'</span>-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_LDFLAGS</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="12 characters"><span>'</span>-Wl,-O1 -pie<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>GPG_KEYS</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="122 characters"><span>'</span>1198C0117593497A5EC5C199286AF1F9897469DC C28D937575603EB4ABB725861C0779DC5C0A9DE4 AFD8691FDAEDF03BDF6E460563F15A9B715376CA<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_VERSION</th>
+								<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-string" title="6 characters"><span>'</span>8.3.30<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_URL</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="51 characters"><span>'</span>https://www.php.net/distributions/php-8.3.30.tar.xz<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_ASC_URL</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="55 characters"><span>'</span>https://www.php.net/distributions/php-8.3.30.tar.xz.asc<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_SHA256</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="64 characters"><span>'</span>67f084d36852daab6809561a7c8023d130ca07fc6af8fb040684dd1414934d48<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>HOME</th>
+								<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-string" title="5 characters"><span>'</span>/root<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PHP_SELF</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="19 characters"><span>'</span>Standard input code<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>SCRIPT_NAME</th>
+								<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="19 characters"><span>'</span>Standard input code<span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>SCRIPT_FILENAME</th>
+								<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-string"><span>'</span><span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>PATH_TRANSLATED</th>
+								<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-string"><span>'</span><span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>DOCUMENT_ROOT</th>
+								<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-string"><span>'</span><span>'</span></span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>REQUEST_TIME_FLOAT</th>
+								<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-number">1771593846.803919</span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>REQUEST_TIME</th>
+								<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-number">1771593846</span></pre>
+</td>
+							</tr>
+							<tr>
+								<th>argv</th>
+								<td><pre class="tracy-dump tracy-light" data-tracy-dump='[[0,"Standard input code"]]'></pre>
+</td>
+							</tr>
+							<tr>
+								<th>argc</th>
+								<td><pre class="tracy-dump tracy-light"><span class="tracy-dump-number">1</span></pre>
+</td>
+							</tr>
+					</table>
+				</div>
+
+				<div class="tracy-tab-panel">
+<pre class="tracy-dump tracy-light">phpinfo()
+
+
+ _______________________________________________________________________
+
+
+Configuration
+
+bcmath
+
+BCMath support =&gt; enabled
+
+Directive =&gt; Local Value =&gt; Master Value
+bcmath.scale =&gt; 0 =&gt; 0
+
+Core
+
+PHP Version =&gt; 8.3.30
+
+Directive =&gt; Local Value =&gt; Master Value
+allow_url_fopen =&gt; On =&gt; On
+allow_url_include =&gt; Off =&gt; Off
+arg_separator.input =&gt; &amp; =&gt; &amp;
+arg_separator.output =&gt; &amp; =&gt; &amp;
+auto_append_file =&gt; no value =&gt; no value
+auto_globals_jit =&gt; On =&gt; On
+auto_prepend_file =&gt; no value =&gt; no value
+browscap =&gt; no value =&gt; no value
+default_charset =&gt; UTF-8 =&gt; UTF-8
+default_mimetype =&gt; text/html =&gt; text/html
+disable_classes =&gt; no value =&gt; no value
+disable_functions =&gt; no value =&gt; no value
+display_errors =&gt; STDOUT =&gt; STDOUT
+display_startup_errors =&gt; On =&gt; On
+doc_root =&gt; no value =&gt; no value
+docref_ext =&gt; no value =&gt; no value
+docref_root =&gt; no value =&gt; no value
+enable_dl =&gt; On =&gt; On
+enable_post_data_reading =&gt; On =&gt; On
+error_append_string =&gt; no value =&gt; no value
+error_log =&gt; no value =&gt; no value
+error_log_mode =&gt; 0644 =&gt; 0644
+error_prepend_string =&gt; no value =&gt; no value
+error_reporting =&gt; 32767 =&gt; 32767
+expose_php =&gt; On =&gt; On
+extension_dir =&gt; /usr/local/lib/php/extensions/no-debug-non-zts-20230831 =&gt; /usr/local/lib/php/extensions/no-debug-non-zts-20230831
+fiber.stack_size =&gt; no value =&gt; no value
+file_uploads =&gt; On =&gt; On
+hard_timeout =&gt; 2 =&gt; 2
+highlight.comment =&gt; &lt;font style=&quot;color: #FF8000&quot;&gt;#FF8000&lt;/font&gt; =&gt; &lt;font style=&quot;color: #FF8000&quot;&gt;#FF8000&lt;/font&gt;
+highlight.default =&gt; &lt;font style=&quot;color: #0000BB&quot;&gt;#0000BB&lt;/font&gt; =&gt; &lt;font style=&quot;color: #0000BB&quot;&gt;#0000BB&lt;/font&gt;
+highlight.html =&gt; &lt;font style=&quot;color: #000000&quot;&gt;#000000&lt;/font&gt; =&gt; &lt;font style=&quot;color: #000000&quot;&gt;#000000&lt;/font&gt;
+highlight.keyword =&gt; &lt;font style=&quot;color: #007700&quot;&gt;#007700&lt;/font&gt; =&gt; &lt;font style=&quot;color: #007700&quot;&gt;#007700&lt;/font&gt;
+highlight.string =&gt; &lt;font style=&quot;color: #DD0000&quot;&gt;#DD0000&lt;/font&gt; =&gt; &lt;font style=&quot;color: #DD0000&quot;&gt;#DD0000&lt;/font&gt;
+html_errors =&gt; Off =&gt; Off
+ignore_repeated_errors =&gt; Off =&gt; Off
+ignore_repeated_source =&gt; Off =&gt; Off
+ignore_user_abort =&gt; Off =&gt; Off
+implicit_flush =&gt; On =&gt; On
+include_path =&gt; .:/usr/local/lib/php =&gt; .:/usr/local/lib/php
+input_encoding =&gt; no value =&gt; no value
+internal_encoding =&gt; no value =&gt; no value
+log_errors =&gt; Off =&gt; Off
+mail.add_x_header =&gt; Off =&gt; Off
+mail.force_extra_parameters =&gt; no value =&gt; no value
+mail.log =&gt; no value =&gt; no value
+mail.mixed_lf_and_crlf =&gt; Off =&gt; Off
+max_execution_time =&gt; 0 =&gt; 0
+max_file_uploads =&gt; 20 =&gt; 20
+max_input_nesting_level =&gt; 64 =&gt; 64
+max_input_time =&gt; -1 =&gt; -1
+max_input_vars =&gt; 1000 =&gt; 1000
+max_multipart_body_parts =&gt; -1 =&gt; -1
+memory_limit =&gt; 256M =&gt; 256M
+open_basedir =&gt; no value =&gt; no value
+output_buffering =&gt; 0 =&gt; 0
+output_encoding =&gt; no value =&gt; no value
+output_handler =&gt; no value =&gt; no value
+post_max_size =&gt; 120M =&gt; 120M
+precision =&gt; 14 =&gt; 14
+realpath_cache_size =&gt; 4096K =&gt; 4096K
+realpath_cache_ttl =&gt; 120 =&gt; 120
+register_argc_argv =&gt; On =&gt; On
+report_memleaks =&gt; On =&gt; On
+report_zend_debug =&gt; Off =&gt; Off
+request_order =&gt; no value =&gt; no value
+sendmail_from =&gt; no value =&gt; no value
+sendmail_path =&gt; /usr/sbin/sendmail -t -i =&gt; /usr/sbin/sendmail -t -i
+serialize_precision =&gt; -1 =&gt; -1
+short_open_tag =&gt; On =&gt; On
+SMTP =&gt; localhost =&gt; localhost
+smtp_port =&gt; 25 =&gt; 25
+sys_temp_dir =&gt; no value =&gt; no value
+syslog.facility =&gt; LOG_USER =&gt; LOG_USER
+syslog.filter =&gt; no-ctrl =&gt; no-ctrl
+syslog.ident =&gt; php =&gt; php
+unserialize_callback_func =&gt; no value =&gt; no value
+upload_max_filesize =&gt; 64M =&gt; 64M
+upload_tmp_dir =&gt; no value =&gt; no value
+user_dir =&gt; no value =&gt; no value
+user_ini.cache_ttl =&gt; 300 =&gt; 300
+user_ini.filename =&gt; .user.ini =&gt; .user.ini
+variables_order =&gt; EGPCS =&gt; EGPCS
+xmlrpc_error_number =&gt; 0 =&gt; 0
+xmlrpc_errors =&gt; Off =&gt; Off
+zend.assertions =&gt; 1 =&gt; 1
+zend.detect_unicode =&gt; On =&gt; On
+zend.enable_gc =&gt; On =&gt; On
+zend.exception_ignore_args =&gt; Off =&gt; Off
+zend.exception_string_param_max_len =&gt; 15 =&gt; 15
+zend.max_allowed_stack_size =&gt; 0 =&gt; 0
+zend.multibyte =&gt; Off =&gt; Off
+zend.reserved_stack_size =&gt; 0 =&gt; 0
+zend.script_encoding =&gt; no value =&gt; no value
+zend.signal_check =&gt; Off =&gt; Off
+
+ctype
+
+ctype functions =&gt; enabled
+
+curl
+
+cURL support =&gt; enabled
+cURL Information =&gt; 8.14.1
+Age =&gt; 11
+Features
+AsynchDNS =&gt; Yes
+CharConv =&gt; No
+Debug =&gt; No
+GSS-Negotiate =&gt; No
+IDN =&gt; Yes
+IPv6 =&gt; Yes
+krb4 =&gt; No
+Largefile =&gt; Yes
+libz =&gt; Yes
+NTLM =&gt; Yes
+NTLMWB =&gt; No
+SPNEGO =&gt; Yes
+SSL =&gt; Yes
+SSPI =&gt; No
+TLS-SRP =&gt; Yes
+HTTP2 =&gt; Yes
+GSSAPI =&gt; Yes
+KERBEROS5 =&gt; Yes
+UNIX_SOCKETS =&gt; Yes
+PSL =&gt; Yes
+HTTPS_PROXY =&gt; Yes
+MULTI_SSL =&gt; No
+BROTLI =&gt; Yes
+ALTSVC =&gt; Yes
+HTTP3 =&gt; Yes
+UNICODE =&gt; No
+ZSTD =&gt; Yes
+HSTS =&gt; Yes
+GSASL =&gt; No
+Protocols =&gt; dict, file, ftp, ftps, gopher, gophers, http, https, imap, imaps, ldap, ldaps, mqtt, pop3, pop3s, rtmp, rtmpe, rtmps, rtmpt, rtmpte, rtmpts, rtsp, scp, sftp, smb, smbs, smtp, smtps, telnet, tftp, ws, wss
+Host =&gt; x86_64-pc-linux-gnu
+SSL Version =&gt; OpenSSL/3.5.4
+ZLib Version =&gt; 1.3.1
+libSSH Version =&gt; libssh2/1.11.1
+
+Directive =&gt; Local Value =&gt; Master Value
+curl.cainfo =&gt; no value =&gt; no value
+
+date
+
+date/time support =&gt; enabled
+timelib version =&gt; 2022.14
+&quot;Olson&quot; Timezone Database Version =&gt; 2025.2
+Timezone Database =&gt; internal
+Default timezone =&gt; Europe/Prague
+
+Directive =&gt; Local Value =&gt; Master Value
+date.default_latitude =&gt; 31.7667 =&gt; 31.7667
+date.default_longitude =&gt; 35.2333 =&gt; 35.2333
+date.sunrise_zenith =&gt; 90.833333 =&gt; 90.833333
+date.sunset_zenith =&gt; 90.833333 =&gt; 90.833333
+date.timezone =&gt; Europe/Prague =&gt; Europe/Prague
+
+dom
+
+DOM/XML =&gt; enabled
+DOM/XML API Version =&gt; 20031129
+libxml Version =&gt; 2.9.14
+HTML Support =&gt; enabled
+XPath Support =&gt; enabled
+XPointer Support =&gt; enabled
+Schema Support =&gt; enabled
+RelaxNG Support =&gt; enabled
+
+fileinfo
+
+fileinfo support =&gt; enabled
+libmagic =&gt; 543
+
+filter
+
+Input Validation and Filtering =&gt; enabled
+
+Directive =&gt; Local Value =&gt; Master Value
+filter.default =&gt; unsafe_raw =&gt; unsafe_raw
+filter.default_flags =&gt; no value =&gt; no value
+
+gd
+
+GD Support =&gt; enabled
+GD Version =&gt; bundled (2.1.0 compatible)
+FreeType Support =&gt; enabled
+FreeType Linkage =&gt; with freetype
+FreeType Version =&gt; 2.13.3
+GIF Read Support =&gt; enabled
+GIF Create Support =&gt; enabled
+JPEG Support =&gt; enabled
+libJPEG Version =&gt; 6b
+PNG Support =&gt; enabled
+libPNG Version =&gt; 1.6.48
+WBMP Support =&gt; enabled
+XBM Support =&gt; enabled
+BMP Support =&gt; enabled
+TGA Read Support =&gt; enabled
+
+Directive =&gt; Local Value =&gt; Master Value
+gd.jpeg_ignore_warning =&gt; On =&gt; On
+
+hash
+
+hash support =&gt; enabled
+Hashing Engines =&gt; md2 md4 md5 sha1 sha224 sha256 sha384 sha512/224 sha512/256 sha512 sha3-224 sha3-256 sha3-384 sha3-512 ripemd128 ripemd160 ripemd256 ripemd320 whirlpool tiger128,3 tiger160,3 tiger192,3 tiger128,4 tiger160,4 tiger192,4 snefru snefru256 gost gost-crypto adler32 crc32 crc32b crc32c fnv132 fnv1a32 fnv164 fnv1a64 joaat murmur3a murmur3c murmur3f xxh32 xxh64 xxh3 xxh128 haval128,3 haval160,3 haval192,3 haval224,3 haval256,3 haval128,4 haval160,4 haval192,4 haval224,4 haval256,4 haval128,5 haval160,5 haval192,5 haval224,5 haval256,5 
+
+MHASH support =&gt; Enabled
+MHASH API Version =&gt; Emulated Support
+
+iconv
+
+iconv support =&gt; enabled
+iconv implementation =&gt; glibc
+iconv library version =&gt; 2.41
+
+Directive =&gt; Local Value =&gt; Master Value
+iconv.input_encoding =&gt; no value =&gt; no value
+iconv.internal_encoding =&gt; no value =&gt; no value
+iconv.output_encoding =&gt; no value =&gt; no value
+
+intl
+
+Internationalization support =&gt; enabled
+ICU version =&gt; 76.1
+ICU Data version =&gt; 76.1
+ICU TZData version =&gt; 2024b
+ICU Unicode version =&gt; 16.0
+
+Directive =&gt; Local Value =&gt; Master Value
+intl.default_locale =&gt; no value =&gt; no value
+intl.error_level =&gt; 0 =&gt; 0
+intl.use_exceptions =&gt; Off =&gt; Off
+
+json
+
+json support =&gt; enabled
+
+libxml
+
+libXML support =&gt; active
+libXML Compiled Version =&gt; 2.9.14
+libXML Loaded Version =&gt; 20914
+libXML streams =&gt; enabled
+
+mbstring
+
+Multibyte Support =&gt; enabled
+Multibyte string engine =&gt; libmbfl
+HTTP input encoding translation =&gt; disabled
+libmbfl version =&gt; 1.3.2
+
+mbstring extension makes use of &quot;streamable kanji code filter and converter&quot;, which is distributed under the GNU Lesser General Public License version 2.1.
+
+Multibyte (japanese) regex support =&gt; enabled
+Multibyte regex (oniguruma) version =&gt; 6.9.9
+
+Directive =&gt; Local Value =&gt; Master Value
+mbstring.detect_order =&gt; no value =&gt; no value
+mbstring.encoding_translation =&gt; Off =&gt; Off
+mbstring.http_input =&gt; no value =&gt; no value
+mbstring.http_output =&gt; no value =&gt; no value
+mbstring.http_output_conv_mimetypes =&gt; ^(text/|application/xhtml\+xml) =&gt; ^(text/|application/xhtml\+xml)
+mbstring.internal_encoding =&gt; no value =&gt; no value
+mbstring.language =&gt; neutral =&gt; neutral
+mbstring.regex_retry_limit =&gt; 1000000 =&gt; 1000000
+mbstring.regex_stack_limit =&gt; 100000 =&gt; 100000
+mbstring.strict_detection =&gt; Off =&gt; Off
+mbstring.substitute_character =&gt; no value =&gt; no value
+
+mysqlnd
+
+mysqlnd =&gt; enabled
+Version =&gt; mysqlnd 8.3.30
+Compression =&gt; supported
+core SSL =&gt; supported
+extended SSL =&gt; supported
+Command buffer size =&gt; 4096
+Read buffer size =&gt; 32768
+Read timeout =&gt; 86400
+Collecting statistics =&gt; Yes
+Collecting memory statistics =&gt; No
+Tracing =&gt; n/a
+Loaded plugins =&gt; mysqlnd,debug_trace,auth_plugin_mysql_native_password,auth_plugin_mysql_clear_password,auth_plugin_caching_sha2_password,auth_plugin_sha256_password
+API Extensions =&gt; pdo_mysql
+
+openssl
+
+OpenSSL support =&gt; enabled
+OpenSSL Library Version =&gt; OpenSSL 3.5.4 30 Sep 2025
+OpenSSL Header Version =&gt; OpenSSL 3.5.4 30 Sep 2025
+Openssl default config =&gt; /usr/lib/ssl/openssl.cnf
+
+Directive =&gt; Local Value =&gt; Master Value
+openssl.cafile =&gt; no value =&gt; no value
+openssl.capath =&gt; no value =&gt; no value
+
+pcre
+
+PCRE (Perl Compatible Regular Expressions) Support =&gt; enabled
+PCRE Library Version =&gt; 10.42 2022-12-12
+PCRE Unicode Version =&gt; 14.0.0
+PCRE JIT Support =&gt; enabled
+PCRE JIT Target =&gt; x86 64bit (little endian + unaligned)
+
+Directive =&gt; Local Value =&gt; Master Value
+pcre.backtrack_limit =&gt; 1000000 =&gt; 1000000
+pcre.jit =&gt; On =&gt; On
+pcre.recursion_limit =&gt; 100000 =&gt; 100000
+
+PDO
+
+PDO support =&gt; enabled
+PDO drivers =&gt; sqlite, mysql
+
+pdo_mysql
+
+PDO Driver for MySQL =&gt; enabled
+Client API version =&gt; mysqlnd 8.3.30
+
+Directive =&gt; Local Value =&gt; Master Value
+pdo_mysql.default_socket =&gt; no value =&gt; no value
+
+pdo_sqlite
+
+PDO Driver for SQLite 3.x =&gt; enabled
+SQLite Library =&gt; 3.46.1
+
+Phar
+
+Phar: PHP Archive support =&gt; enabled
+Phar API version =&gt; 1.1.1
+Phar-based phar archives =&gt; enabled
+Tar-based phar archives =&gt; enabled
+ZIP-based phar archives =&gt; enabled
+gzip compression =&gt; enabled
+bzip2 compression =&gt; disabled (install ext/bz2)
+Native OpenSSL support =&gt; enabled
+
+
+Phar based on pear/PHP_Archive, original concept by Davey Shafik.
+Phar fully realized by Gregory Beaver and Marcus Boerger.
+Portions of tar implementation Copyright (c) 2003-2009 Tim Kientzle.
+Directive =&gt; Local Value =&gt; Master Value
+phar.cache_list =&gt; no value =&gt; no value
+phar.readonly =&gt; On =&gt; On
+phar.require_hash =&gt; On =&gt; On
+
+posix
+
+POSIX support =&gt; enabled
+
+random
+
+Version =&gt; 8.3.30
+
+readline
+
+Readline Support =&gt; enabled
+Readline library =&gt; 8.2
+
+Directive =&gt; Local Value =&gt; Master Value
+cli.pager =&gt; no value =&gt; no value
+cli.prompt =&gt; \b \&gt;  =&gt; \b \&gt; 
+
+Reflection
+
+Reflection =&gt; enabled
+
+session
+
+Session Support =&gt; enabled
+Registered save handlers =&gt; files user 
+Registered serializer handlers =&gt; php_serialize php php_binary 
+
+Directive =&gt; Local Value =&gt; Master Value
+session.auto_start =&gt; Off =&gt; Off
+session.cache_expire =&gt; 180 =&gt; 180
+session.cache_limiter =&gt; nocache =&gt; nocache
+session.cookie_domain =&gt; no value =&gt; no value
+session.cookie_httponly =&gt; On =&gt; On
+session.cookie_lifetime =&gt; 0 =&gt; 0
+session.cookie_path =&gt; / =&gt; /
+session.cookie_samesite =&gt; no value =&gt; no value
+session.cookie_secure =&gt; Off =&gt; Off
+session.gc_divisor =&gt; 100 =&gt; 100
+session.gc_maxlifetime =&gt; 1440 =&gt; 1440
+session.gc_probability =&gt; 1 =&gt; 1
+session.lazy_write =&gt; On =&gt; On
+session.name =&gt; PHPSESSID =&gt; PHPSESSID
+session.referer_check =&gt; no value =&gt; no value
+session.save_handler =&gt; files =&gt; files
+session.save_path =&gt; no value =&gt; no value
+session.serialize_handler =&gt; php =&gt; php
+session.sid_bits_per_character =&gt; 4 =&gt; 4
+session.sid_length =&gt; 32 =&gt; 32
+session.upload_progress.cleanup =&gt; On =&gt; On
+session.upload_progress.enabled =&gt; On =&gt; On
+session.upload_progress.freq =&gt; 1% =&gt; 1%
+session.upload_progress.min_freq =&gt; 1 =&gt; 1
+session.upload_progress.name =&gt; PHP_SESSION_UPLOAD_PROGRESS =&gt; PHP_SESSION_UPLOAD_PROGRESS
+session.upload_progress.prefix =&gt; upload_progress_ =&gt; upload_progress_
+session.use_cookies =&gt; On =&gt; On
+session.use_only_cookies =&gt; On =&gt; On
+session.use_strict_mode =&gt; On =&gt; On
+session.use_trans_sid =&gt; Off =&gt; Off
+
+SimpleXML
+
+SimpleXML support =&gt; enabled
+Schema support =&gt; enabled
+
+sodium
+
+sodium support =&gt; enabled
+libsodium headers version =&gt; 1.0.18
+libsodium library version =&gt; 1.0.18
+
+SPL
+
+SPL support =&gt; enabled
+Interfaces =&gt; OuterIterator, RecursiveIterator, SeekableIterator, SplObserver, SplSubject
+Classes =&gt; AppendIterator, ArrayIterator, ArrayObject, BadFunctionCallException, BadMethodCallException, CachingIterator, CallbackFilterIterator, DirectoryIterator, DomainException, EmptyIterator, FilesystemIterator, FilterIterator, GlobIterator, InfiniteIterator, InvalidArgumentException, IteratorIterator, LengthException, LimitIterator, LogicException, MultipleIterator, NoRewindIterator, OutOfBoundsException, OutOfRangeException, OverflowException, ParentIterator, RangeException, RecursiveArrayIterator, RecursiveCachingIterator, RecursiveCallbackFilterIterator, RecursiveDirectoryIterator, RecursiveFilterIterator, RecursiveIteratorIterator, RecursiveRegexIterator, RecursiveTreeIterator, RegexIterator, RuntimeException, SplDoublyLinkedList, SplFileInfo, SplFileObject, SplFixedArray, SplHeap, SplMinHeap, SplMaxHeap, SplObjectStorage, SplPriorityQueue, SplQueue, SplStack, SplTempFileObject, UnderflowException, UnexpectedValueException
+
+sqlite3
+
+SQLite3 support =&gt; enabled
+SQLite Library =&gt; 3.46.1
+
+Directive =&gt; Local Value =&gt; Master Value
+sqlite3.defensive =&gt; On =&gt; On
+sqlite3.extension_dir =&gt; no value =&gt; no value
+
+standard
+
+Dynamic Library Support =&gt; enabled
+Path to sendmail =&gt; /usr/sbin/sendmail -t -i
+
+Directive =&gt; Local Value =&gt; Master Value
+assert.active =&gt; On =&gt; On
+assert.bail =&gt; Off =&gt; Off
+assert.callback =&gt; no value =&gt; no value
+assert.exception =&gt; On =&gt; On
+assert.warning =&gt; On =&gt; On
+auto_detect_line_endings =&gt; Off =&gt; Off
+default_socket_timeout =&gt; 60 =&gt; 60
+from =&gt; no value =&gt; no value
+session.trans_sid_hosts =&gt; no value =&gt; no value
+session.trans_sid_tags =&gt; a=href,area=href,frame=src,form= =&gt; a=href,area=href,frame=src,form=
+unserialize_max_depth =&gt; 4096 =&gt; 4096
+url_rewriter.hosts =&gt; no value =&gt; no value
+url_rewriter.tags =&gt; form= =&gt; form=
+user_agent =&gt; no value =&gt; no value
+
+tokenizer
+
+Tokenizer Support =&gt; enabled
+
+xml
+
+XML Support =&gt; active
+XML Namespace Support =&gt; active
+libxml2 Version =&gt; 2.9.14
+
+xmlreader
+
+XMLReader =&gt; enabled
+
+xmlwriter
+
+XMLWriter =&gt; enabled
+
+Zend OPcache
+
+Opcode Caching =&gt; Disabled
+Optimization =&gt; Disabled
+SHM Cache =&gt; Enabled
+File Cache =&gt; Disabled
+JIT =&gt; On
+Startup Failed =&gt; Opcode Caching is disabled for CLI
+
+Directive =&gt; Local Value =&gt; Master Value
+opcache.blacklist_filename =&gt; no value =&gt; no value
+opcache.dups_fix =&gt; Off =&gt; Off
+opcache.enable =&gt; On =&gt; On
+opcache.enable_cli =&gt; Off =&gt; Off
+opcache.enable_file_override =&gt; Off =&gt; Off
+opcache.error_log =&gt; no value =&gt; no value
+opcache.file_cache =&gt; no value =&gt; no value
+opcache.file_cache_consistency_checks =&gt; On =&gt; On
+opcache.file_cache_only =&gt; Off =&gt; Off
+opcache.file_update_protection =&gt; 2 =&gt; 2
+opcache.force_restart_timeout =&gt; 180 =&gt; 180
+opcache.huge_code_pages =&gt; Off =&gt; Off
+opcache.interned_strings_buffer =&gt; 8 =&gt; 8
+opcache.jit =&gt; tracing =&gt; tracing
+opcache.jit_bisect_limit =&gt; 0 =&gt; 0
+opcache.jit_blacklist_root_trace =&gt; 16 =&gt; 16
+opcache.jit_blacklist_side_trace =&gt; 8 =&gt; 8
+opcache.jit_buffer_size =&gt; 0 =&gt; 0
+opcache.jit_debug =&gt; 0 =&gt; 0
+opcache.jit_hot_func =&gt; 127 =&gt; 127
+opcache.jit_hot_loop =&gt; 64 =&gt; 64
+opcache.jit_hot_return =&gt; 8 =&gt; 8
+opcache.jit_hot_side_exit =&gt; 8 =&gt; 8
+opcache.jit_max_exit_counters =&gt; 8192 =&gt; 8192
+opcache.jit_max_loop_unrolls =&gt; 8 =&gt; 8
+opcache.jit_max_polymorphic_calls =&gt; 2 =&gt; 2
+opcache.jit_max_recursive_calls =&gt; 2 =&gt; 2
+opcache.jit_max_recursive_returns =&gt; 2 =&gt; 2
+opcache.jit_max_root_traces =&gt; 1024 =&gt; 1024
+opcache.jit_max_side_traces =&gt; 128 =&gt; 128
+opcache.jit_max_trace_length =&gt; 1024 =&gt; 1024
+opcache.jit_prof_threshold =&gt; 0.005 =&gt; 0.005
+opcache.lockfile_path =&gt; /tmp =&gt; /tmp
+opcache.log_verbosity_level =&gt; 1 =&gt; 1
+opcache.max_accelerated_files =&gt; 10000 =&gt; 10000
+opcache.max_file_size =&gt; 0 =&gt; 0
+opcache.max_wasted_percentage =&gt; 5 =&gt; 5
+opcache.memory_consumption =&gt; 128 =&gt; 128
+opcache.opt_debug_level =&gt; 0 =&gt; 0
+opcache.optimization_level =&gt; 0x7FFEBFFF =&gt; 0x7FFEBFFF
+opcache.preferred_memory_model =&gt; no value =&gt; no value
+opcache.preload =&gt; no value =&gt; no value
+opcache.preload_user =&gt; no value =&gt; no value
+opcache.protect_memory =&gt; Off =&gt; Off
+opcache.record_warnings =&gt; Off =&gt; Off
+opcache.restrict_api =&gt; no value =&gt; no value
+opcache.revalidate_freq =&gt; 2 =&gt; 2
+opcache.revalidate_path =&gt; Off =&gt; Off
+opcache.save_comments =&gt; On =&gt; On
+opcache.use_cwd =&gt; On =&gt; On
+opcache.validate_permission =&gt; Off =&gt; Off
+opcache.validate_root =&gt; Off =&gt; Off
+opcache.validate_timestamps =&gt; On =&gt; On
+
+zip
+
+Zip =&gt; enabled
+Zip version =&gt; 1.22.3
+Libzip version =&gt; 1.11.3
+BZIP2 compression =&gt; Yes
+XZ compression =&gt; Yes
+ZSTD compression =&gt; Yes
+AES-128 encryption =&gt; Yes
+AES-192 encryption =&gt; Yes
+AES-256 encryption =&gt; Yes
+
+zlib
+
+ZLib Support =&gt; enabled
+Stream Wrapper =&gt; compress.zlib://
+Stream Filter =&gt; zlib.inflate, zlib.deflate
+Compiled Version =&gt; 1.3.1
+Linked Version =&gt; 1.3.1
+
+Directive =&gt; Local Value =&gt; Master Value
+zlib.output_compression =&gt; Off =&gt; Off
+zlib.output_compression_level =&gt; -1 =&gt; -1
+zlib.output_handler =&gt; no value =&gt; no value
+
+Additional Modules
+
+Module Name
+</pre>				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<section class="tracy-section">
+	<h2 class="tracy-section-label">
+		<a href="#" data-tracy-ref="^+" class="tracy-toggle tracy-collapsed">CLI request</a>
+	</h2>
+
+	<div class="tracy-section-panel tracy-collapsed">
+		<h3>Process ID 427</h3>
+
+			<pre>php &apos;Standard input code&apos;</pre>
+			<h3>Arguments</h3>
+
+			<div class="tracy-pane">
+				<table>
+						<tr>
+							<th>0</th>
+							<td><pre class="tracy-dump tracy-light"
+><span class="tracy-dump-string" title="19 characters"><span>'</span>Standard input code<span>'</span></span></pre>
+</td>
+						</tr>
+				</table>
+			</div>
+	</div>
+</section>
+		<footer>
+			<ul>
+				<li><b><a href="https://github.com/sponsors/dg" target="_blank" rel="noreferrer noopener">Please support Tracy via a donation 💙️</a></b></li>
+				<li>Report generated at 2026/02/20 14:24:06</li>
+					<li>PHP 8.3.30</li>
+					<li>Tracy 2.11.2</li>
+			</ul>
+
+			<div class="tracy-footer-logo"><a href="https://tracy.nette.org" rel="noreferrer"></a></div>
+		</footer>
+	</div>
+
+	<meta itemprop=tracy-snapshot content='{"7258":{"object":"Contributte\\Translation\\Translator","editor":{"file":"/var/www/html/vendor/contributte/translation/src/Translator.php","line":16,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTranslator.php\u0026line=16\u0026search=\u0026replace="},"items":[["localeResolver",{"ref":7264},"Contributte\\Translation\\Translator"],["fallbackResolver",{"ref":7265},"Contributte\\Translation\\Translator"],["defaultLocale","cs","Contributte\\Translation\\Translator"],["cacheDir","/var/www/html/temp/cache/translation","Contributte\\Translation\\Translator"],["debug",true,"Contributte\\Translation\\Translator"],["returnOriginalMessage",true,0],["localesWhitelist",null,"Contributte\\Translation\\Translator"],["prefix",[[0,"messages"]],"Contributte\\Translation\\Translator"],["prefixTemp",[],"Contributte\\Translation\\Translator"],["resourcesLocales",[["cs",true]],"Contributte\\Translation\\Translator"],["psrLogger",null,"Contributte\\Translation\\Translator"],["tracyPanel",{"ref":7255},"Contributte\\Translation\\Translator"],["initLang","ContributteTranslationTranslator","Contributte\\Translation\\Translator"],["translateKeyGenerator",{"ref":6545},"Contributte\\Translation\\Translator"],["catalogues",[],1],["locale","ContributteTranslationTranslator","Symfony\\Component\\Translation\\Translator"],["fallbackLocales",[[0,"cs"]],"Symfony\\Component\\Translation\\Translator"],["loaders",[["neon",{"ref":7271}]],"Symfony\\Component\\Translation\\Translator"],["resources",[["cs",[[0,[[0,"neon"],[1,"/var/www/html/app/../translations/messages+intl-icu.cs.neon"],[2,"messages+intl-icu"]]],[1,[[0,"neon"],[1,"/var/www/html/app/../translations/messages.cs.neon"],[2,"messages"]]]]]],"Symfony\\Component\\Translation\\Translator"],["formatter",{"ref":7263},"Symfony\\Component\\Translation\\Translator"],["configCacheFactory",{"ref":7270},"Symfony\\Component\\Translation\\Translator"],["parentLocales",{"text":"unset"},"Symfony\\Component\\Translation\\Translator"],["hasIntlFormatter",true,"Symfony\\Component\\Translation\\Translator"],["globalParameters",[],"Symfony\\Component\\Translation\\Translator"],["globalTranslatedParameters",[],"Symfony\\Component\\Translation\\Translator"],["cacheDir","/var/www/html/temp/cache/translation","Symfony\\Component\\Translation\\Translator"],["debug",true,"Symfony\\Component\\Translation\\Translator"],["cacheVary",[["fallback_locales",[[0,"cs"]]]],"Symfony\\Component\\Translation\\Translator"]]},"7264":{"object":"Contributte\\Translation\\LocaleResolver","editor":{"file":"/var/www/html/vendor/contributte/translation/src/LocaleResolver.php","line":8,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocaleResolver.php\u0026line=8\u0026search=\u0026replace="},"items":[["container",{"ref":28},"Contributte\\Translation\\LocaleResolver"],["resolvers",[[0,"Contributte\\Translation\\LocalesResolvers\\Session"],[1,"Contributte\\Translation\\LocalesResolvers\\Router"],[2,"Contributte\\Translation\\LocalesResolvers\\Parameter"],[3,"Contributte\\Translation\\LocalesResolvers\\Header"]],"Contributte\\Translation\\LocaleResolver"]]},"28":{"object":"Container_f956862001","editor":{"file":"/var/www/html/temp/cache/nette.configurator/Container_f956862001.php","line":10,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Ftemp%2Fcache%2Fnette.configurator%2FContainer_f956862001.php\u0026line=10\u0026search=\u0026replace="},"items":[["tags",[["nette.inject",{"array":null,"length":8}]],1],["aliases",[["application","application.application"],["cacheStorage","cache.storage"],["database.default","database.default.connection"],["database.default.context","database.default.explorer"],["httpRequest","http.request"],["httpResponse","http.response"],["nette.cacheJournal","cache.journal"],["nette.database.default","database.default"],["nette.database.default.context","database.default.explorer"],["nette.httpRequestFactory","http.requestFactory"],["nette.latteFactory","latte.latteFactory"],["nette.mailer","mail.mailer"],["nette.presenterFactory","application.presenterFactory"],["nette.templateFactory","latte.templateFactory"],["nette.userStorage","security.userStorage"],["session","session.session"],["user","security.user"]],1],["wiring",[["Nette\\DI\\Container",{"array":null,"length":1}],["Nette\\Application\\Application",{"array":null,"length":1}],["Nette\\Application\\IPresenterFactory",{"array":null,"length":1}],["Nette\\Application\\LinkGenerator",{"array":null,"length":1}],["Nette\\Caching\\Storages\\Journal",{"array":null,"length":1}],["Nette\\Caching\\Storage",{"array":null,"length":1}],["Nette\\Database\\Connection",{"array":null,"length":1}],["Nette\\Database\\IStructure",{"array":null,"length":1}],["Nette\\Database\\Structure",{"array":null,"length":1}],["Nette\\Database\\Conventions",{"array":null,"length":1}],["Nette\\Database\\Conventions\\DiscoveredConventions",{"array":null,"length":1}],["Nette\\Database\\Explorer",{"array":null,"length":1}],["Nette\\Http\\RequestFactory",{"array":null,"length":1}],["Nette\\Http\\IRequest",{"array":null,"length":1}],["Nette\\Http\\Request",{"array":null,"length":1}],["Nette\\Http\\IResponse",{"array":null,"length":1}],["Nette\\Http\\Response",{"array":null,"length":1}],["Nette\\Bridges\\ApplicationLatte\\LatteFactory",{"array":null,"length":1}],["Nette\\Application\\UI\\TemplateFactory",{"array":null,"length":1}],["Nette\\Bridges\\ApplicationLatte\\TemplateFactory",{"array":null,"length":1}],["Nette\\Mail\\Mailer",{"array":null,"length":1}],["Nette\\Security\\Passwords",{"array":null,"length":1}],["Nette\\Security\\UserStorage",{"array":null,"length":1}],["Nette\\Security\\User",{"array":null,"length":1}],["Nette\\Http\\Session",{"array":null,"length":1}],["Tracy\\ILogger",{"array":null,"length":1}],["Tracy\\BlueScreen",{"array":null,"length":1}],["Tracy\\Bar",{"array":null,"length":1}],["Contributte\\Translation\\LocaleResolver",{"array":null,"length":1}],["Contributte\\Translation\\LocalesResolvers\\ResolverInterface",{"array":null,"length":1}],["Contributte\\Translation\\LocalesResolvers\\Session",{"array":null,"length":1}],["Contributte\\Translation\\LocalesResolvers\\Router",{"array":null,"length":1}],["Contributte\\Translation\\LocalesResolvers\\Parameter",{"array":null,"length":1}],["Contributte\\Translation\\LocalesResolvers\\Header",{"array":null,"length":1}],["Contributte\\Translation\\FallbackResolver",{"array":null,"length":1}],["Symfony\\Component\\Config\\ConfigCacheFactoryInterface",{"array":null,"length":1}],["Symfony\\Component\\Config\\ConfigCacheFactory",{"array":null,"length":1}],["Symfony\\Component\\Translation\\Translator",{"array":null,"length":1}],["Symfony\\Contracts\\Translation\\TranslatorInterface",{"array":null,"length":1}],["Symfony\\Component\\Translation\\TranslatorBagInterface",{"array":null,"length":1}],["Symfony\\Contracts\\Translation\\LocaleAwareInterface",{"array":null,"length":1}],["Nette\\Localization\\Translator",{"array":null,"length":1}],["Contributte\\Translation\\Translator",{"array":null,"length":1}],["Symfony\\Component\\Translation\\Loader\\ArrayLoader",{"array":null,"length":1}],["Symfony\\Component\\Translation\\Loader\\LoaderInterface",{"array":null,"length":1}],["Contributte\\Translation\\Loaders\\Neon",{"array":null,"length":1}],["Tracy\\IBarPanel",{"array":null,"length":1}],["Contributte\\Translation\\Tracy\\Panel",{"array":null,"length":1}],["Nette\\Routing\\RouteList",{"array":null,"length":1}],["Nette\\Routing\\Router",{"array":null,"length":1}],["ArrayAccess",{"array":null,"length":1}],["Nette\\Application\\Routers\\RouteList",{"array":null,"length":1}],["App\\Presenters\\BasePresenter",{"array":null,"length":1}],["Nette\\Application\\UI\\Presenter",{"array":null,"length":1}],["Nette\\Application\\UI\\Control",{"array":null,"length":1}],["Nette\\Application\\UI\\Component",{"array":null,"length":1}],["Nette\\ComponentModel\\Container",{"array":null,"length":1}],["Nette\\ComponentModel\\Component",{"array":null,"length":1}],["Nette\\ComponentModel\\IComponent",{"array":null,"length":1}],["Nette\\ComponentModel\\IContainer",{"array":null,"length":1}],["Nette\\Application\\UI\\SignalReceiver",{"array":null,"length":1}],["Nette\\Application\\UI\\StatePersistent",{"array":null,"length":1}],["Nette\\Application\\UI\\Renderable",{"array":null,"length":1}],["Nette\\Application\\IPresenter",{"array":null,"length":1}],["App\\Presenters\\SignPresenter",{"array":null,"length":1}],["App\\Presenters\\Error4xxPresenter",{"array":null,"length":1}],["App\\Presenters\\ProjectPresenter",{"array":null,"length":1}],["App\\Presenters\\ProfilePresenter",{"array":null,"length":1}],["App\\Presenters\\ErrorPresenter",{"array":null,"length":1}],["App\\Presenters\\HomepagePresenter",{"array":null,"length":1}],["NetteModule\\ErrorPresenter",{"array":null,"length":1}],["NetteModule\\MicroPresenter",{"array":null,"length":1}],["Contributte\\Translation\\Latte\\Filters",{"array":null,"length":1}],["Latte\\Extension",{"array":null,"length":1}],["Contributte\\Translation\\Latte\\TranslatorExtension",{"array":null,"length":1}]],1],["parameters",[["appDir","/var/www/html/app"],["wwwDir","."],["vendorDir","/var/www/html/vendor"],["rootDir","/var/www/html"],["debugMode",true],["productionMode",false],["consoleMode",true],["tempDir","/var/www/html/temp"]],0],["instances",[["tracy.bar",{"ref":9}],["tracy.logger",{"ref":6554}],["mail.mailer",{"ref":7257}],["http.requestFactory",{"ref":7259}],["http.request",{"ref":7260}],["translation.localeResolver",{"ref":7264}],["translation.fallbackResolver",{"ref":7265}],["translation.configCacheFactory",{"ref":7270}],["translation.loaderNeon",{"ref":7271}],["translation.translator",{"ref":7258}],["http.response",{"ref":7273}],["session.session",{"ref":7274}],["translation.localeResolverSession",{"ref":7268}],["01",{"ref":7277}],["translation.localeResolverRouter",{"ref":7275}],["translation.localeResolverParameter",{"ref":7276}],["translation.localeResolverHeader",{"ref":7279}],["translation.tracyPanel",{"ref":7255}]],"Nette\\DI\\Container"],["creating",[],"Nette\\DI\\Container"],["methods",[["__construct",0],["createService01",1],["createServiceApplication__1",2],["createServiceApplication__2",3],["createServiceApplication__3",4],["createServiceApplication__4",5],["createServiceApplication__5",6],["createServiceApplication__6",7],["createServiceApplication__7",8],["createServiceApplication__8",9],["createServiceApplication__application",10],["createServiceApplication__linkGenerator",11],["createServiceApplication__presenterFactory",12],["createServiceCache__journal",13],["createServiceCache__storage",14],["createServiceContainer",15],["createServiceDatabase__default__connection",16],["createServiceDatabase__default__conventions",17],["createServiceDatabase__default__explorer",18],["createServiceDatabase__default__structure",19],["createServiceHttp__request",20],["createServiceHttp__requestFactory",21],["createServiceHttp__response",22],["createServiceLatte__latteFactory",23],["createServiceLatte__templateFactory",24],["createServiceMail__mailer",25],["createServiceSecurity__passwords",26],["createServiceSecurity__user",27],["createServiceSecurity__userStorage",28],["createServiceSession__session",29],["createServiceTracy__bar",30],["createServiceTracy__blueScreen",31],["createServiceTracy__logger",32],["createServiceTranslation__configCacheFactory",33],["createServiceTranslation__fallbackResolver",34],["createServiceTranslation__latte__extension",35],["createServiceTranslation__latte__filters",36],["createServiceTranslation__loaderNeon",37],["createServiceTranslation__localeResolver",38],["createServiceTranslation__localeResolverHeader",39],["createServiceTranslation__localeResolverParameter",40],["createServiceTranslation__localeResolverRouter",41],["createServiceTranslation__localeResolverSession",42],["createServiceTranslation__tracyPanel",43],["createServiceTranslation__translator",44],["initialize",45],["getStaticParameters",46],["getDynamicParameter",47],["getParameters",48],["getParameter",49],["addService",50],["removeService",51],["getService",52],["getByName",53],["getServiceType",54],["hasService",55],["isCreated",56],["createService",57],["getByType",58],["findAutowired",59],["findByType",60],["findByTag",61],["preventDeadLock",62],["createInstance",63],["callInjects",64],["callMethod",65],["autowireArguments",66],["getMethodName",67]],"Nette\\DI\\Container"],["factories",[],"Nette\\DI\\Container"]]},"9":{"object":"Tracy\\Bar","editor":{"file":"/var/www/html/vendor/tracy/tracy/src/Tracy/Bar/Bar.php","line":18,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Ftracy%2Ftracy%2Fsrc%2FTracy%2FBar%2FBar.php\u0026line=18\u0026search=\u0026replace="}},"6554":{"object":"Tracy\\Logger","editor":{"file":"/var/www/html/vendor/tracy/tracy/src/Tracy/Logger/Logger.php","line":19,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Ftracy%2Ftracy%2Fsrc%2FTracy%2FLogger%2FLogger.php\u0026line=19\u0026search=\u0026replace="}},"7257":{"object":"Nette\\Mail\\SendmailMailer","editor":{"file":"/var/www/html/vendor/nette/mail/src/Mail/SendmailMailer.php","line":18,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fnette%2Fmail%2Fsrc%2FMail%2FSendmailMailer.php\u0026line=18\u0026search=\u0026replace="}},"7259":{"object":"Nette\\Http\\RequestFactory","editor":{"file":"/var/www/html/vendor/nette/http/src/Http/RequestFactory.php","line":22,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fnette%2Fhttp%2Fsrc%2FHttp%2FRequestFactory.php\u0026line=22\u0026search=\u0026replace="}},"7260":{"object":"Nette\\Http\\Request","editor":{"file":"/var/www/html/vendor/nette/http/src/Http/Request.php","line":34,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fnette%2Fhttp%2Fsrc%2FHttp%2FRequest.php\u0026line=34\u0026search=\u0026replace="}},"7265":{"object":"Contributte\\Translation\\FallbackResolver","editor":{"file":"/var/www/html/vendor/contributte/translation/src/FallbackResolver.php","line":7,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FFallbackResolver.php\u0026line=7\u0026search=\u0026replace="},"items":[["fallbackLocales",[[0,"cs"]],"Contributte\\Translation\\FallbackResolver"]]},"7270":{"object":"Symfony\\Component\\Config\\ConfigCacheFactory","editor":{"file":"/var/www/html/vendor/symfony/config/ConfigCacheFactory.php","line":23,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Fconfig%2FConfigCacheFactory.php\u0026line=23\u0026search=\u0026replace="},"items":[["debug",true,"Symfony\\Component\\Config\\ConfigCacheFactory"]]},"7271":{"object":"Contributte\\Translation\\Loaders\\Neon","editor":{"file":"/var/www/html/vendor/contributte/translation/src/Loaders/Neon.php","line":12,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLoaders%2FNeon.php\u0026line=12\u0026search=\u0026replace="},"items":[]},"7273":{"object":"Nette\\Http\\Response","editor":{"file":"/var/www/html/vendor/nette/http/src/Http/Response.php","line":23,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fnette%2Fhttp%2Fsrc%2FHttp%2FResponse.php\u0026line=23\u0026search=\u0026replace="}},"7274":{"object":"Nette\\Http\\Session","editor":{"file":"/var/www/html/vendor/nette/http/src/Http/Session.php","line":20,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fnette%2Fhttp%2Fsrc%2FHttp%2FSession.php\u0026line=20\u0026search=\u0026replace="}},"7268":{"object":"Contributte\\Translation\\LocalesResolvers\\Session","editor":{"file":"/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Session.php","line":10,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocalesResolvers%2FSession.php\u0026line=10\u0026search=\u0026replace="},"items":[["httpResponse",{"ref":7273},"Contributte\\Translation\\LocalesResolvers\\Session"],["session",{"ref":7274},"Contributte\\Translation\\LocalesResolvers\\Session"],["sessionSection",{"ref":7272},"Contributte\\Translation\\LocalesResolvers\\Session"]]},"7277":{"object":"Nette\\Application\\Routers\\RouteList","editor":{"file":"/var/www/html/vendor/nette/application/src/Application/Routers/RouteList.php","line":20,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fnette%2Fapplication%2Fsrc%2FApplication%2FRouters%2FRouteList.php\u0026line=20\u0026search=\u0026replace="}},"7275":{"object":"Contributte\\Translation\\LocalesResolvers\\Router","editor":{"file":"/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Router.php","line":9,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocalesResolvers%2FRouter.php\u0026line=9\u0026search=\u0026replace="},"items":[["request",{"ref":7260},"Contributte\\Translation\\LocalesResolvers\\Router"],["router",{"ref":7277},"Contributte\\Translation\\LocalesResolvers\\Router"]]},"7276":{"object":"Contributte\\Translation\\LocalesResolvers\\Parameter","editor":{"file":"/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Parameter.php","line":8,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocalesResolvers%2FParameter.php\u0026line=8\u0026search=\u0026replace="},"items":[["request",{"ref":7260},"Contributte\\Translation\\LocalesResolvers\\Parameter"]]},"7279":{"object":"Contributte\\Translation\\LocalesResolvers\\Header","editor":{"file":"/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Header.php","line":10,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FLocalesResolvers%2FHeader.php\u0026line=10\u0026search=\u0026replace="},"items":[["httpRequest",{"ref":7260},"Contributte\\Translation\\LocalesResolvers\\Header"]]},"7255":{"object":"Contributte\\Translation\\Tracy\\Panel","editor":{"file":"/var/www/html/vendor/contributte/translation/src/Tracy/Panel.php","line":10,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTracy%2FPanel.php\u0026line=10\u0026search=\u0026replace="},"items":[["translator",{"ref":7258},"Contributte\\Translation\\Tracy\\Panel"],["missingTranslation",[],"Contributte\\Translation\\Tracy\\Panel"],["missingTranslationCount",0,"Contributte\\Translation\\Tracy\\Panel"],["localeResolvers",[[0,{"ref":7268}],[1,{"ref":7275}],[2,{"ref":7276}],[3,{"ref":7279}]],"Contributte\\Translation\\Tracy\\Panel"],["resources",[["cs",[["/var/www/html/app/../translations/messages+intl-icu.cs.neon","messages+intl-icu"],["/var/www/html/app/../translations/messages.cs.neon","messages"]]]],"Contributte\\Translation\\Tracy\\Panel"],["resourcesCount",2,"Contributte\\Translation\\Tracy\\Panel"],["ignoredResources",[],"Contributte\\Translation\\Tracy\\Panel"],["ignoredResourcesCount",0,"Contributte\\Translation\\Tracy\\Panel"]]},"7272":{"object":"Nette\\Http\\SessionSection","editor":{"file":"/var/www/html/vendor/nette/http/src/Http/SessionSection.php","line":19,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fnette%2Fhttp%2Fsrc%2FHttp%2FSessionSection.php\u0026line=19\u0026search=\u0026replace="}},"6545":{"object":"Closure($params)","editor":{"file":"/var/www/html/vendor/contributte/translation/src/Translator.php","line":164,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fcontributte%2Ftranslation%2Fsrc%2FTranslator.php\u0026line=164\u0026search=\u0026replace="},"items":[["file","/var/www/html/vendor/contributte/translation/src/Translator.php:164",4]]},"7263":{"object":"Symfony\\Component\\Translation\\Formatter\\MessageFormatter","editor":{"file":"/var/www/html/vendor/symfony/translation/Formatter/MessageFormatter.php","line":23,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Ftranslation%2FFormatter%2FMessageFormatter.php\u0026line=23\u0026search=\u0026replace="},"items":[["translator",{"ref":7266},"Symfony\\Component\\Translation\\Formatter\\MessageFormatter"],["intlFormatter",{"ref":7267},"Symfony\\Component\\Translation\\Formatter\\MessageFormatter"]]},"7266":{"object":"Symfony\\Component\\Translation\\IdentityTranslator","editor":{"file":"/var/www/html/vendor/symfony/translation/IdentityTranslator.php","line":23,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Ftranslation%2FIdentityTranslator.php\u0026line=23\u0026search=\u0026replace="},"items":[["locale",null,"Symfony\\Component\\Translation\\IdentityTranslator"]]},"7267":{"object":"Symfony\\Component\\Translation\\Formatter\\IntlFormatter","editor":{"file":"/var/www/html/vendor/symfony/translation/Formatter/IntlFormatter.php","line":21,"url":"editor://open/?file=%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Ftranslation%2FFormatter%2FIntlFormatter.php\u0026line=21\u0026search=\u0026replace="},"items":[["hasMessageFormatter",{"text":"unset"},"Symfony\\Component\\Translation\\Formatter\\IntlFormatter"],["cache",[],"Symfony\\Component\\Translation\\Formatter\\IntlFormatter"]]},"7256":{"object":"ErrorException","items":[["skippable",true,3],["severity",512,1],["message",{"string":"The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions e <span>…</span> nResolver.","length":188},1],["string","","Exception"],["code",0,1],["file","/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Session.php",1],["line",44,1],["trace",[[0,[["file","/var/www/html/vendor/tracy/tracy/src/Tracy/Debugger/Debugger.php"],["line",354],["function","handleError"],["class","Tracy\\DevelopmentStrategy"],["type","->"],["args",[[0,512],[1,{"string":"The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions e <span>…</span> nResolver.","length":188}],[2,"/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Session.php"],[3,44]]]]],[1,[["function","errorHandler"],["class","Tracy\\Debugger"],["type","::"],["args",[[0,512],[1,{"string":"The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions e <span>…</span> nResolver.","length":188}],[2,"/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Session.php"],[3,44]]]]],[2,[["file","/var/www/html/vendor/contributte/translation/src/LocalesResolvers/Session.php"],["line",44],["function","trigger_error"],["args",[[0,{"string":"The advice of session locale resolver is required but the session has not been started and headers had been already sent. Either start your sessions e <span>…</span> nResolver.","length":188}],[1,512]]]]],[3,[["file","/var/www/html/vendor/contributte/translation/src/LocaleResolver.php"],["line",51],["function","resolve"],["class","Contributte\\Translation\\LocalesResolvers\\Session"],["type","->"],["args",[[0,{"ref":7258}]]]]],[4,[["file","/var/www/html/vendor/contributte/translation/src/Translator.php"],["line",245],["function","resolve"],["class","Contributte\\Translation\\LocaleResolver"],["type","->"],["args",[[0,{"ref":7258}]]]]],[5,[["file","/var/www/html/vendor/symfony/translation/Translator.php"],["line",231],["function","getLocale"],["class","Contributte\\Translation\\Translator"],["type","->"],["args",[]]]],[6,[["file","/var/www/html/vendor/contributte/translation/src/Translator.php"],["line",393],["function","getCatalogue"],["class","Symfony\\Component\\Translation\\Translator"],["type","->"],["args",[[0,null]]]]],[7,[["file","/var/www/html/vendor/contributte/translation/src/Translator.php"],["line",352],["function","trans"],["class","Contributte\\Translation\\Translator"],["type","->"],["args",[[0,"app.name"],[1,[]],[2,"messages"],[3,null]]]]],[8,[["file","Command line code"],["line",8],["function","translate"],["class","Contributte\\Translation\\Translator"],["type","->"],["args",[[0,"app.name"]]]]]],"Exception"],["previous",null,"Exception"]]}}'>
+</tracy-div>
+<script>
+'use strict';
+(function(){const MOVE_THRESHOLD=100;class Toggle{static init(){let start;document.documentElement.addEventListener('mousedown',(e)=>{start=[e.clientX,e.clientY];});document.documentElement.addEventListener('click',(e)=>{let el;if(!e.shiftKey&&!e.ctrlKey&&!e.metaKey&&(el=e.target.closest('.tracy-toggle'))&&Math.pow(start[0]-e.clientX,2)+Math.pow(start[1]-e.clientY,2)<MOVE_THRESHOLD){Toggle.toggle(el,undefined,e);e.preventDefault();e.stopImmediatePropagation();}});Toggle.init=function(){};}static toggle(el,expand,e){let collapsed=el.classList.contains('tracy-collapsed'),ref=el.getAttribute('data-tracy-ref')||el.getAttribute('href',2),dest=el;if(typeof expand==='undefined'){expand=collapsed;}el.dispatchEvent(new CustomEvent('tracy-beforetoggle',{bubbles:true,detail:{collapsed:!expand,originalEvent:e},}));if(!ref||ref==='#'){ref='+';}else if(ref.substr(0,1)==='#'){dest=document;}ref=ref.match(/(\^\s*([^+\s]*)\s*)?(\+\s*(\S*)\s*)?(.*)/);dest=ref[1]?dest.parentNode:dest;dest=ref[2]?dest.closest(ref[2]):dest;dest=ref[3]?Toggle.nextElement(dest.nextElementSibling,ref[4]):dest;dest=ref[5]?dest.querySelector(ref[5]):dest;el.classList.toggle('tracy-collapsed',!expand);dest.classList.toggle('tracy-collapsed',!expand);el.dispatchEvent(new CustomEvent('tracy-toggle',{bubbles:true,detail:{relatedTarget:dest,collapsed:!expand,originalEvent:e},}));}static persist(baseEl,restore){let saved=[];baseEl.addEventListener('tracy-toggle',(e)=>{if(saved.indexOf(e.target)<0){saved.push(e.target);}});let toggles=JSON.parse(sessionStorage.getItem('tracy-toggles-'+baseEl.id));if(toggles&&restore!==false){toggles.forEach((item)=>{let el=baseEl;for(let i in item.path){if(!(el=el.children[item.path[i]])){return;}}if(el.textContent===item.text){Toggle.toggle(el,item.expand);}});}window.addEventListener('pagehide',()=>{toggles=saved.map((el)=>{let item={path:[],text:el.textContent,expand:!el.classList.contains('tracy-collapsed')};do{item.path.unshift(Array.from(el.parentNode.children).indexOf(el));el=el.parentNode;}while(el&&el!==baseEl);return item;});sessionStorage.setItem('tracy-toggles-'+baseEl.id,JSON.stringify(toggles));});}static nextElement(el,selector){while(el&&selector&&!el.matches(selector)){el=el.nextElementSibling;}return el;}}let Tracy=window.Tracy=window.Tracy||{};Tracy.Toggle=Tracy.Toggle||Toggle;})();(function(){class TableSort{static init(){document.documentElement.addEventListener('click',(e)=>{if((window.getSelection().type!=='Range')&&e.target.matches('.tracy-sortable > :first-child > tr:first-child *')){TableSort.sort(e.target.closest('td,th'));}});TableSort.init=function(){};}static sort(tcell){let tbody=tcell.closest('table').tBodies[0];let preserveFirst=!tcell.closest('thead')&&!tcell.parentNode.querySelectorAll('td').length;let asc=!(tbody.tracyAsc===tcell.cellIndex);tbody.tracyAsc=asc?tcell.cellIndex:null;let getText=(cell)=>cell?(cell.getAttribute('data-order')||cell.innerText):'';Array.from(tbody.children).slice(preserveFirst?1:0).sort((a,b)=>(function(v1,v2){return v1!==''&&v2!==''&&!isNaN(v1)&&!isNaN(v2)?v1-v2:v1.toString().localeCompare(v2,undefined,{numeric:true,sensitivity:'base'});}(getText((asc?a:b).children[tcell.cellIndex]),getText((asc?b:a).children[tcell.cellIndex])))).forEach((tr)=>{tbody.appendChild(tr);});}}let Tracy=window.Tracy=window.Tracy||{};Tracy.TableSort=Tracy.TableSort||TableSort;})();(function(){class Tabs{static init(){document.documentElement.addEventListener('click',(e)=>{let label,context;if(!e.shiftKey&&!e.ctrlKey&&!e.metaKey&&(label=e.target.closest('.tracy-tab-label'))&&(context=e.target.closest('.tracy-tabs'))){Tabs.toggle(context,label);e.preventDefault();e.stopImmediatePropagation();}});Tabs.init=function(){};}static toggle(context,label){let labels=context.querySelector('.tracy-tab-label').parentNode.querySelectorAll('.tracy-tab-label'),panels=context.querySelector('.tracy-tab-panel').parentNode.querySelectorAll(':scope > .tracy-tab-panel');for(let i=0;i<labels.length;i++){labels[i].classList.toggle('tracy-active',labels[i]===label);}for(let i=0;i<panels.length;i++){panels[i].classList.toggle('tracy-active',labels[i]===label);}}}let Tracy=window.Tracy=window.Tracy||{};Tracy.Tabs=Tracy.Tabs||Tabs;})();(function(){function init(){if(navigator.userAgent.includes('OPR/')){document.addEventListener('click',(e)=>{e.target.closest('a[href^="editor:"]')?.setAttribute('target','_blank');},true,);}}let Tracy=window.Tracy=window.Tracy||{};if(!Tracy.helpers){init();Tracy.helpers=true;}})();(function(){const COLLAPSE_COUNT=7,COLLAPSE_COUNT_TOP=14,TYPE_ARRAY='a',TYPE_OBJECT='o',TYPE_RESOURCE='r',PROP_VIRTUAL=4,PROP_PRIVATE=2;const HINT_CTRL='Ctrl-Click to open in editor',HINT_ALT='Alt-Click to expand/collapse all child nodes';class Dumper{static init(context){(context||document).querySelectorAll('[data-tracy-snapshot][data-tracy-dump]').forEach((pre)=>{let snapshot=JSON.parse(pre.getAttribute('data-tracy-snapshot'));pre.removeAttribute('data-tracy-snapshot');pre.appendChild(build(JSON.parse(pre.getAttribute('data-tracy-dump')),snapshot,pre.classList.contains('tracy-collapsed')));pre.removeAttribute('data-tracy-dump');pre.classList.remove('tracy-collapsed');});(context||document).querySelectorAll('meta[itemprop=tracy-snapshot]').forEach((meta)=>{let snapshot=JSON.parse(meta.getAttribute('content'));meta.parentElement.querySelectorAll('[data-tracy-dump]').forEach((pre)=>{if(pre.closest('[data-tracy-snapshot]')){return;}pre.appendChild(build(JSON.parse(pre.getAttribute('data-tracy-dump')),snapshot,pre.classList.contains('tracy-collapsed')));pre.removeAttribute('data-tracy-dump');pre.classList.remove('tracy-collapsed');});});if(Dumper.inited){return;}Dumper.inited=true;document.documentElement.addEventListener('click',(e)=>{let el;if((e.ctrlKey||e.metaKey)&&(el=e.target.closest('[data-tracy-href]'))){location.href=el.getAttribute('data-tracy-href');return false;}});document.documentElement.addEventListener('tracy-beforetoggle',(e)=>{let el;if((el=e.target.closest('[data-tracy-snapshot]'))){let snapshot=JSON.parse(el.getAttribute('data-tracy-snapshot'));el.removeAttribute('data-tracy-snapshot');el.querySelectorAll('[data-tracy-dump]').forEach((toggler)=>{if(!toggler.nextSibling){toggler.after(document.createTextNode('\n'));}toggler.nextSibling.after(buildStruct(JSON.parse(toggler.getAttribute('data-tracy-dump')),snapshot,toggler,true,[]));toggler.removeAttribute('data-tracy-dump');});}});document.documentElement.addEventListener('tracy-toggle',(e)=>{if(!e.target.matches('.tracy-dump *')){return;}let cont=e.detail.relatedTarget;let origE=e.detail.originalEvent;if(origE&&origE.usedIds){toggleChildren(cont,origE.usedIds);return;}else if(origE&&origE.altKey&&cont.querySelector('.tracy-toggle')){if(e.detail.collapsed){e.target.classList.toggle('tracy-collapsed',false);cont.classList.toggle('tracy-collapsed',false);e.detail.collapsed=false;}let expand=e.target.tracyAltExpand=!e.target.tracyAltExpand;toggleChildren(cont,expand?{}:false);}cont.classList.toggle('tracy-dump-flash',!e.detail.collapsed);});document.documentElement.addEventListener('animationend',(e)=>{if(e.animationName==='tracy-dump-flash'){e.target.classList.toggle('tracy-dump-flash',false);}});document.addEventListener('mouseover',(e)=>{if(!e.target.matches('.tracy-dump *')){return;}let el;if(e.target.matches('.tracy-dump-hash')&&(el=e.target.closest('tracy-div'))){el.querySelectorAll('.tracy-dump-hash').forEach((el)=>{if(el.textContent===e.target.textContent){el.classList.add('tracy-dump-highlight');}});return;}if((el=e.target.closest('.tracy-toggle'))&&!el.title){el.title=HINT_ALT;}});document.addEventListener('mouseout',(e)=>{if(e.target.matches('.tracy-dump-hash')){document.querySelectorAll('.tracy-dump-hash.tracy-dump-highlight').forEach((el)=>{el.classList.remove('tracy-dump-highlight');});}});Tracy.Toggle.init();}}function build(data,repository,collapsed,parentIds,keyType){let id,type=data===null?'null':typeof data,collapseCount=collapsed===null?COLLAPSE_COUNT:COLLAPSE_COUNT_TOP;if(type==='null'||type==='number'||type==='boolean'){return createEl(null,null,[createEl('span',{class:'tracy-dump-'+type.replace('ean','')},[data+''],),]);}else if(type==='string'){data={string:data.replace(/&/g,'&amp;').replace(/</g,'&lt;'),length:[...data].length,};}else if(Array.isArray(data)){data={array:null,items:data};}else if(data.ref){id=data.ref;data=repository[id];if(!data){throw new UnknownEntityException;}}if(data.string!==undefined||data.bin!==undefined){let s=data.string===undefined?data.bin:data.string;if(keyType===TYPE_ARRAY){return createEl(null,null,[createEl('span',{class:'tracy-dump-string'},{html:'<span class="tracy-dump-lq">\'<\/span>'+s+'<span>\'<\/span>'},),]);}else if(keyType!==undefined){if(type!=='string'){s='<span class="tracy-dump-lq">\'<\/span>'+s+'<span>\'<\/span>';}const classes=['tracy-dump-public','tracy-dump-protected','tracy-dump-private','tracy-dump-dynamic','tracy-dump-virtual',];return createEl(null,null,[createEl('span',{class:classes[typeof keyType==='string'?PROP_PRIVATE:keyType],title:typeof keyType==='string'?'declared in '+keyType:null,},{html:s},),]);}let count=(s.match(/\n/g)||[]).length;if(count){let collapsed=count>=COLLAPSE_COUNT;return createEl(null,null,[createEl('span',{class:collapsed?'tracy-toggle tracy-collapsed':'tracy-toggle'},['string']),'\n',createEl('div',{class:'tracy-dump-string'+(collapsed?' tracy-collapsed':''),title:data.length+(data.bin?' bytes':' characters'),},{html:'<span class="tracy-dump-lq">\'<\/span>'+s+'<span>\'<\/span>'},),]);}return createEl(null,null,[createEl('span',{class:'tracy-dump-string',title:data.length+(data.bin?' bytes':' characters'),},{html:'<span>\'<\/span>'+s+'<span>\'<\/span>'},),]);}else if(data.number){return createEl(null,null,[createEl('span',{class:'tracy-dump-number'},[data.number]),]);}else if(data.text!==undefined){return createEl(null,null,[createEl('span',{class:'tracy-dump-virtual'},[data.text]),]);}else{let pos,nameEl;nameEl=data.object&&(pos=data.object.lastIndexOf('\\'))>0?[data.object.substr(0,pos+1),createEl('b',null,[data.object.substr(pos+1)])]:[data.object||data.resource];let span=data.array!==undefined?[createEl('span',{class:'tracy-dump-array'},['array']),' ('+(data.length||data.items.length)+')',]:[createEl('span',{'class':data.object?'tracy-dump-object':'tracy-dump-resource','title':data.editor?'Declared in file '+data.editor.file+' on line '+data.editor.line+(data.editor.url?'\n'+HINT_CTRL:'')+'\n'+HINT_ALT:null,'data-tracy-href':data.editor?data.editor.url:null,},nameEl),...(id?[' ',createEl('span',{class:'tracy-dump-hash'},[data.resource?'@'+id.substr(1):'#'+id])]:[]),];parentIds=parentIds?parentIds.slice():[];let recursive=id&&parentIds.indexOf(id)>-1;parentIds.push(id);if(recursive||!data.items||!data.items.length){span.push(recursive?' RECURSION':(!data.items||data.items.length?' …':''));return createEl(null,null,span);}collapsed=collapsed===true||data.collapsed||(data.items&&data.items.length>=collapseCount);let toggle=createEl('span',{class:collapsed?'tracy-toggle tracy-collapsed':'tracy-toggle'},span);return createEl(null,null,[toggle,'\n',buildStruct(data,repository,toggle,collapsed,parentIds),]);}}function buildStruct(data,repository,toggle,collapsed,parentIds){if(Array.isArray(data)){data={items:data};}else if(data.ref){parentIds=parentIds.slice();parentIds.push(data.ref);data=repository[data.ref];}let cut=data.items&&data.length>data.items.length;let type=data.object?TYPE_OBJECT:data.resource?TYPE_RESOURCE:TYPE_ARRAY;let div=createEl('div',{class:collapsed?'tracy-collapsed':null});if(collapsed){let handler;toggle.addEventListener('tracy-toggle',handler=function(){toggle.removeEventListener('tracy-toggle',handler);createItems(div,data.items,type,repository,parentIds,null);if(cut){createEl(div,null,['…\n']);}});}else{createItems(div,data.items,type,repository,parentIds,true);if(cut){createEl(div,null,['…\n']);}}return div;}function createEl(el,attrs,content){if(!(el instanceof Node)){el=el?document.createElement(el):document.createDocumentFragment();}for(let id in attrs||{}){if(attrs[id]!==null){el.setAttribute(id,attrs[id]);}}if(content&&content.html!==undefined){el.innerHTML=content.html;return el;}content=content||[];el.append(...content.filter((child)=>(child!==null)));return el;}function createItems(el,items,type,repository,parentIds,collapsed){let key,val,vis,ref,i,tmp;for(i=0;i<items.length;i++){if(type===TYPE_ARRAY){[key,val,ref]=items[i];}else{[key,val,vis=PROP_VIRTUAL,ref]=items[i];}createEl(el,null,[build(key,null,null,null,type===TYPE_ARRAY?TYPE_ARRAY:vis),type===TYPE_ARRAY?' => ':': ',...(ref?[createEl('span',{class:'tracy-dump-hash'},['&'+ref]),' ']:[]),tmp=build(val,repository,collapsed,parentIds),tmp.lastElementChild.tagName==='DIV'?'':'\n',]);}}function toggleChildren(cont,usedIds){let hashEl,id;cont.querySelectorAll(':scope > .tracy-toggle').forEach((el)=>{hashEl=(el.querySelector('.tracy-dump-hash')||el.previousElementSibling);id=hashEl&&hashEl.matches('.tracy-dump-hash')?hashEl.textContent:null;if(!usedIds||(id&&usedIds[id])){Tracy.Toggle.toggle(el,false);}else{usedIds[id]=true;Tracy.Toggle.toggle(el,true,{usedIds:usedIds});}});}function UnknownEntityException(){}let Tracy=window.Tracy=window.Tracy||{};Tracy.Dumper=Tracy.Dumper||Dumper;function init(){Tracy.Dumper.init();}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}})();(function(){class BlueScreen{static init(ajax){BlueScreen.globalInit();let blueScreen=document.getElementById('tracy-bs');document.documentElement.classList.add('tracy-bs-visible');if(navigator.platform.indexOf('Mac')>-1){blueScreen.classList.add('tracy-mac');}blueScreen.addEventListener('tracy-toggle',(e)=>{if(e.target.matches('#tracy-bs-toggle')){document.documentElement.classList.toggle('tracy-bs-visible',!e.detail.collapsed);}else if(!e.target.matches('.tracy-dump *')&&e.detail.originalEvent){e.detail.relatedTarget.classList.toggle('tracy-panel-fadein',!e.detail.collapsed);}});if(!ajax){document.body.appendChild(blueScreen);let id=location.href+document.querySelector('.tracy-section--error').textContent;Tracy.Toggle.persist(blueScreen,sessionStorage.getItem('tracy-toggles-bskey')===id);sessionStorage.setItem('tracy-toggles-bskey',id);}(new ResizeObserver(stickyFooter)).observe(blueScreen);if(document.documentElement.classList.contains('tracy-bs-visible')){blueScreen.scrollIntoView();}}static globalInit(){document.addEventListener('keyup',(e)=>{if(e.keyCode===27&&!e.shiftKey&&!e.altKey&&!e.ctrlKey&&!e.metaKey){Tracy.Toggle.toggle(document.getElementById('tracy-bs-toggle'));}});Tracy.TableSort.init();Tracy.Tabs.init();window.addEventListener('scroll',stickyFooter);BlueScreen.globalInit=function(){};}static loadAjax(content){let ajaxBs=document.getElementById('tracy-bs');if(ajaxBs){ajaxBs.remove();}document.body.insertAdjacentHTML('beforeend',content);ajaxBs=document.getElementById('tracy-bs');Tracy.Dumper.init(ajaxBs);BlueScreen.init(true);}}function stickyFooter(){let footer=document.querySelector('#tracy-bs footer');footer.classList.toggle('tracy-footer--sticky',false);footer.classList.toggle('tracy-footer--sticky',footer.offsetHeight+footer.offsetTop-window.innerHeight-document.documentElement.scrollTop<0);}let Tracy=window.Tracy=window.Tracy||{};Tracy.BlueScreen=Tracy.BlueScreen||BlueScreen;})();
+Tracy.BlueScreen.init();
+</script>
+</body>
+</html>

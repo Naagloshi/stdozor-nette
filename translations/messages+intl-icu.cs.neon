@@ -1,0 +1,39 @@
+# ICU MessageFormat překlady pro pluralizaci
+# Používá se automaticky s +intl-icu doménou
+
+project:
+  index:
+    # Správné skloňování: 1 projekt, 2 projekty, 5 projektů
+    subtitle: '{count, plural, one {Máte # projekt} few {Máte # projekty} other {Máte # projektů}}'
+
+  count:
+    # Samostatné počty pro použití kdekoliv
+    categories: '{count, plural, one {# kategorie} few {# kategorie} other {# kategorií}}'
+    items: '{count, plural, one {# položka} few {# položky} other {# položek}}'
+    members: '{count, plural, one {# člen} few {# členové} other {# členů}}'
+
+category:
+  count:
+    items: '{count, plural, one {# položka} few {# položky} other {# položek}}'
+    subcategories: '{count, plural, one {# podkategorie} few {# podkategorie} other {# podkategorií}}'
+
+# Obecné časové výrazy
+time:
+  days: '{count, plural, one {# den} few {# dny} other {# dní}}'
+  hours: '{count, plural, one {# hodina} few {# hodiny} other {# hodin}}'
+  minutes: '{count, plural, one {# minuta} few {# minuty} other {# minut}}'
+  seconds: '{count, plural, one {# sekunda} few {# sekundy} other {# sekund}}'
+
+# Obecné soubory
+file:
+  count: '{count, plural, one {# soubor} few {# soubory} other {# souborů}}'
+  uploaded: '{count, plural, one {Byl nahrán # soubor} few {Byly nahrány # soubory} other {Bylo nahráno # souborů}}'
+
+# Uživatelé
+user:
+  count: '{count, plural, one {# uživatel} few {# uživatelé} other {# uživatelů}}'
+
+# Přílohy
+attachment:
+  label:
+    attachments_count: '{count, plural, =0 {Žádné přílohy} one {# příloha} few {# přílohy} other {# příloh}}'

@@ -1,0 +1,769 @@
+# Všeobecné překlady aplikace
+app:
+    name: 'Stavební dozor'
+    welcome: 'Vítejte v aplikaci Stavební dozor'
+
+# Footer
+footer:
+    about: 'Moderní aplikace pro správu stavebních projektů. Sledujte rozpočty, kontrolní dny a veďte stavební deník.'
+    quick_links: 'Rychlé odkazy'
+    info: 'Informace'
+    style_guide: 'Průvodce stylem'
+    version: 'Verze'
+    symfony: 'Symfony'
+    nette: 'Nette Framework'
+    environment: 'Prostředí'
+    all_rights_reserved: 'Všechna práva vyhrazena.'
+    privacy_policy: 'Ochrana osobních údajů'
+    terms_of_service: 'Podmínky používání'
+
+# Navigace
+nav:
+    home: 'Domů'
+    projects: 'Projekty'
+    profile: 'Profil'
+    dashboard: 'Nástěnka'
+    logout: 'Odhlásit se'
+    login: 'Přihlásit se'
+    register: 'Registrace'
+
+# Akce/tlačítka
+action:
+    create: 'Vytvořit'
+    edit: 'Upravit'
+    delete: 'Smazat'
+    cancel: 'Zrušit'
+    close: 'Zavřít'
+    save: 'Uložit'
+    back: 'Zpět'
+    confirm: 'Potvrdit'
+    search: 'Hledat'
+    view: 'Zobrazit'
+    details: 'Detail'
+
+# Obecné labely
+label:
+    name: 'Název'
+    size: 'Velikost'
+    actions: 'Akce'
+    images: 'Obrázky'
+    all_files: 'Všechny soubory'
+
+# Enums - ProjectStatus
+enum:
+    project_status:
+        planning: 'V přípravě'
+        active: 'Probíhá'
+        paused: 'Pozastaveno'
+        completed: 'Dokončeno'
+        cancelled: 'Zrušeno'
+    category_status:
+        planned: 'Plánováno'
+        in_progress: 'Probíhá'
+        completed: 'Dokončeno'
+    project_role:
+        owner: 'Vlastník projektu'
+        supervisor: 'Technický dozor investor (TDI)'
+        contractor: 'Zhotovitel'
+        investor: 'Investor'
+
+# Projekty
+project:
+    # Index (seznam)
+    index:
+        title: 'Projekty'
+        heading: 'Moje projekty'
+        # Poznámka: Pluralizace je v messages+intl-icu.cs.yaml
+        new_project: 'Nový projekt'
+        no_projects: 'Zatím nemáte žádné projekty'
+        no_projects_hint: 'Začněte vytvořením svého prvního stavebního projektu'
+        create_first: 'Vytvořit první projekt'
+
+    # New (vytvoření)
+    new:
+        title: 'Nový projekt'
+        heading: 'Vytvořit nový projekt'
+        template_section: 'Šablona projektu'
+        template_help: 'Vyberte šablonu pro automatické vytvoření struktury kategorií. Můžete také pokračovat bez šablony a kategorie přidat později.'
+
+    # Show (detail)
+    show:
+        basic_info: 'Základní informace'
+        metadata: 'Metadata'
+        categories: 'Kategorie projektu'
+        estimated_amount: 'Odhadovaná částka'
+        total_amount: 'Skutečná částka celkem'
+        no_categories: 'V tomto projektu zatím nejsou žádné kategorie.'
+        no_categories_hint: 'Začněte přidáním první kategorie.'
+        subcategories: 'Podkategorie'
+
+    # Category
+    category:
+        name: 'Název kategorie'
+        status: 'Stav'
+        estimated_amount: 'Odhadovaná částka'
+        actual_amount: 'Skutečná částka'
+
+    # Edit (editace)
+    edit:
+        title: 'Upravit projekt: %name%'
+        heading: 'Upravit projekt'
+        subtitle: 'Upravte základní informace o projektu'
+        modal_title: 'Upravit projekt'
+
+    # Delete (smazání)
+    delete:
+        title: 'Smazat projekt'
+        confirm: 'Opravdu chcete smazat projekt "%name%"? Tato akce je nevratná a budou smazána všechna související data.'
+
+    # Formulář
+    form:
+        name: 'Název projektu'
+        description: 'Popis'
+        address: 'Adresa stavby'
+        start_date: 'Datum zahájení'
+        end_date: 'Plánované ukončení'
+        estimated_amount: 'Odhadovaná částka'
+        estimated_amount_help: 'Předpokládaný rozpočet projektu (zadáváte ručně, nepřepočítává se)'
+        status: 'Stav projektu'
+        is_public: 'Veřejný projekt'
+        currency: 'Měna'
+        currency_locked_help: 'Měnu nelze změnit, protože projekt má zaznamenané položky se skutečnými částkami.'
+        template: 'Šablona projektu'
+        template_placeholder: 'Vyberte šablonu (volitelné)'
+
+    # Labely
+    label:
+        owner: 'Vlastník'
+        investor: 'Investor'
+        technical_supervisor: 'Technický dozor'
+        created_at: 'Vytvořeno'
+        updated_at: 'Aktualizováno'
+        start_date: 'Zahájení'
+        end_date: 'Plánované ukončení'
+        visibility: 'Viditelnost'
+        public: 'Veřejný'
+        private: 'Soukromý'
+        no_description: 'Bez popisu'
+        currency: 'Měna'
+
+    # Statistiky (labely - bez čísla)
+    stats:
+        categories: 'Kategorií'
+        created: 'Vytvořeno'
+        estimated: 'Odhadováno'
+        actual: 'Skutečně'
+        budget: 'Rozpočet'
+        utilization: 'Čerpání'
+        basic_info: 'Základní údaje'
+        key_people: 'Důležité osoby'
+        my_role: 'Moje role'
+        no_basic_info: 'Zatím nejsou vyplněny základní údaje'
+        coming_soon: 'Připravujeme'
+        access_all_categories: 'Přístup ke všem kategoriím'
+        access_to_categories: 'Přístup ke kategoriím'
+        not_member: 'Nejste členem tohoto projektu'
+
+    # Taby v detailu projektu
+    tabs:
+        detail: 'Detail projektu'
+        people: 'Důležité osoby'
+        exports: 'Exporty'
+
+    # Sekce Důležité osoby
+    people:
+        coming_soon_title: 'Sekce je v přípravě'
+        coming_soon_description: 'Správa důležitých osob (investor, TDI, zhotovitel atd.) bude dostupná v příští verzi.'
+
+    # Sekce Exporty
+    exports:
+        coming_soon_title: 'Exporty v přípravě'
+        coming_soon_description: 'Možnost exportu stavebního deníku, kontrolních dnů a rozpočtu bude dostupná v příští verzi.'
+
+    # Poznámka: Pluralizační překlady (count) jsou v messages+intl-icu.cs.yaml
+
+    # Akce
+    action:
+        view: 'Zobrazit'
+        edit: 'Upravit'
+        delete: 'Smazat'
+        create: 'Vytvořit projekt'
+        save: 'Uložit změny'
+        cancel: 'Zrušit'
+        back_to_list: 'Zpět na seznam'
+        delete_confirm_title: 'Smazat projekt?'
+        delete_confirm_message: 'Opravdu chcete smazat projekt "%name%"?'
+        delete_warning: 'Tato akce je nevratná. Budou smazána všechna související data včetně kategorií a položek.'
+
+    # Flash zprávy
+    flash:
+        created: 'Projekt byl úspěšně vytvořen.'
+        updated: 'Projekt byl úspěšně aktualizován.'
+        deleted: 'Projekt byl úspěšně smazán.'
+
+# Entity labely - Project
+entity:
+    project:
+        name: 'Název projektu'
+        description: 'Popis'
+        address: 'Adresa stavby'
+        start_date: 'Datum zahájení'
+        end_date: 'Datum ukončení'
+        status: 'Stav projektu'
+        is_public: 'Veřejný projekt'
+        created_at: 'Vytvořeno'
+        updated_at: 'Aktualizováno'
+    user:
+        email: 'E-mailová adresa'
+        password: 'Heslo'
+        roles: 'Role'
+        is_verified: 'Ověřený účet'
+        created_at: 'Registrován'
+    profile:
+        first_name: 'Jméno'
+        last_name: 'Příjmení'
+        phone: 'Telefon'
+        avatar: 'Profilový obrázek'
+        bio: 'O mně'
+        created_at: 'Vytvořeno'
+    role:
+        name: 'Název role'
+        code: 'Kód'
+        description: 'Popis'
+        permissions: 'Oprávnění'
+
+# Validace - UI texty (help messages)
+validators:
+    password:
+        help: 'Použijte alespoň 16 znaků. Doporučujeme použít frázi nebo větu, kterou si snadno zapamatujete (např. "moje oblíbená kniha je duna"). Delší heslo je bezpečnější než krátké složité.'
+        min_length: 'Heslo musí mít alespoň 16 znaků.'
+        compromised: 'Toto heslo bylo kompromitováno v únicích dat. Zvolte prosím jiné heslo.'
+    item:
+        description:
+            not_blank: 'Popis položky je povinný.'
+            max_length: 'Popis může obsahovat maximálně 10000 znaků.'
+        item_date:
+            not_blank: 'Datum položky je povinné.'
+        amount:
+            type: 'Částka musí být číslo.'
+        weather:
+            max_length: 'Poznámka o počasí může obsahovat maximálně 500 znaků.'
+    attachment:
+        max_size: 'Soubor je příliš velký. Maximální velikost je 10 MB.'
+        invalid_type: 'Nepodporovaný typ souboru. Povolené formáty: obrázky, PDF, Excel, Word, ZIP, OpenOffice.'
+
+# Flash messages
+flash:
+    success:
+        created: 'Záznam byl úspěšně vytvořen'
+        updated: 'Záznam byl úspěšně upraven'
+        deleted: 'Záznam byl úspěšně smazán'
+        saved: 'Změny byly uloženy'
+    error:
+        general: 'Došlo k chybě, zkuste to prosím znovu'
+        not_found: 'Záznam nebyl nalezen'
+        access_denied: 'Nemáte oprávnění k této akci'
+        validation: 'Formulář obsahuje chyby, zkontrolujte prosím zadané údaje'
+    info:
+        no_changes: 'Nebyly provedeny žádné změny'
+
+# Error stránky
+error:
+    403:
+        title: 'Přístup zamítnut'
+        heading: '403 - Přístup zamítnut'
+        message: 'Nemáte oprávnění k zobrazení této stránky. Buď nejste členem tohoto projektu, nebo nemáte dostatečná práva.'
+        go_home: 'Zpět na hlavní stránku'
+        go_projects: 'Moje projekty'
+        help: 'Pokud si myslíte, že byste měli mít přístup, kontaktujte vlastníka projektu.'
+    404:
+        title: 'Stránka nenalezena'
+        heading: '404 - Stránka nenalezena'
+        message: 'Stránka, kterou hledáte, neexistuje nebo byla přesunuta.'
+        go_home: 'Zpět na hlavní stránku'
+    general:
+        title: 'Došlo k chybě'
+        heading: 'Něco se pokazilo'
+        message: 'Omlouváme se, ale při zpracování vaší žádosti došlo k chybě. Zkuste to prosím znovu.'
+        go_home: 'Zpět na hlavní stránku'
+
+# Security
+security:
+    login:
+        title: 'Přihlášení'
+        email: 'E-mailová adresa'
+        password: 'Heslo'
+        submit: 'Přihlásit se'
+        remember_me: 'Zapamatovat si mě'
+        forgot_password: 'Zapomněli jste heslo?'
+        resend_verification: 'Nepřišel vám ověřovací email?'
+        no_account: 'Ještě nemáte účet?'
+    registration:
+        title: 'Registrace'
+        email: 'E-mailová adresa'
+        password: 'Heslo'
+        agree_terms: 'Souhlasím s podmínkami'
+        submit: 'Registrovat se'
+        check_email: 'Zkontrolujte váš email pro dokončení registrace'
+        email_already_exists: 'Tento email je již zaregistrován'
+        email_required: 'Email je povinný'
+        already_verified: 'Tento účet je již ověřen, můžete se přihlásit'
+        already_have_account: 'Už máte účet?'
+        resend_verification: 'Poslat ověřovací email znovu'
+        resend_help: 'Zadejte email, na který byl zaregistrován váš účet. Pošleme vám nový ověřovací email.'
+        resend_submit: 'Poslat email'
+    email_verification:
+        subject: 'Potvrzení e-mailové adresy'
+        from_name: 'Stavební dozor'
+        title: 'Potvrzení e-mailové adresy'
+        body: 'Potvrďte prosím vaši e-mailovou adresu kliknutím na následující odkaz:'
+        link_text: 'Potvrdit můj email'
+        expires_info: 'Tento odkaz vyprší za'
+        greeting: 'Zdravíme!'
+        success: 'Vaše e-mailová adresa byla úspěšně ověřena'
+        invalid_link: 'Neplatný ověřovací odkaz'
+    reset_password:
+        request:
+            title: 'Obnovit heslo'
+            email: 'E-mailová adresa'
+            submit: 'Odeslat odkaz pro obnovení hesla'
+            help: 'Zadejte vaši e-mailovou adresu a my vám pošleme odkaz pro obnovení hesla.'
+            remembered: 'Vzpomněli jste si?'
+        check_email:
+            title: 'Email pro obnovení hesla byl odeslán'
+            body: 'Pokud existuje účet s vámi zadanou e-mailovou adresou, byl vám právě odeslán email s odkazem pro obnovení hesla. Tento odkaz vyprší za'
+            no_email: 'Pokud jste email neobdrželi, zkontrolujte složku spam nebo'
+            try_again: 'zkuste to znovu'
+        reset:
+            title: 'Obnovit heslo'
+            new_password: 'Nové heslo'
+            repeat_password: 'Zopakujte heslo'
+            submit: 'Obnovit heslo'
+        email:
+            subject: 'Žádost o obnovení hesla'
+            greeting: 'Zdravíme!'
+            body: 'Pro obnovení hesla prosím klikněte na následující odkaz'
+            expires: 'Tento odkaz vyprší za'
+    logout:
+        success: 'Byl jste úspěšně odhlášen'
+    user_checker:
+        not_verified: 'Váš účet ještě nebyl ověřen. Zkontrolujte prosím váš email.'
+    error:
+        invalid_credentials: 'Neplatné přihlašovací údaje'
+        access_denied: 'Přístup zamítnut'
+
+    # 2FA
+    2fa:
+        title: 'Dvoufaktorové ověření'
+        enter_code: 'Zadejte ověřovací kód'
+        submit: 'Ověřit'
+        trust_device: 'Důvěřovat tomuto zařízení po 30 dní'
+        use_backup_code: 'Použít záložní kód'
+        or_use_security_key: 'Nebo použijte bezpečnostní klíč'
+        use_security_key: 'Použít bezpečnostní klíč'
+        use_security_key_prompt: 'Ověřte se bezpečnostním klíčem'
+        touch_key: 'Dotkněte se bezpečnostního klíče nebo použijte biometrii...'
+        verify_key: 'Ověřit klíčem'
+        webauthn_error: 'Ověření bezpečnostním klíčem selhalo.'
+        https_required: 'Bezpečnostní klíče vyžadují zabezpečené připojení (HTTPS).'
+        or_use_totp: 'Nebo zadejte kód z aplikace'
+        use_totp: 'Zadat kód z aplikace'
+        invalid_code: 'Neplatný ověřovací kód.'
+        cancelled_message: 'Ověření zrušeno. Klikněte pro opakování.'
+        active: '2FA aktivní'
+        not_configured: '2FA nenastaveno'
+
+    # TOTP
+    totp:
+        setup_title: 'Autentizační aplikace (TOTP)'
+        scan_qr: 'Naskenujte QR kód aplikací (Google Authenticator, Authy, ...)'
+        manual_entry: 'Nebo zadejte kód ručně:'
+        enter_verification: 'Zadejte 6-místný kód z aplikace pro ověření'
+        verify_and_enable: 'Ověřit a aktivovat'
+        enabled: 'TOTP je aktivní'
+        disabled: 'TOTP není nastaveno'
+        already_enabled: 'TOTP je již aktivní.'
+        enable_success: 'TOTP bylo úspěšně aktivováno.'
+        disable_success: 'TOTP bylo deaktivováno.'
+        disable_confirm: 'Opravdu chcete deaktivovat TOTP?'
+        disable_button: 'Deaktivovat'
+        setup_button: 'Nastavit'
+        invalid_code: 'Neplatný ověřovací kód. Zkuste to znovu.'
+
+    # WebAuthn
+    webauthn:
+        title: 'Bezpečnostní klíče'
+        add_key: 'Přidat bezpečnostní klíč'
+        add_passkey: 'Přidat passkey'
+        key_name: 'Název klíče'
+        key_name_placeholder: 'např. Můj YubiKey'
+        register_prompt: 'Dotkněte se bezpečnostního klíče nebo použijte biometrii...'
+        added_success: 'Klíč byl úspěšně přidán.'
+        deleted_success: 'Klíč byl odebrán.'
+        no_keys: 'Žádné bezpečnostní klíče nejsou přidány.'
+        added: 'Přidáno'
+        last_used: 'Poslední použití'
+        delete_confirm: 'Opravdu chcete odebrat tento klíč?'
+        error_cancelled: 'Registrace byla zrušena nebo vypršel čas.'
+        error_failed: 'Registrace selhala.'
+
+    # Passkeys
+    passkey:
+        login_button: 'Přihlásit se passkey'
+        login_prompt: 'Použijte biometrii nebo bezpečnostní klíč...'
+        login_error: 'Přihlášení passkey selhalo.'
+        no_passkeys: 'Žádné passkeys nejsou přidány.'
+        or_use_passkey: 'nebo se přihlaste passkey'
+        error_cancelled: 'Přihlášení bylo zrušeno nebo vypršel čas.'
+        error_failed: 'Přihlášení passkey selhalo.'
+
+    # Záložní kódy
+    backup_codes:
+        title: 'Záložní kódy'
+        remaining: '{0} Žádné záložní kódy|{1} 1 záložní kód|[2,4] %count% záložní kódy|[5,Inf] %count% záložních kódů'
+        generate: 'Vygenerovat nové kódy'
+        regenerate_warning: 'Vygenerování nových kódů zneplatní předchozí.'
+        save_warning: 'Uložte tyto kódy na bezpečné místo. Nebudou znovu zobrazeny!'
+        generated_success: 'Záložní kódy byly vygenerovány.'
+        no_2fa_active: 'Pro generování záložních kódů musíte mít aktivní alespoň jednu metodu 2FA.'
+        copy_all: 'Zkopírovat všechny kódy'
+        copied: 'Zkopírováno!'
+        saved_button: 'Kódy jsem si uložil/a'
+
+    # Důvěryhodná zařízení
+    trusted_device:
+        title: 'Důvěryhodná zařízení'
+        revoke_all: 'Odvolat všechna zařízení'
+        revoked_success: 'Všechna důvěryhodná zařízení byla odvolána.'
+        info: 'Na důvěryhodných zařízeních se 2FA nepožaduje po dobu 30 dní.'
+
+    # Profil - bezpečnost
+    profile:
+        security_title: 'Zabezpečení účtu'
+        security_subtitle: 'Správa dvoufaktorového ověření a bezpečnostních klíčů'
+        manage_button: 'Spravovat'
+
+# Stránky
+page:
+    homepage:
+        title: 'Úvodní stránka'
+        welcome: 'Vítejte'
+        welcome_back: 'Vítejte zpět ve Stavebním dozoru'
+        my_projects: 'Moje projekty'
+        projects_description: 'Zobrazit všechny stavební projekty'
+        my_profile: 'Můj profil'
+        profile_description: 'Nastavení účtu a osobní údaje'
+        statistics: 'Statistiky'
+        coming_soon: 'Připravujeme'
+        tagline: 'Profesionální nástroj pro správu stavebních projektů'
+    dashboard:
+        title: 'Nástěnka'
+        my_projects: 'Moje projekty'
+    profile:
+        title: 'Profil'
+        subtitle: 'Spravujte své osobní údaje a nastavení účtu'
+        edit: 'Upravit profil'
+        edit_subtitle: 'Upravte své osobní údaje'
+        user_info: 'Informace o uživateli'
+        verified: 'Ověřeno'
+        not_verified: 'Neověřeno'
+        login_credentials: 'Přihlašovací údaje'
+        personal_info: 'Osobní údaje'
+        account_status: 'Stav účtu'
+        not_set: 'Nevyplněno'
+
+# Profil - formulář a flash messages
+profile:
+    flash:
+        updated: 'Profil byl úspěšně aktualizován'
+        updated_with_password: 'Profil a heslo byly úspěšně aktualizovány'
+        password_current_required: 'Pro změnu hesla musíte zadat současné heslo.'
+        password_current_incorrect: 'Současné heslo není správné.'
+    form:
+        current_password: 'Současné heslo'
+        new_password: 'Nové heslo'
+        new_password_confirm: 'Potvrzení nového hesla'
+        change_password: 'Změna hesla'
+        change_password_help: 'Pole pro změnu hesla vyplňte pouze pokud chcete heslo změnit. V opačném případě ponechte prázdné.'
+    projects:
+        title: 'Projekty'
+        no_projects: 'Zatím nemáte žádné projekty'
+
+# Kategorie
+category:
+    # New (vytvoření)
+    new:
+        title: 'Nová kategorie'
+        form_heading: 'Vytvořit novou kategorii'
+
+    # Edit (editace)
+    edit:
+        title: 'Upravit kategorii'
+        heading: 'Upravit kategorii: %name%'
+        manual_amount_heading: 'Přepočítávání skutečné částky'
+
+    # Formulář
+    form:
+        name: 'Název kategorie'
+        description: 'Popis'
+        status: 'Stav'
+        estimated_amount: 'Odhadovaná částka'
+        estimated_amount_help: 'Předpokládaný rozpočet pro tuto kategorii'
+        manual_amount_override: 'Nastavit pevnou částku'
+        manual_amount_override_help: 'Pokud zaškrtnete, částka se nebude automaticky přepočítávat'
+        manual_amount: 'Pevná částka'
+        manual_amount_help: 'Ručně zadaná částka (neplatí pokud není zaškrtnuto "Nastavit pevnou částku")'
+
+    # Show (detail kategorie)
+    show:
+        title: 'Detail kategorie'
+        status: 'Stav'
+        estimated_amount: 'Odhadovaná částka'
+        actual_amount: 'Skutečná částka'
+        manual_amount_override: 'Částka je zadána ručně a nepřepočítává se automaticky.'
+        items_heading: 'Položky'
+        no_items: 'V této kategorii zatím nejsou žádné položky.'
+        item_date: 'Datum'
+        item_description: 'Popis'
+        item_amount: 'Částka'
+        item_control_day: 'Kontrolní den'
+        item_construction_log: 'Stavební deník'
+        item_actions: 'Akce'
+
+    # Akce
+    action:
+        back_to_project: 'Zpět na projekt'
+        add_category: 'Přidat kategorii'
+        edit_category: 'Upravit kategorii'
+        delete_category: 'Smazat kategorii'
+        start_category: 'Zahájit'
+        complete_category: 'Ukončit'
+        move_up: 'Posunout nahoru'
+        move_down: 'Posunout dolů'
+        add_item: 'Přidat položku'
+        add_another_item: 'Přidat další položku'
+        add_subcategory: 'Přidat podkategorii'
+        edit_item: 'Upravit'
+        delete_item: 'Smazat'
+        save: 'Uložit změny'
+        cancel: 'Zrušit'
+
+    # Delete (smazání)
+    delete:
+        title: 'Smazat kategorii'
+        confirm: 'Opravdu chcete smazat tuto kategorii?'
+        warning_title: 'Varování'
+        warning_text: 'Smazáním kategorie dojde také ke smazání všech podkategorií a jejich položek. Tato akce je nevratná.'
+        warning_category: 'Kategorie bude trvale smazána'
+        warning_subcategories: 'Všechny podkategorie budou smazány'
+        warning_items: 'Všechny položky v kategorii a podkategoriích budou smazány'
+        warning_attachments: 'Všechny přílohy budou smazány'
+
+    # Potvrzení
+    confirm:
+        delete_item: 'Opravdu chcete smazat tuto položku? Tato akce je nevratná.'
+
+    # Flash zprávy
+    flash:
+        created: 'Kategorie byla úspěšně vytvořena.'
+        updated: 'Změny byly úspěšně uloženy.'
+        deleted: 'Kategorie byla úspěšně smazána (včetně podkategorií a položek).'
+        invalid_csrf: 'Neplatný bezpečnostní token. Zkuste to prosím znovu.'
+        reordered: 'Pořadí kategorie bylo změněno.'
+        reorder_limit: 'Kategorii nelze posunout dále.'
+        status_changed: 'Stav kategorie byl změněn.'
+        status_change_invalid: 'Neplatná změna stavu.'
+
+    # Správa přístupu ke kategorii
+    access:
+        heading: 'Správa přístupu'
+        add_button: 'Přidat přístup'
+        remove_button: 'Odebrat přístup'
+        add_title: 'Přidat přístup členům'
+        remove_title: 'Odebrat přístup členům'
+        add_description: 'Vyberte členy, kterým chcete přidat přístup k této kategorii.'
+        remove_description: 'Vyberte členy, kterým chcete odebrat přístup k této kategorii.'
+        no_members_available: 'Žádní členové k dispozici.'
+        no_members_with_access: 'Žádní členové s přístupem.'
+        add_submit: 'Přidat přístup'
+        remove_submit: 'Odebrat přístup'
+        added: '{count, plural, =1 {Přístup byl přidán 1 členovi} other {Přístup byl přidán # členům}}'
+        removed: '{count, plural, =1 {Přístup byl odebrán 1 členovi} other {Přístup byl odebrán # členům}}'
+        no_members_selected: 'Nevybrali jste žádné členy.'
+
+# Položky
+item:
+    # New (vytvoření)
+    new:
+        title: 'Nová položka'
+        heading: 'Vytvořit novou položku'
+        category_label: 'Kategorie'
+
+    # Edit (editace)
+    edit:
+        title: 'Upravit položku'
+        heading: 'Upravit položku'
+        category_label: 'Kategorie'
+        created_at: 'Vytvořeno'
+        created_by: 'Vytvořil'
+        no_amount_permission: 'Nemáte oprávnění upravovat částku. Pouze vlastník projektu může upravovat částky.'
+
+    # Formulář
+    form:
+        description: 'Popis'
+        description_help: 'Popište práci, materiál nebo událost.'
+        item_date: 'Datum'
+        item_date_help: 'Datum provedení práce nebo události (výchozí: dnes). Umožňuje zpětné doplnění údajů.'
+        amount: 'Částka'
+        amount_help: 'Částka může být záporná (např. sleva, vrácené peníze). Pole je nepovinné.'
+        weather: 'Počasí'
+        weather_help: 'Volitelné textové pole pro poznámku o počasí.'
+        is_control_day: 'Kontrolní den'
+        is_control_day_help: 'Označte, pokud se jedná o kontrolní den.'
+        include_in_construction_log: 'Zahrnout do stavebního deníku'
+        include_in_construction_log_help: 'Označte, pokud má být poznámka zahrnutá do stavebního deníku.'
+        attachments: 'Přílohy'
+        attachments_help: 'Nahrajte soubory (fotky, dokumenty). Max 10 souborů, každý max 10 MB. Podporované formáty: obrázky, PDF, Excel, Word, ZIP, OpenOffice.'
+
+    # Delete (smazání)
+    delete:
+        title: 'Smazat položku'
+        confirm: 'Opravdu chcete smazat tuto položku?'
+        warning_title: 'Varování'
+        warning_text: 'Tato akce je nevratná a položka bude trvale odstraněna ze systému.'
+
+    # Akce
+    action:
+        create: 'Vytvořit položku'
+        save: 'Uložit změny'
+        cancel: 'Zrušit'
+
+    # Flash zprávy
+    flash:
+        created: 'Položka byla úspěšně vytvořena.'
+        updated: 'Položka byla úspěšně aktualizována.'
+        deleted: 'Položka byla úspěšně smazána.'
+        invalid_csrf: 'Neplatný CSRF token. Zkuste to prosím znovu.'
+
+# Členové projektu (Důležité osoby)
+project_member:
+    badge:
+        permanent_owner: 'Trvalý vlastník'
+    # Index (seznam členů)
+    index:
+        title: 'Důležité osoby'
+        heading: 'Členové projektu'
+        members_heading: 'Aktuální členové'
+        invitations_heading: 'Čekající pozvánky'
+        no_members: 'Projekt zatím nemá žádné členy.'
+        no_invitations: 'Žádné čekající pozvánky.'
+        role: 'Role'
+        invited_at: 'Pozván'
+        accepted_at: 'Přijato'
+        invited_by: 'Pozval'
+        actions: 'Akce'
+
+    # Invite (pozvání)
+    invite:
+        title: 'Pozvat člena'
+        heading: 'Pozvat nového člena do projektu'
+        submit: 'Odeslat pozvánku'
+
+    # Accept invitation (přijetí pozvánky)
+    accept:
+        title: 'Přijetí pozvánky'
+        heading: 'Byli jste pozváni do projektu'
+        project: 'Projekt'
+        roles: 'Role'
+        invited_by: 'Pozval vás'
+        expires_at: 'Platnost do'
+        accept_button: 'Přijmout pozvánku'
+        login_required: 'Pro přijetí pozvánky se prosím přihlaste nebo zaregistrujte.'
+        login_button: 'Přihlásit se'
+        register_button: 'Registrovat se'
+
+    # Change roles (změna rolí)
+    change_roles:
+        title: 'Změnit role'
+        heading: 'Změnit role člena'
+        submit: 'Uložit změny'
+
+    # Formulář
+    form:
+        email: 'Email'
+        roles: 'Role'
+        roles_help: 'Vyberte jednu nebo více rolí pro uživatele'
+        has_global_category_access: 'Automatický přístup ke všem kategoriím'
+        has_global_category_access_help: 'Při vytváření nových kategorií bude mít člen automaticky přístup. Owner a TDI mají tento přístup vždy.'
+        categories: 'Přístup ke konkrétním kategoriím'
+        categories_help: 'Vyberte kategorie, ke kterým bude mít uživatel přístup. Pokud má zapnutý automatický přístup, toto pole se ignoruje.'
+
+    # Akce
+    action:
+        invite: 'Pozvat člena'
+        change_roles: 'Změnit role'
+        remove: 'Odebrat'
+        cancel_invitation: 'Zrušit pozvánku'
+
+    # Flash zprávy
+    flash:
+        invitation_sent: 'Pozvánka byla odeslána.'
+        invitation_accepted: 'Pozvánka byla přijata. Vítejte v projektu!'
+        invitation_cancelled: 'Pozvánka byla zrušena.'
+        invalid_invitation: 'Pozvánka je neplatná nebo vypršela.'
+        member_removed: 'Člen byl odebrán z projektu.'
+        roles_changed: 'Role byly úspěšně změněny.'
+        roles_added: 'Nové role byly úspěšně přidány.'
+        invalid_csrf: 'Neplatný bezpečnostní token. Zkuste to prosím znovu.'
+        already_member: 'Uživatel je již členem projektu.'
+        pending_invitation: 'Uživatel již má aktivní pozvánku.'
+        login_to_accept_invitation: 'Pro přijetí pozvánky se prosím přihlaste nebo zaregistrujte.'
+
+    # Chybové zprávy
+    error:
+        invalid_invitation: 'Pozvánka je neplatná, vypršela nebo již byla použita.'
+        active_invitation_exists: 'Uživatel již má aktivní pozvánku do tohoto projektu.'
+
+    # Delete/Remove (odstranění)
+    remove:
+        title: 'Odebrat člena'
+        confirm: 'Opravdu chcete odebrat tohoto člena z projektu?'
+        warning_title: 'Varování'
+        warning_text: 'Člen ztratí přístup k projektu. Jeho příspěvky zůstanou zachovány.'
+        warning_permanent_owner: 'Trvalého vlastníka projektu nelze odebrat.'
+        warning_last_owner: 'Nelze odebrat posledního vlastníka projektu.'
+
+# Přílohy (attachments)
+attachment:
+    # Flash zprávy
+    flash:
+        uploaded: 'Příloha byla úspěšně nahrána.'
+        deleted: 'Příloha byla úspěšně smazána.'
+        delete_failed: 'Nepodařilo se smazat přílohu.'
+
+    # Akce
+    action:
+        upload: 'Nahrát soubory'
+        download: 'Stáhnout'
+        delete: 'Smazat'
+
+    # Potvrzení
+    confirm:
+        delete: 'Opravdu chcete smazat tuto přílohu?'
+
+    # Labely
+    label:
+        attachments: 'Přílohy'
+        no_attachments: 'Žádné přílohy'
+        uploaded_by: 'Nahrál'
+        uploaded_at: 'Nahráno'
+
+# Upload UI
+upload:
+    click_to_upload: 'Klikněte pro výběr souborů'
+    or_drag_and_drop: 'nebo je přetáhněte sem'
+    max_files: 'Maximálně {max} souborů'
+    max_size: 'Maximální velikost: {size}'
+    file_too_large: 'Soubor je příliš velký'
+    invalid_file_type: 'Nepodporovaný typ souboru'
+    too_many_files: 'Příliš mnoho souborů'

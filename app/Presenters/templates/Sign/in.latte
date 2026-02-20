@@ -1,0 +1,52 @@
+{import '../_forms.latte'}
+
+{block title}{_ 'messages.security.login.title'}{/block}
+
+{block content}
+<div class="py-12 px-4 sm:px-6 lg:px-8">
+	<div class="max-w-md mx-auto space-y-8">
+		<div class="bg-white rounded-lg shadow-lg p-8">
+			<h1 class="text-3xl font-bold text-center text-gray-900 mb-8">{_ 'messages.security.login.title'}</h1>
+
+			{form loginForm, class => 'space-y-6'}
+				{include formField, name: email}
+				{include formField, name: password}
+				{include formSubmit}
+			{/form}
+
+			{* Passkey login — bude aktivováno ve Fázi 4 *}
+			{*
+			<div class="relative my-8">
+				<div class="absolute inset-0 flex items-center">
+					<div class="w-full border-t border-gray-200"></div>
+				</div>
+				<div class="relative flex justify-center text-sm">
+					<span class="px-2 bg-white text-gray-500">{_ 'messages.security.passkey.or_use_passkey'}</span>
+				</div>
+			</div>
+			*}
+
+			<hr class="my-8 border-gray-200">
+
+			<div class="text-center space-y-3">
+				<p class="mb-2">
+					<a href="{link forgotPassword}" class="text-blue-600 hover:text-blue-800 hover:underline text-sm font-medium">
+						{_ 'messages.security.login.forgot_password'}
+					</a>
+				</p>
+				<p class="mb-2">
+					<a href="{link resendVerification}" class="text-blue-600 hover:text-blue-800 hover:underline text-sm font-medium">
+						{_ 'messages.security.login.resend_verification'}
+					</a>
+				</p>
+				<p class="text-gray-600 text-sm">
+					{_ 'messages.security.login.no_account'}
+					<a href="{link up}" class="text-blue-600 hover:text-blue-800 hover:underline font-medium">
+						{_ 'messages.nav.register'}
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

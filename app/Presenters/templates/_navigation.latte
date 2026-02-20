@@ -1,0 +1,136 @@
+{*
+	Hlavní navigace — Tailwind CSS, Stimulus controllery
+	Port: _navigation_tailwind.html.twig
+*}
+<nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm" data-controller="mobile_menu">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex justify-between h-16">
+			{* Levá strana: Logo + Navigace *}
+			<div class="flex items-center space-x-8">
+				<a href="{link Homepage:default}" class="flex items-center space-x-2 text-gray-900 hover:text-gray-600 transition">
+					<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-3.31 0-6-2.69-6-6V8.5l6-3.11 6 3.11V14c0 3.31-2.69 6-6 6z"/>
+					</svg>
+					<span class="font-semibold text-lg hidden sm:block">{_ 'messages.app.name'}</span>
+				</a>
+
+				{* Desktop Navigation *}
+				<div class="hidden md:flex space-x-1">
+					<a href="{link Homepage:default}"
+					   class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+						{_ 'messages.nav.home'}
+					</a>
+
+					{if $user->isLoggedIn()}
+						<a href="{link Project:default}"
+						   class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+							{_ 'messages.nav.projects'}
+						</a>
+					{/if}
+				</div>
+			</div>
+
+			{* Pravá strana: User Menu / Auth *}
+			<div class="flex items-center space-x-4">
+				{if $user->isLoggedIn()}
+					{* User Dropdown (Desktop) *}
+					<div class="relative" data-controller="user-menu">
+						<button type="button"
+								data-action="click->user-menu#toggle"
+								class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+							<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+							</svg>
+							<span>{$user->getIdentity()?->displayName ?? $user->getIdentity()?->email ?? ''}</span>
+							<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+							</svg>
+						</button>
+
+						{* Dropdown Menu *}
+						<div data-user-menu-target="menu"
+							 class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1">
+							<a href="{link Profile:default}"
+							   class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition">
+								<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/>
+								</svg>
+								{_ 'messages.nav.profile'}
+							</a>
+							<div class="border-t border-gray-100 my-1"></div>
+							<a href="{link Sign:out}"
+							   class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition">
+								<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"/>
+								</svg>
+								{_ 'messages.nav.logout'}
+							</a>
+						</div>
+					</div>
+				{else}
+					{* Login & Register (Desktop) *}
+					<div class="hidden md:flex items-center space-x-2">
+						<a href="{link Sign:in}"
+						   class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+							{_ 'messages.nav.login'}
+						</a>
+						<a href="{link Sign:up}"
+						   class="px-4 py-2 text-sm font-medium text-white bg-slate-800 hover:bg-slate-900 rounded-md transition shadow-sm">
+							{_ 'messages.nav.register'}
+						</a>
+					</div>
+				{/if}
+
+				{* Mobile Menu Button *}
+				<button type="button"
+						data-action="click->mobile_menu#toggle"
+						class="md:hidden inline-flex items-center justify-center p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	{* Mobile Menu *}
+	<div data-mobile_menu-target="menu" class="hidden md:hidden border-t border-gray-200">
+		<div class="px-4 py-3 space-y-1">
+			<a href="{link Homepage:default}"
+			   class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+				{_ 'messages.nav.home'}
+			</a>
+
+			{if $user->isLoggedIn()}
+				<a href="{link Project:default}"
+				   class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+					{_ 'messages.nav.projects'}
+				</a>
+
+				<div class="border-t border-gray-200 my-2"></div>
+
+				<a href="{link Profile:default}"
+				   class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+					{_ 'messages.nav.profile'}
+				</a>
+
+				<a href="{link Sign:out}"
+				   class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+					{_ 'messages.nav.logout'}
+				</a>
+			{else}
+				<div class="border-t border-gray-200 my-2"></div>
+
+				<a href="{link Sign:in}"
+				   class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+					{_ 'messages.nav.login'}
+				</a>
+
+				<a href="{link Sign:up}"
+				   class="block px-3 py-2 text-base font-medium text-white bg-slate-800 hover:bg-slate-900 rounded-md transition text-center">
+					{_ 'messages.nav.register'}
+				</a>
+			{/if}
+		</div>
+	</div>
+</nav>

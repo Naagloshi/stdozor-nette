@@ -1,0 +1,28 @@
+{block title}{_ 'messages.error.404.title'}{/block}
+
+{block content}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+	<div class="max-w-md w-full space-y-8 text-center">
+		<div class="mx-auto h-24 w-24 text-gray-400">
+			<svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+			</svg>
+		</div>
+
+		<div>
+			<h1 class="text-4xl font-extrabold text-gray-900 mb-2">{_ 'messages.error.404.heading'}</h1>
+			<p class="text-xl text-gray-600 mb-8">{_ 'messages.error.404.message'}</p>
+		</div>
+
+		<div class="space-y-3">
+			<a href="{link Homepage:default}"
+			   class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition">
+				<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+				</svg>
+				{_ 'messages.error.404.go_home'}
+			</a>
+		</div>
+	</div>
+</div>
+{/block}

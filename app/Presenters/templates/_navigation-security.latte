@@ -1,0 +1,46 @@
+{*
+	Navigace pro auth stránky (login, registrace, reset hesla)
+	Port: _navigation_security.html.twig
+*}
+<nav class="bg-white border-b border-gray-200 shadow-sm">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex justify-between h-16">
+			{* Logo *}
+			<div class="flex items-center">
+				<a href="{link Homepage:default}" class="flex items-center space-x-2 text-gray-900 hover:text-gray-600 transition">
+					<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-3.31 0-6-2.69-6-6V8.5l6-3.11 6 3.11V14c0 3.31-2.69 6-6 6z"/>
+					</svg>
+					<span class="font-semibold text-lg">{_ 'messages.app.name'}</span>
+				</a>
+			</div>
+
+			{* Kontextové odkazy *}
+			<div class="flex items-center space-x-2">
+				{var $action = $presenter->getAction()}
+				{if $action === 'in' || $action === 'forgotPassword'}
+					<span class="text-sm text-gray-600 hidden sm:inline">{_ 'messages.security.login.no_account'}</span>
+					<a href="{link Sign:up}"
+					   class="px-4 py-2 text-sm font-medium text-white bg-slate-800 hover:bg-slate-900 rounded-md transition shadow-sm">
+						{_ 'messages.nav.register'}
+					</a>
+				{elseif $action === 'up'}
+					<span class="text-sm text-gray-600 hidden sm:inline">{_ 'messages.security.registration.already_have_account'}</span>
+					<a href="{link Sign:in}"
+					   class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+						{_ 'messages.nav.login'}
+					</a>
+				{else}
+					<a href="{link Sign:in}"
+					   class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition">
+						{_ 'messages.nav.login'}
+					</a>
+					<a href="{link Sign:up}"
+					   class="px-4 py-2 text-sm font-medium text-white bg-slate-800 hover:bg-slate-900 rounded-md transition shadow-sm">
+						{_ 'messages.nav.register'}
+					</a>
+				{/if}
+			</div>
+		</div>
+	</div>
+</nav>

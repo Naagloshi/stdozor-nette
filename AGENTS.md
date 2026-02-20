@@ -17,23 +17,34 @@ Instrukce pro AI nástroje (Claude Code, GitHub Copilot, Cursor).
 # Spuštění
 docker compose up -d
 
-# PHP příkazy
-docker compose exec php php ...
-
-# Composer
-docker compose exec php composer install
-docker compose exec php composer require nette/...
+# Porty:
+#   Nginx:      http://localhost:8081
+#   MariaDB:    localhost:3307
+#   Mailpit UI: http://localhost:8026
+#   Mailpit SMTP: localhost:1026
 ```
 
-### Nette Console
+### PHP a Composer příkazy
+
+Projekt obsahuje wrapper scripty `bin/php` a `bin/composer`, které transparentně volají Docker kontejner. **Vždy používat tyto wrappery** místo přímého `docker compose exec`:
 
 ```bash
-# Migrace (pokud se použije)
-docker compose exec php php bin/console migrations:migrate
+# PHP příkazy (wrapper → docker compose exec)
+bin/php -v
+bin/php vendor/bin/phpstan analyse app
+
+# Composer (wrapper → docker compose exec)
+bin/composer install
+bin/composer require nette/...
 
 # Cache
-docker compose exec php php temp/clear-cache.sh
+bin/php temp/clear-cache.sh
 ```
+
+**DŮLEŽITÉ — vlastnictví souborů:**
+- Wrappery automaticky spouštějí příkazy s UID/GID hostitele (1000:1000)
+- Díky tomu soubory vytvořené v kontejneru mají správného vlastníka pro WSL
+- **NIKDY** nespouštět `docker compose exec php composer ...` přímo (vytvoří root:root soubory)
 
 ## Coding Standards
 
@@ -46,10 +57,10 @@ docker compose exec php php temp/clear-cache.sh
 
 ```bash
 # Code style check
-docker compose exec php vendor/bin/phpcs --standard=vendor/nette/coding-standard/coding-standard-php83.neon src
+bin/php vendor/bin/phpcs --standard=vendor/nette/coding-standard/coding-standard-php83.neon app
 
 # PHPStan
-docker compose exec php vendor/bin/phpstan analyse src
+bin/php vendor/bin/phpstan analyse app
 ```
 
 ### Nette specifika

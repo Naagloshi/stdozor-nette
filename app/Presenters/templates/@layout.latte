@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{ifset title}{include title} | {/ifset}{_ 'messages.app.name'}</title>
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🏗️</text></svg>">
+
+	{* PhotoSwipe CSS *}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/photoswipe.css">
+
+	{* Tailwind CSS CDN *}
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primary: {
+							50: '#e7f1ff',
+							100: '#cfe2ff',
+							200: '#9ec5ff',
+							300: '#6ea8ff',
+							400: '#3d8bff',
+							500: '#0d6efd',
+							600: '#0a58ca',
+							700: '#084298',
+							800: '#052c65',
+							900: '#031633',
+						},
+						success: '#198754',
+						warning: '#ffc107',
+						danger: '#dc3545',
+						info: '#0dcaf0',
+					}
+				}
+			}
+		}
+	</script>
+
+	{* Custom CSS *}
+	<link rel="stylesheet" href="{$basePath}/assets/app.css">
+
+	{block stylesheets}{/block}
+</head>
+<body class="flex flex-col min-h-screen">
+	{include '_navigation.latte'}
+
+	{include '_toast.latte'}
+
+	<main class="flex-grow">
+		{block content}{/block}
+	</main>
+
+	{include '_footer.latte'}
+
+	{block scripts}
+		{* PhotoSwipe JS *}
+		<script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/umd/photoswipe.umd.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/umd/photoswipe-lightbox.umd.min.js"></script>
+
+		{* Stimulus via importmap *}
+		<script type="importmap" n:syntax="off">
+		{
+			"imports": {
+				"@hotwired/stimulus": "https://cdn.jsdelivr.net/npm/@hotwired/stimulus@3.2.2/+esm"
+			}
+		}
+		</script>
+		<script type="module" src="{$basePath}/assets/app.js"></script>
+	{/block}
+</body>
+</html>
