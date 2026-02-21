@@ -12,6 +12,10 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// Nette v3.2+ requires _nss cookie for same-origin signal validation.
+// In tests there's no browser, so we fake the cookie.
+$_COOKIE['_nss'] = '1';
+
 $configurator = App\Bootstrap::boot();
 $configurator->setTempDirectory(__DIR__ . '/../temp/tests');
 

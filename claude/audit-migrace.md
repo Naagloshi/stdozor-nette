@@ -467,3 +467,4 @@ class RouterFactory
 - [ ] **Rozhodnout:** Asset management — Vite vs CDN importmap
 - [ ] **Poznámka:** WebAuthn → pouze `web-auth/webauthn-lib`, NE symfony-bundle
 - [ ] **Poznámka:** contributte/translation čte YAML — konverze není nutná
+- [ ] **Zavést:** DB migrační systém (`nextras/migrations` nebo vlastní) — upgrade/downgrade schématu, tracking spuštěných migrací

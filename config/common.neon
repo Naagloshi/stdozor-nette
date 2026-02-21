@@ -8,6 +8,7 @@ application:
 
 
 session:
+	name: stdozorsid
 	expiration: 14 days
 
 
@@ -21,6 +22,22 @@ mail:
 	smtp: true
 	host: mailpit
 	port: 1025
+
+
+latte:
+	extensions:
+		- Latte\Essential\RawPhpExtension
+
+services:
+	latte.latteFactory:
+		setup:
+			- addFilter(money, [App\Model\Latte\Filters, money])
+			- addFilter(moneyAmount, [App\Model\Latte\Filters, moneyAmount])
+			- addFilter(statusBadgeClass, [App\Model\Latte\Filters, statusBadgeClass])
+			- addFilter(statusLabel, [App\Model\Latte\Filters, statusLabel])
+			- addFilter(categoryStatusBadgeClass, [App\Model\Latte\Filters, categoryStatusBadgeClass])
+			- addFilter(categoryStatusLabel, [App\Model\Latte\Filters, categoryStatusLabel])
+			- addFilter(decimalMoney, [App\Model\Latte\Filters, decimalMoney])
 
 
 extensions:

@@ -6,3 +6,9 @@ services:
 	- App\Model\Security\PasswordResetService
 	- App\Model\Security\PwnedPasswordChecker
 	- App\Model\Security\MailService
+	- App\Model\Repository\ProjectRepository
+	- App\Model\Repository\ProjectMemberRepository
+	- App\Model\Repository\CategoryRepository
+	- App\Model\Repository\ItemRepository
+	- App\Model\Service\CategoryAmountCalculator
+	- App\Controls\CategoryList\ICategoryListControlFactory

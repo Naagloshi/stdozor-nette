@@ -1,0 +1,439 @@
+{snippet categoryTree}
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6">
+	<div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+		<h2 class="text-xl font-semibold text-gray-900">{_ 'messages.project.show.categories'}</h2>
+		<div class="flex items-center gap-3">
+			<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-slate-100 text-slate-800">
+				{$categoryCount}
+			</span>
+			{if $isOwner}
+				<a href="{plink Category:create, projectId: $projectId}" class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition shadow-sm">
+					<svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+					</svg>
+					{_ 'messages.category.action.add_category'}
+				</a>
+			{/if}
+		</div>
+	</div>
+	<div class="p-4">
+		{if $categoryCount > 0}
+			{foreach $groupedCategories as $statusKey => $nodes}
+				{if count($nodes) > 0}
+					<div class="mb-6 last:mb-0">
+						{* Status group header *}
+						<h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3 pb-2 border-b border-gray-100">
+							<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {$statusKey|categoryStatusBadgeClass}">
+								{$statusKey|categoryStatusLabel}
+							</span>
+							<span class="text-gray-400 text-xs normal-case font-normal">({count($nodes)})</span>
+						</h3>
+						<div class="space-y-2">
+							{foreach $nodes as $node}
+								{include categoryNode, node: $node}
+							{/foreach}
+						</div>
+					</div>
+				{/if}
+			{/foreach}
+		{else}
+			{* Empty state *}
+			<div class="text-center py-12">
+				<svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+				</svg>
+				<h3 class="mt-2 text-sm font-medium text-gray-900">{_ 'messages.project.show.no_categories'}</h3>
+				<p class="mt-1 text-sm text-gray-500">{_ 'messages.project.show.no_categories_hint'}</p>
+				{if $isOwner}
+					<a href="{plink Category:create, projectId: $projectId}" class="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-800 transition">
+						<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+						</svg>
+						{_ 'messages.category.action.add_category'}
+					</a>
+				{/if}
+			</div>
+		{/if}
+	</div>
+</div>
+{/snippet}
+
+
+{define categoryNode, $node}
+{var $cat = $node['category']}
+{var $catStatus = App\Model\Enum\CategoryStatus::tryFrom($cat->status)}
+<div class="border border-gray-200 rounded-lg bg-white overflow-hidden">
+	<details class="group/cat" {if $catStatus === App\Model\Enum\CategoryStatus::InProgress}open{/if}>
+		<summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 select-none list-none [&::-webkit-details-marker]:hidden">
+			<div class="flex items-center gap-3 min-w-0">
+				{* Chevron *}
+				<svg class="w-4 h-4 text-gray-400 flex-shrink-0 transition-transform duration-200 group-open/cat:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+				<span class="font-medium text-gray-900 truncate">{$cat->name}</span>
+			</div>
+			<div class="flex items-center gap-2 flex-shrink-0 ml-4">
+				{* Amounts *}
+				<div class="text-right text-xs hidden sm:flex sm:items-center sm:gap-3 mr-2">
+					{if $cat->estimated_amount}
+						<span class="text-gray-500">{$cat->estimated_amount|decimalMoney:$currency}</span>
+					{/if}
+					{if $cat->actual_amount}
+						<span class="font-semibold text-green-600">{$cat->actual_amount|decimalMoney:$currency}</span>
+					{/if}
+				</div>
+				{* All action buttons *}
+				{if $isOwner}
+					{* Status change *}
+					{if $catStatus && $catStatus->canTransitionTo(App\Model\Enum\CategoryStatus::InProgress)}
+						<a href="{link changeStatus!, $cat->id, 'in_progress'}"
+						   class="inline-flex items-center px-2 py-1 text-xs font-medium text-green-700 bg-green-50 hover:bg-green-100 rounded-md transition"
+						   title="{_ 'messages.category.action.start_category'}">
+							<svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+							</svg>
+							<span class="hidden lg:inline">{_ 'messages.category.action.start_category'}</span>
+						</a>
+					{/if}
+					{if $catStatus && $catStatus->canTransitionTo(App\Model\Enum\CategoryStatus::Completed)}
+						<a href="{link changeStatus!, $cat->id, 'completed'}"
+						   class="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-md transition"
+						   title="{_ 'messages.category.action.complete_category'}">
+							<svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+							</svg>
+							<span class="hidden lg:inline">{_ 'messages.category.action.complete_category'}</span>
+						</a>
+					{/if}
+
+					{* Reorder arrows *}
+					<a href="{link reorder!, $cat->id, 'up'}"
+					   class="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition" title="{_ 'messages.category.action.move_up'}">
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+						</svg>
+					</a>
+					<a href="{link reorder!, $cat->id, 'down'}"
+					   class="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition" title="{_ 'messages.category.action.move_down'}">
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+						</svg>
+					</a>
+
+					<span class="h-4 w-px bg-gray-200"></span>
+
+					{* Edit + delete *}
+					<a href="{plink Category:edit, id: $cat->id}" class="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition" title="{_ 'messages.category.action.edit_category'}">
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+						</svg>
+					</a>
+					<a href="{link delete!, $cat->id}" class="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition" title="{_ 'messages.category.action.delete_category'}"
+					   onclick="return confirm('{_ 'messages.category.delete.confirm'}')">
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+						</svg>
+					</a>
+				{/if}
+			</div>
+		</summary>
+
+		<div class="px-4 pb-4 border-t border-gray-100">
+			{* Description *}
+			{if $cat->description}
+				<p class="text-sm text-gray-600 mt-3 whitespace-pre-line">{$cat->description}</p>
+			{/if}
+
+			{* Manual override notice *}
+			{if $cat->manual_amount_override}
+				<p class="text-xs text-amber-600 mt-2 flex items-center">
+					<svg class="w-3.5 h-3.5 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+					</svg>
+					{_ 'messages.category.show.manual_amount_override'}
+				</p>
+			{/if}
+
+			{* Amounts on mobile *}
+			<div class="sm:hidden mt-3 flex flex-wrap gap-3 text-xs">
+				{if $cat->estimated_amount}
+					<span class="text-gray-500">{_ 'messages.project.stats.estimated'}: {$cat->estimated_amount|decimalMoney:$currency}</span>
+				{/if}
+				{if $cat->actual_amount}
+					<span class="font-semibold text-green-600">{_ 'messages.project.stats.actual'}: {$cat->actual_amount|decimalMoney:$currency}</span>
+				{/if}
+			</div>
+
+			{* Items section *}
+			{var $items = $itemsByCategory[$cat->id] ?? []}
+			<div class="mt-4 pt-3 border-t border-gray-100">
+				<div class="flex items-center justify-between mb-2">
+					<h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">{_ 'messages.category.show.items_heading'}</h4>
+					{if $isOwner}
+						<a href="{plink Item:create, categoryId: $cat->id}"
+						   class="inline-flex items-center px-2 py-1 text-xs font-medium text-green-700 hover:bg-green-50 rounded-md transition">
+							<svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+							</svg>
+							{_ 'messages.category.action.add_item'}
+						</a>
+					{/if}
+				</div>
+				{if count($items) > 0}
+					<div class="overflow-x-auto -mx-4">
+						<table class="min-w-full divide-y divide-gray-200 text-sm">
+							<thead class="bg-gray-50">
+								<tr>
+									<th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">{_ 'messages.category.show.item_date'}</th>
+									<th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">{_ 'messages.category.show.item_description'}</th>
+									{if in_array('owner', $memberRoles, true)}
+										<th class="px-3 py-2 text-right text-xs font-medium text-gray-500 uppercase">{_ 'messages.category.show.item_amount'}</th>
+									{/if}
+									<th class="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase" title="{_ 'messages.category.show.item_control_day'}">
+										<svg class="w-4 h-4 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+										</svg>
+									</th>
+									<th class="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase" title="{_ 'messages.category.show.item_construction_log'}">
+										<svg class="w-4 h-4 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+										</svg>
+									</th>
+									{if $isOwner}
+										<th class="px-3 py-2 text-right text-xs font-medium text-gray-500 uppercase">{_ 'messages.category.show.item_actions'}</th>
+									{/if}
+								</tr>
+							</thead>
+							<tbody class="bg-white divide-y divide-gray-200">
+								{foreach $items as $item}
+									{include itemRow, item: $item}
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+					{if $isOwner && count($items) >= 3}
+						<div class="text-right mt-2">
+							<a href="{plink Item:create, categoryId: $cat->id}"
+							   class="inline-flex items-center px-2 py-1 text-xs font-medium text-green-700 hover:bg-green-50 rounded-md transition">
+								<svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+								</svg>
+								{_ 'messages.category.action.add_another_item'}
+							</a>
+						</div>
+					{/if}
+				{else}
+					<p class="text-gray-500 text-sm italic">{_ 'messages.category.show.no_items'}</p>
+				{/if}
+			</div>
+
+			{* Add subcategory button — only for root categories (no parent_id) *}
+			{if $isOwner && $cat->parent_id === null}
+				<div class="mt-3 pt-3 border-t border-gray-100">
+					<a href="{plink Category:create, projectId: $projectId, parentId: $cat->id}"
+					   class="inline-flex items-center px-2.5 py-1 text-xs font-medium text-blue-700 hover:bg-blue-50 rounded-md transition">
+						<svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+						</svg>
+						{_ 'messages.category.action.add_subcategory'}
+					</a>
+				</div>
+			{/if}
+
+			{* Subcategories — max 1 level deep *}
+			{if count($node['children']) > 0}
+				<div class="mt-4 pl-4 space-y-2 border-l-2 border-gray-200">
+					<h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{_ 'messages.project.show.subcategories'}</h4>
+					{foreach $node['children'] as $child}
+						{include subcategoryNode, node: $child}
+					{/foreach}
+				</div>
+			{/if}
+		</div>
+	</details>
+</div>
+{/define}
+
+
+{define subcategoryNode, $node}
+{var $cat = $node['category']}
+{var $catStatus = App\Model\Enum\CategoryStatus::tryFrom($cat->status)}
+{var $subItems = $itemsByCategory[$cat->id] ?? []}
+<div class="border border-gray-100 rounded-lg bg-gray-50 overflow-hidden">
+	<details class="group/sub">
+		<summary class="flex items-center justify-between px-3 py-2 cursor-pointer hover:bg-gray-100 select-none list-none [&::-webkit-details-marker]:hidden">
+			<div class="flex items-center gap-2 min-w-0">
+				<svg class="w-3.5 h-3.5 text-gray-400 flex-shrink-0 transition-transform duration-200 group-open/sub:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+				<span class="font-medium text-sm text-gray-900 truncate">{$cat->name}</span>
+				<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium {$cat->status|categoryStatusBadgeClass}">
+					{$cat->status|categoryStatusLabel}
+				</span>
+				{if count($subItems) > 0}
+					<span class="text-xs text-gray-400">({count($subItems)})</span>
+				{/if}
+			</div>
+			<div class="flex items-center gap-2 flex-shrink-0 ml-3">
+				{* Amounts *}
+				<div class="text-right text-xs hidden sm:flex sm:items-center sm:gap-3 mr-1">
+					{if $cat->estimated_amount}
+						<span class="text-gray-500">{$cat->estimated_amount|decimalMoney:$currency}</span>
+					{/if}
+					{if $cat->actual_amount}
+						<span class="font-semibold text-green-600">{$cat->actual_amount|decimalMoney:$currency}</span>
+					{/if}
+				</div>
+				{if $isOwner}
+					{* Add item shortcut *}
+					<a href="{plink Item:create, categoryId: $cat->id}"
+					   class="p-1 text-green-600 hover:bg-green-100 rounded transition" title="{_ 'messages.category.action.add_item'}">
+						<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+						</svg>
+					</a>
+					{* Status change *}
+					{if $catStatus && $catStatus->canTransitionTo(App\Model\Enum\CategoryStatus::InProgress)}
+						<a href="{link changeStatus!, $cat->id, 'in_progress'}"
+						   class="p-1 text-green-600 hover:bg-green-100 rounded transition" title="{_ 'messages.category.action.start_category'}">
+							<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+							</svg>
+						</a>
+					{/if}
+					{if $catStatus && $catStatus->canTransitionTo(App\Model\Enum\CategoryStatus::Completed)}
+						<a href="{link changeStatus!, $cat->id, 'completed'}"
+						   class="p-1 text-blue-600 hover:bg-blue-100 rounded transition" title="{_ 'messages.category.action.complete_category'}">
+							<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+							</svg>
+						</a>
+					{/if}
+					{* Reorder *}
+					<a href="{link reorder!, $cat->id, 'up'}"
+					   class="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition" title="{_ 'messages.category.action.move_up'}">
+						<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+						</svg>
+					</a>
+					<a href="{link reorder!, $cat->id, 'down'}"
+					   class="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition" title="{_ 'messages.category.action.move_down'}">
+						<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+						</svg>
+					</a>
+					<span class="h-3.5 w-px bg-gray-300"></span>
+					{* Edit + delete *}
+					<a href="{plink Category:edit, id: $cat->id}" class="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition" title="{_ 'messages.category.action.edit_category'}">
+						<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+						</svg>
+					</a>
+					<a href="{link delete!, $cat->id}" class="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition" title="{_ 'messages.category.action.delete_category'}"
+					   onclick="return confirm('{_ 'messages.category.delete.confirm'}')">
+						<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+						</svg>
+					</a>
+				{/if}
+			</div>
+		</summary>
+
+		<div class="px-3 pb-3 border-t border-gray-200">
+			{if $cat->description}
+				<p class="text-xs text-gray-500 mt-2">{$cat->description|truncate:120}</p>
+			{/if}
+
+			{* Items in subcategory *}
+			<div class="mt-3">
+				{if count($subItems) > 0}
+					<div class="overflow-x-auto -mx-3">
+						<table class="min-w-full divide-y divide-gray-200 text-xs">
+							<tbody class="bg-white divide-y divide-gray-100">
+								{foreach $subItems as $item}
+									{include itemRow, item: $item}
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+					{if $isOwner && count($subItems) >= 3}
+						<div class="text-right mt-2">
+							<a href="{plink Item:create, categoryId: $cat->id}"
+							   class="inline-flex items-center px-2 py-1 text-xs font-medium text-green-700 hover:bg-green-50 rounded-md transition">
+								<svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+								</svg>
+								{_ 'messages.category.action.add_another_item'}
+							</a>
+						</div>
+					{/if}
+				{else}
+					<p class="text-gray-400 text-xs italic">{_ 'messages.category.show.no_items'}</p>
+				{/if}
+			</div>
+		</div>
+	</details>
+</div>
+{/define}
+
+
+{define itemRow, $item}
+<tr class="hover:bg-gray-50">
+	<td class="px-3 py-2 whitespace-nowrap text-gray-900">{$item->item_date|date:'d.m.Y'}</td>
+	<td class="px-3 py-2">
+		<div class="text-gray-900">{$item->description|truncate:60}</div>
+		{if $item->weather}
+			<div class="text-xs text-gray-500 mt-0.5">
+				<svg class="w-3 h-3 inline -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+				</svg>
+				{$item->weather}
+			</div>
+		{/if}
+	</td>
+	{if in_array('owner', $memberRoles, true)}
+		<td class="px-3 py-2 text-right whitespace-nowrap">
+			{if $item->amount}
+				<span class="font-semibold {if $item->amount < 0}text-red-600{else}text-gray-900{/if}">{$item->amount|decimalMoney:$currency}</span>
+			{else}
+				<span class="text-gray-400">-</span>
+			{/if}
+		</td>
+	{/if}
+	<td class="px-3 py-2 text-center">
+		{if $item->is_control_day}
+			<svg class="w-4 h-4 inline text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+			</svg>
+		{else}
+			<span class="text-gray-400">-</span>
+		{/if}
+	</td>
+	<td class="px-3 py-2 text-center">
+		{if $item->include_in_construction_log}
+			<svg class="w-4 h-4 inline text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+			</svg>
+		{else}
+			<span class="text-gray-400">-</span>
+		{/if}
+	</td>
+	{if $isOwner}
+		<td class="px-3 py-2 text-right">
+			<div class="flex justify-end gap-1">
+				<a href="{plink Item:edit, id: $item->id}" class="p-1 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded transition" title="{_ 'messages.category.action.edit_item'}">
+					<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+					</svg>
+				</a>
+				<a href="{link deleteItem!, $item->id}" class="p-1 text-red-600 hover:text-red-900 hover:bg-red-50 rounded transition" title="{_ 'messages.category.action.delete_item'}"
+				   onclick="return confirm('{_ 'messages.category.confirm.delete_item'}')">
+					<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+					</svg>
+				</a>
+			</div>
+		</td>
+	{/if}
+</tr>
+{/define}
