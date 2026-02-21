@@ -23,6 +23,10 @@ final class RouterFactory
 		$router->addRoute('overeni-emailu/<token>', 'Sign:verifyEmail');
 		$router->addRoute('znovu-overeni', 'Sign:resendVerification');
 
+		// Profile
+		$router->addRoute('profil', 'Profile:default');
+		$router->addRoute('profil/upravit', 'Profile:edit');
+
 		// Fallback
 		$router->addRoute('<presenter>/<action>[/<id>]', 'Homepage:default');
 

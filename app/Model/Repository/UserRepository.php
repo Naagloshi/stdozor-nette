@@ -75,6 +75,14 @@ final class UserRepository
 	}
 
 
+	public function updateProfile(int $userId, array $data): void
+	{
+		$this->database->table('profile')
+			->where('user_id', $userId)
+			->update($data);
+	}
+
+
 	public function deleteUnverified(int $userId): void
 	{
 		// Delete profile first (FK constraint)

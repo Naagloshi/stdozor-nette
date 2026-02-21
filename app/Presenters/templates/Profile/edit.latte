@@ -1,0 +1,122 @@
+{import '../_forms.latte'}
+
+{block title}{_ 'messages.page.profile.edit'}{/block}
+
+{block content}
+<div class="bg-gray-50">
+	{* Hero Section *}
+	<div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			{* Breadcrumb *}
+			<nav class="flex mb-6" aria-label="Breadcrumb">
+				<ol class="inline-flex items-center space-x-1 md:space-x-3">
+					<li class="inline-flex items-center">
+						<a href="{link Homepage:default}" class="inline-flex items-center text-sm font-medium text-gray-300 hover:text-white transition">
+							<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+							</svg>
+							{_ 'messages.nav.home'}
+						</a>
+					</li>
+					<li>
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<a href="{link Profile:default}" class="ml-1 md:ml-2 text-sm font-medium text-gray-300 hover:text-white transition">
+								{_ 'messages.nav.profile'}
+							</a>
+						</div>
+					</li>
+					<li aria-current="page">
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<span class="ml-1 text-sm font-medium text-gray-400 md:ml-2">{_ 'messages.page.profile.edit'}</span>
+						</div>
+					</li>
+				</ol>
+			</nav>
+
+			{* Page header *}
+			<div>
+				<h1 class="text-4xl font-bold mb-3">{_ 'messages.page.profile.edit'}</h1>
+				<p class="text-gray-300 text-lg">{_ 'messages.page.profile.edit_subtitle'}</p>
+			</div>
+		</div>
+	</div>
+
+	{* Main Content *}
+	<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+			<div class="px-6 py-8">
+				{form editProfileForm, class => 'space-y-6'}
+					{* Account Information *}
+					<div class="mb-8">
+						<h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+							<svg class="w-5 h-5 mr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"/>
+							</svg>
+							{_ 'messages.page.profile.login_credentials'}
+						</h2>
+						{include formField, name: email}
+					</div>
+
+					<hr class="my-8 border-gray-200">
+
+					{* Personal Information *}
+					<div class="mb-8">
+						<h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+							<svg class="w-5 h-5 mr-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/>
+							</svg>
+							{_ 'messages.page.profile.personal_info'}
+						</h2>
+						<div class="space-y-4">
+							{include formField, name: firstName}
+							{include formField, name: lastName}
+							{include formField, name: phone}
+							{include formField, name: bio}
+						</div>
+					</div>
+
+					<hr class="my-8 border-gray-200">
+
+					{* Change Password *}
+					<div class="mb-8">
+						<h2 class="text-lg font-semibold text-gray-900 mb-2 flex items-center">
+							<svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+							</svg>
+							{_ 'messages.profile.form.change_password'}
+						</h2>
+						<p class="text-sm text-gray-500 mb-4">{_ 'messages.profile.form.change_password_help'}</p>
+						<div class="space-y-4">
+							{include formField, name: currentPassword}
+							{include formField, name: newPassword, help: 'messages.validators.password.help'}
+							{include formField, name: newPasswordConfirm}
+						</div>
+					</div>
+
+					{* Action Buttons *}
+					<div class="flex gap-3 pt-4 border-t border-gray-200">
+						<button type="submit" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-slate-800 text-white font-semibold rounded-lg shadow-sm transition">
+							<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+							</svg>
+							{_ 'messages.action.save'}
+						</button>
+						<a href="{link Profile:default}" class="inline-flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition">
+							<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+							</svg>
+							{_ 'messages.action.cancel'}
+						</a>
+					</div>
+				{/form}
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

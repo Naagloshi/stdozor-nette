@@ -1,7 +1,10 @@
 /vendor/
-/temp/cache/
-/log/*.log
+/temp/*
+!/temp/.gitignore
+/log/*
+!/log/.gitignore
 /config/local.neon
 /www/uploads/
 *.local.neon
 .env
+/docker/nginx/ssl/
