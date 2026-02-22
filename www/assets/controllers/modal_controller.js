@@ -17,10 +17,16 @@ import { Controller } from '@hotwired/stimulus';
  */
 export default class extends Controller {
     static targets = ['container', 'backdrop', 'dialog'];
+    static values = { autoOpen: { type: Boolean, default: false } };
 
     connect() {
         // Zavřít modal při Escape
         this.handleEscape = this.handleEscape.bind(this);
+
+        // Auto-open modal po AJAX snippet update
+        if (this.autoOpenValue) {
+            requestAnimationFrame(() => this.open());
+        }
     }
 
     open(event) {

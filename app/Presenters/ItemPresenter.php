@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
+use App\Model\Repository\AttachmentRepository;
 use App\Model\Repository\CategoryRepository;
 use App\Model\Repository\ItemRepository;
 use App\Model\Repository\ProjectMemberRepository;
 use App\Model\Repository\ProjectRepository;
+use App\Model\Service\AttachmentService;
 use Contributte\Translation\Translator;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
@@ -28,6 +30,8 @@ final class ItemPresenter extends BasePresenter
 		private CategoryRepository $categoryRepository,
 		private ProjectRepository $projectRepository,
 		private ProjectMemberRepository $memberRepository,
+		private AttachmentRepository $attachmentRepository,
+		private AttachmentService $attachmentService,
 		private Translator $translator,
 	) {
 	}
@@ -164,6 +168,21 @@ final class ItemPresenter extends BasePresenter
 			$form->addCheckbox('includeInConstructionLog', $this->translator->translate('messages.item.form.include_in_construction_log'));
 		}
 
+		$form->addMultiUpload('attachmentFiles', $this->translator->translate('messages.item.form.attachments'))
+			->addRule(Form::MaxFileSize, $this->translator->translate('messages.validators.attachment.max_size'), 10 * 1024 * 1024)
+			->addRule(Form::MimeType, $this->translator->translate('messages.validators.attachment.invalid_type'), [
+				'image/jpeg', 'image/png', 'image/gif', 'image/webp',
+				'application/pdf',
+				'application/vnd.ms-excel',
+				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+				'application/msword',
+				'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+				'application/zip', 'application/x-zip-compressed',
+				'application/vnd.oasis.opendocument.text',
+				'application/vnd.oasis.opendocument.spreadsheet',
+				'application/vnd.oasis.opendocument.presentation',
+			]);
+
 		$form->addSubmit('send');
 
 		$form->onSuccess[] = $this->itemFormSucceeded(...);
@@ -195,6 +214,7 @@ final class ItemPresenter extends BasePresenter
 			// Edit mode
 			$values['updated_at'] = new \DateTime();
 			$this->itemRepository->update($this->item->id, $values);
+			$itemRow = $this->item;
 
 			$this->flashMessage(
 				$this->translator->translate('messages.item.flash.updated'),
@@ -206,7 +226,7 @@ final class ItemPresenter extends BasePresenter
 			$values['created_by_id'] = $this->getUser()->getId();
 			$values['created_at'] = new \DateTime();
 
-			$this->itemRepository->insert($values);
+			$itemRow = $this->itemRepository->insert($values);
 
 			$this->flashMessage(
 				$this->translator->translate('messages.item.flash.created'),
@@ -214,6 +234,68 @@ final class ItemPresenter extends BasePresenter
 			);
 		}
 
+		// Process uploaded attachments
+		/** @var \Nette\Http\FileUpload[] $files */
+		$files = $data->attachmentFiles ?? [];
+		foreach ($files as $file) {
+			if ($file->isOk()) {
+				try {
+					$this->attachmentService->uploadAttachment(
+						$file,
+						$itemRow->id,
+						$this->category->id,
+						$this->project->id,
+						$this->getUser()->getId(),
+					);
+				} catch (\RuntimeException $e) {
+					$this->flashMessage($e->getMessage(), 'warning');
+				}
+			}
+		}
+
 		$this->redirect('Project:show', $this->project->id);
+	}
+
+
+	public function handleDeleteAttachment(int $attachmentId): void
+	{
+		$this->requireLogin();
+
+		$attachment = $this->attachmentRepository->findById($attachmentId);
+		if (!$attachment) {
+			$this->error($this->translator->translate('messages.error.not_found'), 404);
+		}
+
+		$item = $this->itemRepository->findById($attachment->item_id);
+		if (!$item) {
+			$this->error($this->translator->translate('messages.error.not_found'), 404);
+		}
+
+		$category = $this->categoryRepository->findById($item->category_id);
+		$project = $this->projectRepository->findById($category->project_id);
+
+		// Check: must be project owner or attachment uploader
+		$userId = $this->getUser()->getId();
+		$isOwner = $this->memberRepository->isOwner($project->id, $userId);
+		$isUploader = $attachment->uploaded_by_id === $userId;
+
+		if (!$isOwner && !$isUploader) {
+			$this->error($this->translator->translate('messages.error.forbidden'), 403);
+		}
+
+		try {
+			$this->attachmentService->deleteAttachment($attachment);
+			$this->flashMessage(
+				$this->translator->translate('messages.attachment.flash.deleted'),
+				'success',
+			);
+		} catch (\RuntimeException) {
+			$this->flashMessage(
+				$this->translator->translate('messages.attachment.flash.delete_failed'),
+				'error',
+			);
+		}
+
+		$this->redirect('this');
 	}
 }

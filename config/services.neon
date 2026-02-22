@@ -11,4 +11,9 @@ services:
 	- App\Model\Repository\CategoryRepository
 	- App\Model\Repository\ItemRepository
 	- App\Model\Service\CategoryAmountCalculator
+	- App\Model\Repository\ProjectInvitationRepository
+	- App\Model\Repository\CategoryPermissionRepository
+	- App\Model\Service\InvitationService
+	- App\Model\Repository\AttachmentRepository
+	- App\Model\Service\AttachmentService(uploadDirectory: %wwwDir%/uploads)
 	- App\Controls\CategoryList\ICategoryListControlFactory

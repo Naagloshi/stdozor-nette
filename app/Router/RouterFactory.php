@@ -41,6 +41,15 @@ final class RouterFactory
 		$router->addRoute('kategorie/<categoryId [0-9]+>/polozka/nova', 'Item:create');
 		$router->addRoute('polozka/<id [0-9]+>/upravit', 'Item:edit');
 
+		// Attachments
+		$router->addRoute('priloha/<id [0-9]+>/stahnout', 'Attachment:download');
+
+		// Members
+		$router->addRoute('projekt/<projectId [0-9]+>/clenove', 'Member:default');
+		$router->addRoute('projekt/<projectId [0-9]+>/clenove/pozvat', 'Member:invite');
+		$router->addRoute('projekt/<projectId [0-9]+>/clenove/<memberId [0-9]+>/role', 'Member:changeRoles');
+		$router->addRoute('pozvanka/<token>', 'Member:accept');
+
 		// Fallback
 		$router->addRoute('<presenter>/<action>[/<id>]', 'Homepage:default');
 

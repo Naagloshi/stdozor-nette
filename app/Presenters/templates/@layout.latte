@@ -46,11 +46,37 @@
 <body class="flex flex-col min-h-screen">
 	{include '_navigation.latte'}
 
+	{snippet flashes}
 	{include '_toast.latte'}
+	{/snippet}
 
 	<main class="flex-grow">
 		{block content}{/block}
 	</main>
+
+	{* Sdílený confirm modal *}
+	<div id="confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+		<div id="confirm-modal-backdrop" class="absolute inset-0 bg-black/50 transition-opacity duration-200 opacity-0"></div>
+		<div id="confirm-modal-dialog" class="relative bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 transition-all duration-200 opacity-0 scale-95">
+			<div class="flex items-center gap-3 mb-4">
+				<div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+					<svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+					</svg>
+				</div>
+				<h3 class="text-lg font-semibold text-gray-900">{_ 'messages.confirm.title'}</h3>
+			</div>
+			<p id="confirm-modal-message" class="text-sm text-gray-600 mb-6"></p>
+			<div class="flex justify-end gap-3">
+				<button id="confirm-modal-cancel" type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+					{_ 'messages.confirm.cancel'}
+				</button>
+				<button id="confirm-modal-confirm" type="button" class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
+					{_ 'messages.confirm.confirm_delete'}
+				</button>
+			</div>
+		</div>
+	</div>
 
 	{include '_footer.latte'}
 
@@ -59,11 +85,12 @@
 		<script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/umd/photoswipe.umd.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.3/dist/umd/photoswipe-lightbox.umd.min.js"></script>
 
-		{* Stimulus via importmap *}
+		{* Stimulus + Naja via importmap *}
 		<script type="importmap" n:syntax="off">
 		{
 			"imports": {
-				"@hotwired/stimulus": "https://cdn.jsdelivr.net/npm/@hotwired/stimulus@3.2.2/+esm"
+				"@hotwired/stimulus": "https://cdn.jsdelivr.net/npm/@hotwired/stimulus@3.2.2/+esm",
+				"naja": "https://cdn.jsdelivr.net/npm/naja@3/+esm"
 			}
 		}
 		</script>

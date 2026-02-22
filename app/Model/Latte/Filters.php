@@ -90,4 +90,21 @@ final class Filters
 
 		return number_format((float) $amount, 2, ',', "\u{00a0}") . "\u{00a0}" . $currency;
 	}
+
+
+	/**
+	 * Format file size in bytes to human-readable string.
+	 * Example: 1536 → '1.5 KB', 2097152 → '2 MB'
+	 */
+	public static function fileSize(int $bytes): string
+	{
+		if ($bytes < 1024) {
+			return $bytes . ' B';
+		}
+		if ($bytes < 1_048_576) {
+			return round($bytes / 1024, 1) . ' KB';
+		}
+
+		return round($bytes / 1_048_576, 1) . ' MB';
+	}
 }

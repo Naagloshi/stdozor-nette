@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model\Repository;
 
+use App\Model\Service\AttachmentService;
 use App\Model\Service\CategoryAmountCalculator;
 use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
@@ -15,6 +16,7 @@ final class ItemRepository
 	public function __construct(
 		private Explorer $database,
 		private CategoryAmountCalculator $amountCalculator,
+		private AttachmentService $attachmentService,
 	) {
 	}
 
@@ -94,7 +96,7 @@ final class ItemRepository
 
 
 	/**
-	 * Delete with automatic amount recalculation.
+	 * Delete with attachment cleanup and automatic amount recalculation.
 	 */
 	public function delete(int $id): void
 	{
@@ -104,6 +106,10 @@ final class ItemRepository
 		}
 
 		$categoryId = $item->category_id;
+
+		// Clean up attachment files before cascade delete removes DB records
+		$this->attachmentService->deleteAllForItem($id);
+
 		$this->getTable()->where('id', $id)->delete();
 		$this->amountCalculator->recalculate($categoryId);
 	}

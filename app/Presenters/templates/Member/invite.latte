@@ -1,0 +1,120 @@
+{import '../_forms.latte'}
+
+{block title}{_ 'messages.project_member.invite.title'} — {$project->name}{/block}
+
+{block content}
+<div class="bg-gray-50 min-h-screen">
+	{* Hero Section *}
+	<div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			{* Breadcrumb *}
+			<nav class="flex mb-6" aria-label="Breadcrumb">
+				<ol class="inline-flex items-center space-x-1 md:space-x-3">
+					<li class="inline-flex items-center">
+						<a href="{link Homepage:default}" class="inline-flex items-center text-sm font-medium text-gray-300 hover:text-white transition">
+							<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+							</svg>
+							{_ 'messages.nav.home'}
+						</a>
+					</li>
+					<li>
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<a href="{link Project:default}" class="ml-1 text-sm font-medium text-gray-300 hover:text-white transition md:ml-2">{_ 'messages.project.index.title'}</a>
+						</div>
+					</li>
+					<li>
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<a href="{link Project:show, $project->id}" class="ml-1 text-sm font-medium text-gray-300 hover:text-white transition md:ml-2">{$project->name}</a>
+						</div>
+					</li>
+					<li>
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<a href="{link default, $project->id}" class="ml-1 text-sm font-medium text-gray-300 hover:text-white transition md:ml-2">{_ 'messages.project_member.index.title'}</a>
+						</div>
+					</li>
+					<li aria-current="page">
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<span class="ml-1 text-sm font-medium text-gray-400 md:ml-2">{_ 'messages.project_member.invite.title'}</span>
+						</div>
+					</li>
+				</ol>
+			</nav>
+
+			<h1 class="text-4xl font-bold">{_ 'messages.project_member.invite.heading'}</h1>
+		</div>
+	</div>
+
+	{* Form *}
+	<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+			{form inviteForm, class => 'space-y-6'}
+				{include formField, name: 'email'}
+
+				{* Roles as checkbox grid *}
+				<div>
+					{label roles class => 'block text-sm font-medium text-gray-700 mb-2' /}
+					<p class="text-xs text-gray-500 mb-3">{_ 'messages.project_member.form.roles_help'}</p>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						{foreach $form['roles']->items as $key => $label}
+							<div class="flex items-center">
+								<input type="checkbox" name="{$form['roles']->getHtmlName()}" value="{$key}" id="roles-{$key}"
+									{if in_array($key, $form['roles']->value ?? [])}checked{/if}
+									class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500">
+								<label for="roles-{$key}" class="ml-2 text-sm text-gray-700">{$label}</label>
+							</div>
+						{/foreach}
+					</div>
+					<div n:ifcontent class="mt-1 text-sm text-red-600">{inputError roles}</div>
+				</div>
+
+				{* Global category access *}
+				<div class="border-t border-gray-200 pt-6">
+					<h3 class="text-sm font-semibold text-gray-900 mb-4">{_ 'messages.project_member.form.categories'}</h3>
+					{include formCheckbox, name: 'hasGlobalCategoryAccess'}
+					<p class="text-xs text-gray-500 ml-6 mb-4">{_ 'messages.project_member.form.has_global_category_access_help'}</p>
+
+					{* Categories checkboxes *}
+					{if count($form['categories']->items) > 0}
+						<div data-controller="category-access">
+							<div data-category-access-target="categoriesContainer">
+								<label class="block text-sm font-medium text-gray-700 mb-2">{_ 'messages.project_member.form.categories'}</label>
+								<p class="text-xs text-gray-500 mb-3">{_ 'messages.project_member.form.categories_help'}</p>
+								<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+									{foreach $form['categories']->items as $key => $label}
+										<div class="flex items-center">
+											<input type="checkbox" name="{$form['categories']->getHtmlName()}" value="{$key}" id="categories-{$key}"
+												{if in_array($key, $form['categories']->value ?? [])}checked{/if}
+												class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500">
+											<label for="categories-{$key}" class="ml-2 text-sm text-gray-700">{$label}</label>
+										</div>
+									{/foreach}
+								</div>
+							</div>
+						</div>
+					{/if}
+				</div>
+
+				<div class="flex items-center justify-end gap-3 pt-6 border-t border-gray-200">
+					<a href="{link default, $project->id}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition">
+						{_ 'messages.category.action.cancel'}
+					</a>
+					{input send class => 'inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-slate-800 text-white font-semibold rounded-lg transition shadow-sm cursor-pointer'}
+				</div>
+			{/form}
+		</div>
+	</div>
+</div>
+{/block}

@@ -38,6 +38,7 @@ services:
 			- addFilter(categoryStatusBadgeClass, [App\Model\Latte\Filters, categoryStatusBadgeClass])
 			- addFilter(categoryStatusLabel, [App\Model\Latte\Filters, categoryStatusLabel])
 			- addFilter(decimalMoney, [App\Model\Latte\Filters, decimalMoney])
+			- addFilter(fileSize, [App\Model\Latte\Filters, fileSize])
 
 
 extensions:

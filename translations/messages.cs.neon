@@ -758,6 +758,12 @@ attachment:
         uploaded_by: 'Nahrál'
         uploaded_at: 'Nahráno'
 
+# Potvrzovací dialog
+confirm:
+    title: 'Potvrzení'
+    cancel: 'Zrušit'
+    confirm_delete: 'Smazat'
+
 # Upload UI
 upload:
     click_to_upload: 'Klikněte pro výběr souborů'

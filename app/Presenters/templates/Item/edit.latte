@@ -80,6 +80,11 @@
 					</div>
 				{/if}
 
+				{* Upload zóna *}
+				<div class="border-t border-gray-200 pt-6">
+					{include formUpload, name: 'attachmentFiles', help: 'messages.item.form.attachments_help'}
+				</div>
+
 				<div class="flex items-center justify-end gap-3 pt-6 border-t border-gray-200">
 					<a href="{link Project:show, $project->id}" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition">
 						{_ 'messages.item.action.cancel'}

@@ -150,6 +150,7 @@
 				</div>
 
 				{* Rozpočet *}
+				{snippet projectBudget}
 				<div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
 					<div class="flex items-center justify-between mb-4">
 						<span class="text-sm font-semibold text-gray-200">{_ 'messages.project.stats.budget'}</span>
@@ -189,6 +190,7 @@
 						{/if}
 					</div>
 				</div>
+				{/snippet}
 			</div>
 		</div>
 	</div>
@@ -200,9 +202,9 @@
 				<button class="border-b-2 border-slate-800 py-4 px-1 text-sm font-medium text-slate-800">
 					{_ 'messages.project.tabs.detail'}
 				</button>
-				<button class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-not-allowed opacity-50" disabled>
+				<a href="{link Member:default, $project->id}" class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 transition">
 					{_ 'messages.project.tabs.people'}
-				</button>
+				</a>
 				<button class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 cursor-not-allowed opacity-50" disabled>
 					{_ 'messages.project.tabs.exports'}
 				</button>

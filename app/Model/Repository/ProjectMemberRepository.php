@@ -71,4 +71,115 @@ final class ProjectMemberRepository
 	{
 		return json_decode($member->roles, true) ?: [];
 	}
+
+
+	public function findById(int $id): ?ActiveRow
+	{
+		return $this->getTable()->get($id);
+	}
+
+
+	/**
+	 * Find all members of a project with user email.
+	 * @return ActiveRow[]
+	 */
+	public function findByProject(int $projectId): array
+	{
+		return $this->getTable()
+			->where('project_id', $projectId)
+			->order('invited_at ASC')
+			->fetchAll();
+	}
+
+
+	/**
+	 * Count members with owner role in a project.
+	 */
+	public function countOwners(int $projectId): int
+	{
+		return $this->database->query(
+			'SELECT COUNT(*) AS cnt FROM project_member WHERE project_id = ? AND JSON_CONTAINS(roles, ?)',
+			$projectId,
+			'"owner"',
+		)->fetch()->cnt;
+	}
+
+
+	/**
+	 * Check if user is the permanent owner (project.owner_id).
+	 */
+	public function isPermanentOwner(int $projectId, int $userId): bool
+	{
+		$project = $this->database->table('project')->get($projectId);
+		return $project && $project->owner_id === $userId;
+	}
+
+
+	/**
+	 * Merge new roles into existing member's roles.
+	 */
+	public function addRoles(int $memberId, array $newRoles): void
+	{
+		$member = $this->findById($memberId);
+		if (!$member) {
+			return;
+		}
+
+		$existing = json_decode($member->roles, true) ?: [];
+		$merged = array_values(array_unique(array_merge($existing, $newRoles)));
+
+		$this->getTable()->where('id', $memberId)->update([
+			'roles' => json_encode($merged),
+		]);
+	}
+
+
+	/**
+	 * Replace all roles for a member.
+	 */
+	public function updateRoles(int $memberId, array $roles): void
+	{
+		$this->getTable()->where('id', $memberId)->update([
+			'roles' => json_encode(array_values($roles)),
+		]);
+	}
+
+
+	/**
+	 * Update global category access flag.
+	 */
+	public function updateGlobalAccess(int $memberId, bool $hasGlobalAccess): void
+	{
+		$this->getTable()->where('id', $memberId)->update([
+			'has_global_category_access' => $hasGlobalAccess ? 1 : 0,
+		]);
+	}
+
+
+	/**
+	 * Create a new member from invitation.
+	 */
+	public function createMember(
+		int $projectId,
+		int $userId,
+		array $roles,
+		bool $hasGlobalCategoryAccess,
+		?int $invitedById = null,
+	): ActiveRow {
+		return $this->getTable()->insert([
+			'project_id' => $projectId,
+			'user_id' => $userId,
+			'roles' => json_encode($roles),
+			'has_global_category_access' => $hasGlobalCategoryAccess ? 1 : 0,
+			'invited_by_id' => $invitedById,
+			'invited_at' => new \DateTime(),
+			'accepted_at' => new \DateTime(),
+		]);
+	}
+
+
+	public function delete(int $id): void
+	{
+		$this->getTable()->where('id', $id)->delete();
+	}
 }

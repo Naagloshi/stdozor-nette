@@ -70,6 +70,9 @@ final class ProjectPresenter extends BasePresenter
 
 	public function renderShow(int $id): void
 	{
+		// Reload project for fresh amounts after signal handlers (delete, reorder, etc.)
+		$this->project = $this->projectRepository->findById($id);
+
 		$roles = $this->memberRepository->getRoles($this->membership);
 		$status = ProjectStatus::tryFrom($this->project->status);
 

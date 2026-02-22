@@ -20,6 +20,45 @@
 	<div n:ifcontent class="text-sm text-red-600">{inputError $name}</div>
 {/define}
 
+{define formUpload, $name, $help = null}
+	<div data-controller="upload"
+		 data-upload-max-size-value="10485760"
+		 data-upload-max-files-value="10"
+		 data-upload-accept-value="image/*,.pdf,.doc,.docx,.xls,.xlsx,.zip,.odt,.ods,.odp">
+		{label $name class => 'block text-sm font-medium text-gray-700 mb-2' /}
+
+		{* Drop Zone *}
+		<div data-upload-target="dropzone"
+			 data-action="click->upload#openFilePicker"
+			 class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 hover:bg-gray-50 transition-all">
+			<svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+				<path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+			<p class="mt-2 text-sm text-gray-600">
+				<span class="font-semibold text-blue-600">{_ 'messages.upload.click_to_upload'}</span>
+				{_ 'messages.upload.or_drag_and_drop'}
+			</p>
+			{if $help}<p class="mt-1 text-xs text-gray-500">{_ $help}</p>{/if}
+		</div>
+
+		{* Hidden File Input *}
+		{input $name, 'data-upload-target' => 'input', 'data-action' => 'change->upload#handleInputChange', class => 'hidden'}
+
+		{* File Count *}
+		<div data-upload-target="fileList" class="hidden mt-2 text-sm text-gray-600"></div>
+
+		{* Preview Area *}
+		<div data-upload-target="preview" class="mt-4 space-y-2"></div>
+
+		{* Limits *}
+		<p class="mt-2 text-xs text-gray-500">
+			{_ 'messages.upload.max_files', ['max' => 10]} &bull; {_ 'messages.upload.max_size', ['size' => '10 MB']}
+		</p>
+
+		<div n:ifcontent class="mt-1 text-sm text-red-600">{inputError $name}</div>
+	</div>
+{/define}
+
 {define formSubmit, $name = 'send'}
 	<div class="mt-6">
 		{input $name class => 'w-full inline-flex justify-center items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg font-medium rounded-lg transition cursor-pointer'}
