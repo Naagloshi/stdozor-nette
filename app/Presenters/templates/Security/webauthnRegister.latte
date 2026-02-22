@@ -1,0 +1,87 @@
+{block title}{if $isPasskey}{_ 'messages.security.webauthn.add_passkey'}{else}{_ 'messages.security.webauthn.add_key'}{/if}{/block}
+
+{block content}
+<div class="bg-gray-50 min-h-screen">
+	<div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<nav class="flex mb-6" aria-label="Breadcrumb">
+				<ol class="inline-flex items-center space-x-1 md:space-x-3">
+					<li class="inline-flex items-center">
+						<a href="{link Security:default}" class="text-sm font-medium text-gray-300 hover:text-white transition">
+							{_ 'messages.security.profile.security_title'}
+						</a>
+					</li>
+					<li aria-current="page">
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<span class="ml-1 text-sm font-medium text-gray-400">
+								{if $isPasskey}{_ 'messages.security.webauthn.add_passkey'}{else}{_ 'messages.security.webauthn.add_key'}{/if}
+							</span>
+						</div>
+					</li>
+				</ol>
+			</nav>
+			<h1 class="text-3xl font-bold">{if $isPasskey}{_ 'messages.security.webauthn.add_passkey'}{else}{_ 'messages.security.webauthn.add_key'}{/if}</h1>
+		</div>
+	</div>
+
+	<div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-8">
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
+			 data-controller="webauthn-register"
+			 data-webauthn-register-options-url-value="{link webauthnRegisterOptions!}"
+			 data-webauthn-register-complete-url-value="{link webauthnRegisterComplete!}"
+			 data-webauthn-register-redirect-url-value="{link Security:default}"
+			 data-webauthn-register-is-passkey-value="{$isPasskey ? 'true' : 'false'}"
+			 data-webauthn-register-error-cancelled-value="{_ 'messages.security.webauthn.error_cancelled'}"
+			 data-webauthn-register-error-failed-value="{_ 'messages.security.webauthn.error_failed'}">
+
+			<div class="space-y-4">
+				<div>
+					<label for="keyName" class="block text-sm font-medium text-gray-700 mb-2">
+						{_ 'messages.security.webauthn.key_name'}
+					</label>
+					<input type="text"
+						   id="keyName"
+						   data-webauthn-register-target="name"
+						   placeholder="{_ 'messages.security.webauthn.key_name_placeholder'}"
+						   required
+						   class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+				</div>
+
+				<div data-webauthn-register-target="status" class="hidden text-center py-6">
+					<div class="animate-pulse">
+						<svg class="mx-auto h-16 w-16 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"/>
+						</svg>
+						<p class="mt-4 text-gray-600">{_ 'messages.security.webauthn.register_prompt'}</p>
+					</div>
+				</div>
+
+				<div data-webauthn-register-target="error" class="hidden bg-red-50 border border-red-200 text-red-800 rounded-lg p-4">
+				</div>
+
+				<div data-webauthn-register-target="success" class="hidden bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 text-center">
+					<svg class="mx-auto h-12 w-12 text-green-500 mb-2" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+					</svg>
+					<p>{_ 'messages.security.webauthn.added_success'}</p>
+				</div>
+
+				<div class="flex gap-3" data-webauthn-register-target="buttons">
+					<button type="button"
+							data-action="click->webauthn-register#register"
+							class="flex-1 inline-flex justify-center items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition">
+						{if $isPasskey}{_ 'messages.security.webauthn.add_passkey'}{else}{_ 'messages.security.webauthn.add_key'}{/if}
+					</button>
+					<a href="{link Security:default}"
+					   class="inline-flex justify-center items-center px-6 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+						{_ 'messages.action.cancel'}
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

@@ -165,14 +165,20 @@
 					<div>
 						<p class="text-sm text-gray-600">{_ 'messages.security.profile.security_subtitle'}</p>
 						<div class="mt-1 flex items-center gap-2">
-							<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-								{_ 'messages.security.2fa.not_configured'}
-							</span>
+							{if $userRow->totp_secret !== null && $userRow->totp_secret !== ''}
+								<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+									{_ 'messages.security.2fa.configured'}
+								</span>
+							{else}
+								<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+									{_ 'messages.security.2fa.not_configured'}
+								</span>
+							{/if}
 						</div>
 					</div>
-					<span class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-200 rounded-lg cursor-not-allowed">
+					<a href="{link Security:default}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 transition">
 						{_ 'messages.security.profile.manage_button'}
-					</span>
+					</a>
 				</div>
 			</div>
 		</div>

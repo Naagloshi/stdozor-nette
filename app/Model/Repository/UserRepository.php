@@ -87,4 +87,47 @@ final class UserRepository
 		$this->database->table('email_verification_token')->where('user_id', $userId)->delete();
 		$this->getTable()->where('id', $userId)->delete();
 	}
+
+	// ---- 2FA Methods ----
+
+	public function updateTotpSecret(int $userId, ?string $secret): void
+	{
+		$this->getTable()->where('id', $userId)->update([
+			'totp_secret' => $secret,
+		]);
+	}
+
+	/**
+	 * @param string[] $hashedCodes
+	 */
+	public function updateBackupCodes(int $userId, array $hashedCodes): void
+	{
+		$this->getTable()->where('id', $userId)->update([
+			'backup_codes' => json_encode($hashedCodes),
+		]);
+	}
+
+	public function incrementTrustedVersion(int $userId): void
+	{
+		$this->database->query('UPDATE `user` SET trusted_version = trusted_version + 1 WHERE id = ?', $userId);
+	}
+
+	/**
+	 * Check if a user has any form of 2FA enabled (TOTP or WebAuthn 2FA keys).
+	 */
+	public function has2FAEnabled(ActiveRow $user): bool
+	{
+		// TOTP enabled?
+		if ($user->totp_secret !== null && $user->totp_secret !== '') {
+			return true;
+		}
+
+		// WebAuthn 2FA keys?
+		$webauthnCount = $this->database->table('user_webauthn_credentials')
+			->where('user_id', $user->id)
+			->where('is_passkey', 0)
+			->count();
+
+		return $webauthnCount > 0;
+	}
 }

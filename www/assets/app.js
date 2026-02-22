@@ -7,6 +7,10 @@ import UploadController from './controllers/upload_controller.js';
 import GalleryController from './controllers/gallery_controller.js';
 import DropdownController from './controllers/dropdown_controller.js';
 import ConfirmController from './controllers/confirm_controller.js';
+import WebauthnRegisterController from './controllers/webauthn_register_controller.js';
+import WebauthnLoginController from './controllers/webauthn_login_controller.js';
+import Webauthn2faController from './controllers/webauthn_2fa_controller.js';
+import ClipboardController from './controllers/clipboard_controller.js';
 
 // Naja — Nette AJAX library (non-blocking import)
 import('naja').then(({ default: naja }) => {
@@ -23,3 +27,7 @@ app.register('upload', UploadController);
 app.register('gallery', GalleryController);
 app.register('dropdown', DropdownController);
 app.register('confirm', ConfirmController);
+app.register('webauthn-register', WebauthnRegisterController);
+app.register('webauthn-login', WebauthnLoginController);
+app.register('webauthn-2fa', Webauthn2faController);
+app.register('clipboard', ClipboardController);

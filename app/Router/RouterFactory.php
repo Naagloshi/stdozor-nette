@@ -26,6 +26,16 @@ final class RouterFactory
 		$router->addRoute('profil', 'Profile:default');
 		$router->addRoute('profil/upravit', 'Profile:edit');
 
+		// Security (2FA, WebAuthn, Passkeys)
+		$router->addRoute('profil/zabezpeceni', 'Security:default');
+		$router->addRoute('profil/zabezpeceni/totp', 'Security:totpSetup');
+		$router->addRoute('profil/zabezpeceni/webauthn/<type>', 'Security:webauthnRegister');
+		$router->addRoute('profil/zabezpeceni/zalozni-kody', 'Security:backupCodes');
+
+		// 2FA verification (during login)
+		$router->addRoute('dvoufaktor', 'Sign:twoFactor');
+		$router->addRoute('dvoufaktor/webauthn', 'Sign:twoFactorWebauthn');
+
 		// Projects
 		$router->addRoute('projekty', 'Project:default');
 		$router->addRoute('projekt/novy', 'Project:create');

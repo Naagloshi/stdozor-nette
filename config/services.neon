@@ -17,3 +17,16 @@ services:
 	- App\Model\Repository\AttachmentRepository
 	- App\Model\Service\AttachmentService(uploadDirectory: %wwwDir%/uploads)
 	- App\Controls\CategoryList\ICategoryListControlFactory
+	- App\Model\Service\TotpSetupService
+	- App\Model\Service\BackupCodeService
+	- App\Model\Repository\WebAuthnCredentialRepository
+	-
+		factory: App\Model\Service\WebAuthnService
+		arguments:
+			rpId: %webauthn.rpId%
+			rpName: %webauthn.rpName%
+			allowedOrigins: %webauthn.allowedOrigins%
+	-
+		factory: App\Model\Service\TrustedDeviceService
+		arguments:
+			secret: %trustedDevice.secret%

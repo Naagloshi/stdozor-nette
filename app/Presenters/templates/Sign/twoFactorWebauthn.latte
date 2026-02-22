@@ -1,0 +1,77 @@
+{block title}{_ 'messages.security.2fa.title'}{/block}
+
+{block content}
+<div class="py-12 px-4 sm:px-6 lg:px-8">
+	<div class="max-w-md mx-auto space-y-8">
+		<div class="bg-white rounded-lg shadow-lg p-8"
+			 data-controller="webauthn-2fa"
+			 data-webauthn-2fa-options-url-value="{link webauthn2faOptions!}"
+			 data-webauthn-2fa-verify-url-value="{link webauthn2faVerify!}"
+			 data-webauthn-2fa-touch-prompt-value="{_ 'messages.security.2fa.touch_key'}"
+			 data-webauthn-2fa-cancelled-message-value="{_ 'messages.security.2fa.cancelled_message'}"
+			 data-webauthn-2fa-error-message-value="{_ 'messages.security.2fa.webauthn_error'}">
+
+			<div class="text-center mb-8">
+				<div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-4">
+					<svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+					</svg>
+				</div>
+				<h1 class="text-2xl font-bold text-gray-900">{_ 'messages.security.2fa.title'}</h1>
+				<p class="text-gray-500 mt-2">{_ 'messages.security.2fa.use_security_key_prompt'}</p>
+			</div>
+
+			<div class="flex items-center mb-6">
+				<input type="checkbox"
+					   id="trusted"
+					   data-webauthn-2fa-target="trusted"
+					   class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500">
+				<label for="trusted" class="ml-2 text-sm text-gray-700">
+					{_ 'messages.security.2fa.trust_device'}
+				</label>
+			</div>
+
+			<div class="text-center py-4">
+				<div data-webauthn-2fa-target="status" class="text-gray-600">
+					<div class="animate-pulse flex flex-col items-center">
+						<svg class="w-10 h-10 text-blue-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+						</svg>
+						<p>{_ 'messages.security.2fa.touch_key'}</p>
+					</div>
+				</div>
+			</div>
+
+			<div data-webauthn-2fa-target="error" class="hidden mb-4 bg-red-50 border border-red-200 text-red-800 rounded-lg p-4">
+			</div>
+
+			<button type="button"
+					data-action="click->webauthn-2fa#authenticate"
+					data-webauthn-2fa-target="button"
+					class="w-full inline-flex justify-center items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg font-medium rounded-lg transition">
+				<svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+				</svg>
+				{_ 'messages.security.2fa.verify_key'}
+			</button>
+
+			<div class="mt-6 border-t border-gray-200 pt-6">
+				<p class="text-sm text-gray-500 text-center mb-3">{_ 'messages.security.2fa.or_use_totp'}</p>
+				<a href="{link Sign:twoFactor}"
+				   class="w-full inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+					<svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+					</svg>
+					{_ 'messages.security.2fa.use_totp'}
+				</a>
+			</div>
+
+			<div class="mt-6 text-center">
+				<a href="{link Sign:out}" class="text-sm text-gray-500 hover:text-gray-700">
+					{_ 'messages.nav.logout'}
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

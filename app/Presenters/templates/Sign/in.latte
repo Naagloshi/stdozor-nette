@@ -14,8 +14,7 @@
 				{include formSubmit}
 			{/form}
 
-			{* Passkey login — bude aktivováno ve Fázi 4 *}
-			{*
+			{* Passkey login *}
 			<div class="relative my-8">
 				<div class="absolute inset-0 flex items-center">
 					<div class="w-full border-t border-gray-200"></div>
@@ -24,7 +23,27 @@
 					<span class="px-2 bg-white text-gray-500">{_ 'messages.security.passkey.or_use_passkey'}</span>
 				</div>
 			</div>
-			*}
+
+			<div data-controller="webauthn-login"
+				 data-webauthn-login-options-url-value="{link passkeyOptions!}"
+				 data-webauthn-login-verify-url-value="{link passkeyLogin!}"
+				 data-webauthn-login-error-cancelled-value="{_ 'messages.security.passkey.error_cancelled'}"
+				 data-webauthn-login-error-failed-value="{_ 'messages.security.passkey.error_failed'}">
+				<button type="button"
+						data-action="click->webauthn-login#login"
+						data-webauthn-login-target="button"
+						class="w-full inline-flex justify-center items-center px-6 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium">
+					<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"/>
+					</svg>
+					{_ 'messages.security.passkey.login_button'}
+				</button>
+				<div data-webauthn-login-target="status" class="hidden text-center py-4 text-gray-600 animate-pulse">
+					<p>{_ 'messages.security.passkey.login_prompt'}</p>
+				</div>
+				<div data-webauthn-login-target="error" class="hidden mt-2 bg-red-50 border border-red-200 text-red-800 rounded-lg p-3 text-sm text-center">
+				</div>
+			</div>
 
 			<hr class="my-8 border-gray-200">
 

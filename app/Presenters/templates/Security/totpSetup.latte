@@ -1,0 +1,76 @@
+{block title}{_ 'messages.security.totp.setup_title'}{/block}
+
+{block content}
+<div class="bg-gray-50 min-h-screen">
+	<div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<nav class="flex mb-6" aria-label="Breadcrumb">
+				<ol class="inline-flex items-center space-x-1 md:space-x-3">
+					<li class="inline-flex items-center">
+						<a href="{link Security:default}" class="text-sm font-medium text-gray-300 hover:text-white transition">
+							{_ 'messages.security.profile.security_title'}
+						</a>
+					</li>
+					<li aria-current="page">
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<span class="ml-1 text-sm font-medium text-gray-400">{_ 'messages.security.totp.setup_title'}</span>
+						</div>
+					</li>
+				</ol>
+			</nav>
+			<h1 class="text-3xl font-bold">{_ 'messages.security.totp.setup_title'}</h1>
+		</div>
+	</div>
+
+	<div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-8">
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 space-y-6">
+			{* Step 1: QR Code *}
+			<div>
+				<h2 class="text-lg font-semibold text-gray-900 mb-2">1. {_ 'messages.security.totp.scan_qr'}</h2>
+				<div class="flex justify-center py-4">
+					<img src="{$qrCodeDataUri|nocheck}" alt="TOTP QR Code" class="rounded-lg border border-gray-200">
+				</div>
+			</div>
+
+			{* Manual secret entry *}
+			<div class="bg-gray-50 rounded-lg p-4">
+				<p class="text-sm text-gray-600 mb-1">{_ 'messages.security.totp.manual_entry'}</p>
+				<code class="text-sm font-mono bg-white px-3 py-1 rounded border border-gray-200 select-all break-all">{$secret}</code>
+			</div>
+
+			{* Step 2: Verify *}
+			<div>
+				<h2 class="text-lg font-semibold text-gray-900 mb-2">2. {_ 'messages.security.totp.enter_verification'}</h2>
+				<form method="post" action="{link totpEnable!}" class="space-y-4">
+					<div>
+						<input type="text"
+							   name="code"
+							   autocomplete="one-time-code"
+							   inputmode="numeric"
+							   pattern="[0-9][0-9][0-9][0-9][0-9][0-9]"
+							   maxlength="6"
+							   required
+							   autofocus
+							   class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-center text-2xl tracking-widest py-3"
+							   placeholder="000000">
+					</div>
+
+					<div class="flex gap-3">
+						<button type="submit"
+								class="flex-1 inline-flex justify-center items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition">
+							{_ 'messages.security.totp.verify_and_enable'}
+						</button>
+						<a href="{link Security:default}"
+						   class="inline-flex justify-center items-center px-6 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+							{_ 'messages.action.cancel'}
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

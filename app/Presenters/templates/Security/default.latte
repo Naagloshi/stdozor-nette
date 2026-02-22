@@ -1,0 +1,226 @@
+{block title}{_ 'messages.security.profile.security_title'}{/block}
+
+{block content}
+<div class="bg-gray-50">
+	{* Hero Section *}
+	<div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<nav class="flex mb-6" aria-label="Breadcrumb">
+				<ol class="inline-flex items-center space-x-1 md:space-x-3">
+					<li class="inline-flex items-center">
+						<a href="{link Homepage:default}" class="inline-flex items-center text-sm font-medium text-gray-300 hover:text-white transition">
+							<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+							</svg>
+							{_ 'messages.nav.home'}
+						</a>
+					</li>
+					<li>
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<a href="{link Profile:default}" class="ml-1 text-sm font-medium text-gray-300 hover:text-white transition">{_ 'messages.nav.profile'}</a>
+						</div>
+					</li>
+					<li aria-current="page">
+						<div class="flex items-center">
+							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+							</svg>
+							<span class="ml-1 text-sm font-medium text-gray-400">{_ 'messages.security.profile.security_title'}</span>
+						</div>
+					</li>
+				</ol>
+			</nav>
+
+			<div>
+				<h1 class="text-4xl font-bold mb-3">{_ 'messages.security.profile.security_title'}</h1>
+				<p class="text-gray-300 text-lg">{_ 'messages.security.profile.security_subtitle'}</p>
+			</div>
+		</div>
+	</div>
+
+	{* Main Content *}
+	<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+		{* ===== TOTP Section ===== *}
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+			<div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+				<h2 class="text-lg font-semibold text-gray-900 flex items-center">
+					<svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+					</svg>
+					{_ 'messages.security.totp.setup_title'}
+				</h2>
+			</div>
+			<div class="px-6 py-4">
+				{if $totpEnabled}
+					<div class="flex items-center justify-between">
+						<div class="flex items-center">
+							<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+								<svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+								</svg>
+								{_ 'messages.security.totp.enabled'}
+							</span>
+						</div>
+						<form method="post" action="{link totpDisable!}" class="inline"
+							  onsubmit="return confirm('{_ 'messages.security.totp.disable_confirm'}');">
+							<input type="password" name="password" placeholder="{_ 'messages.profile.form.current_password'}" required
+								   class="text-sm rounded-lg border-gray-300 shadow-sm mr-2 py-1.5">
+							<button type="submit" class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-700 bg-red-50 border border-red-300 rounded-lg hover:bg-red-100 transition">
+								{_ 'messages.security.totp.disable_button'}
+							</button>
+						</form>
+					</div>
+				{else}
+					<div class="flex items-center justify-between">
+						<span class="text-sm text-gray-500">{_ 'messages.security.totp.disabled'}</span>
+						<a href="{link Security:totpSetup}"
+						   class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 transition">
+							{_ 'messages.security.totp.setup_button'}
+						</a>
+					</div>
+				{/if}
+			</div>
+		</div>
+
+		{* ===== WebAuthn Security Keys Section ===== *}
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+			<div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+				<h2 class="text-lg font-semibold text-gray-900 flex items-center">
+					<svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+					</svg>
+					{_ 'messages.security.webauthn.title'}
+				</h2>
+			</div>
+			<div class="px-6 py-4">
+				{if count($keys2fa) > 0}
+					<div class="space-y-3 mb-4">
+						{foreach $keys2fa as $key}
+							<div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+								<div>
+									<p class="text-sm font-medium text-gray-900">{$key->name}</p>
+									<p class="text-xs text-gray-500">
+										{_ 'messages.security.webauthn.added'} {$key->created_at|date:'d.m.Y'}
+										{if $key->last_used_at}
+											&middot; {_ 'messages.security.webauthn.last_used'} {$key->last_used_at|date:'d.m.Y H:i'}
+										{/if}
+									</p>
+								</div>
+								<form method="post" action="{link webauthnDelete!, id: $key->id}"
+									  onsubmit="return confirm('{_ 'messages.security.webauthn.delete_confirm'}');">
+									<button type="submit" class="text-red-600 hover:text-red-800 text-sm">
+										{_ 'messages.action.delete'}
+									</button>
+								</form>
+							</div>
+						{/foreach}
+					</div>
+				{else}
+					<p class="text-sm text-gray-500 mb-4">{_ 'messages.security.webauthn.no_keys'}</p>
+				{/if}
+				<a href="{link Security:webauthnRegister, type: '2fa'}"
+				   class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 transition">
+					{_ 'messages.security.webauthn.add_key'}
+				</a>
+			</div>
+		</div>
+
+		{* ===== Passkeys Section ===== *}
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+			<div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+				<h2 class="text-lg font-semibold text-gray-900 flex items-center">
+					<svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"/>
+					</svg>
+					Passkeys
+				</h2>
+			</div>
+			<div class="px-6 py-4">
+				{if count($passkeys) > 0}
+					<div class="space-y-3 mb-4">
+						{foreach $passkeys as $key}
+							<div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+								<div>
+									<p class="text-sm font-medium text-gray-900">{$key->name}</p>
+									<p class="text-xs text-gray-500">
+										{_ 'messages.security.webauthn.added'} {$key->created_at|date:'d.m.Y'}
+										{if $key->last_used_at}
+											&middot; {_ 'messages.security.webauthn.last_used'} {$key->last_used_at|date:'d.m.Y H:i'}
+										{/if}
+									</p>
+								</div>
+								<form method="post" action="{link webauthnDelete!, id: $key->id}"
+									  onsubmit="return confirm('{_ 'messages.security.webauthn.delete_confirm'}');">
+									<button type="submit" class="text-red-600 hover:text-red-800 text-sm">
+										{_ 'messages.action.delete'}
+									</button>
+								</form>
+							</div>
+						{/foreach}
+					</div>
+				{else}
+					<p class="text-sm text-gray-500 mb-4">{_ 'messages.security.passkey.no_passkeys'}</p>
+				{/if}
+				<a href="{link Security:webauthnRegister, type: 'passkey'}"
+				   class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 transition">
+					{_ 'messages.security.webauthn.add_passkey'}
+				</a>
+			</div>
+		</div>
+
+		{* ===== Backup Codes Section ===== *}
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+			<div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+				<h2 class="text-lg font-semibold text-gray-900 flex items-center">
+					<svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+					</svg>
+					{_ 'messages.security.backup_codes.title'}
+				</h2>
+			</div>
+			<div class="px-6 py-4">
+				<div class="flex items-center justify-between">
+					<p class="text-sm text-gray-600">
+						{_ 'messages.security.backup_codes.remaining', ['count' => $backupCodesCount]}
+					</p>
+					<form method="post" action="{link backupCodesGenerate!}" class="inline">
+						<input type="password" name="password" placeholder="{_ 'messages.profile.form.current_password'}" required
+							   class="text-sm rounded-lg border-gray-300 shadow-sm mr-2 py-1.5">
+						<button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 transition">
+							{_ 'messages.security.backup_codes.generate'}
+						</button>
+					</form>
+				</div>
+				{if $backupCodesCount > 0}
+					<p class="text-xs text-gray-400 mt-2">{_ 'messages.security.backup_codes.regenerate_warning'}</p>
+				{/if}
+			</div>
+		</div>
+
+		{* ===== Trusted Devices Section ===== *}
+		<div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+			<div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+				<h2 class="text-lg font-semibold text-gray-900 flex items-center">
+					<svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+					</svg>
+					{_ 'messages.security.trusted_device.title'}
+				</h2>
+			</div>
+			<div class="px-6 py-4">
+				<p class="text-sm text-gray-600 mb-4">{_ 'messages.security.trusted_device.info'}</p>
+				<form method="post" action="{link trustedDevicesRevoke!}">
+					<button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-red-700 bg-red-50 border border-red-300 rounded-lg hover:bg-red-100 transition">
+						{_ 'messages.security.trusted_device.revoke_all'}
+					</button>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>
+{/block}
