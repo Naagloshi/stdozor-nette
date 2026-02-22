@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Model\Enum;
 
-
 enum CategoryStatus: string
 {
 	case Planned = 'planned';
 	case InProgress = 'in_progress';
 	case Completed = 'completed';
-
 
 	public function label(): string
 	{
@@ -21,7 +19,6 @@ enum CategoryStatus: string
 		};
 	}
 
-
 	public function badgeClass(): string
 	{
 		return match ($this) {
@@ -30,7 +27,6 @@ enum CategoryStatus: string
 			self::Completed => 'bg-gray-100 text-gray-800',
 		};
 	}
-
 
 	/**
 	 * Sort order for display (in_progress first, then planned, then completed).
@@ -44,7 +40,6 @@ enum CategoryStatus: string
 		};
 	}
 
-
 	/**
 	 * Whether this status can transition to the given target status.
 	 */
@@ -57,7 +52,6 @@ enum CategoryStatus: string
 		};
 	}
 
-
 	/**
 	 * @return array<string, string> for Nette Forms addSelect()
 	 */
@@ -67,6 +61,7 @@ enum CategoryStatus: string
 		foreach (self::cases() as $case) {
 			$options[$case->value] = $case->label();
 		}
+
 		return $options;
 	}
 }

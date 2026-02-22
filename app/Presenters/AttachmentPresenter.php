@@ -13,7 +13,6 @@ use App\Model\Service\AttachmentService;
 use Contributte\Translation\Translator;
 use Nette\Application\Responses\FileResponse;
 
-
 final class AttachmentPresenter extends BasePresenter
 {
 	public function __construct(
@@ -24,9 +23,7 @@ final class AttachmentPresenter extends BasePresenter
 		private ProjectRepository $projectRepository,
 		private ProjectMemberRepository $memberRepository,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	public function actionDownload(int $id): void
 	{

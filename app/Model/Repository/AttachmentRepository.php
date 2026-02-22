@@ -8,26 +8,21 @@ use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-
 final class AttachmentRepository
 {
 	public function __construct(
 		private Explorer $database,
-	) {
-	}
-
+	) {}
 
 	public function getTable(): Selection
 	{
 		return $this->database->table('attachment');
 	}
 
-
 	public function findById(int $id): ?ActiveRow
 	{
 		return $this->getTable()->get($id);
 	}
-
 
 	/**
 	 * @return ActiveRow[]
@@ -40,10 +35,11 @@ final class AttachmentRepository
 			->fetchAll();
 	}
 
-
 	/**
 	 * Batch load attachments for multiple items at once.
+	 *
 	 * @param int[] $itemIds
+	 *
 	 * @return array<int, ActiveRow[]> keyed by item_id
 	 */
 	public function findByItemIds(array $itemIds): array
@@ -65,7 +61,6 @@ final class AttachmentRepository
 		return $result;
 	}
 
-
 	public function countByItem(int $itemId): int
 	{
 		return $this->getTable()
@@ -73,18 +68,18 @@ final class AttachmentRepository
 			->count('*');
 	}
 
-
+	/**
+	 * @param array<string, mixed> $data
+	 */
 	public function insert(array $data): ActiveRow
 	{
 		return $this->getTable()->insert($data);
 	}
 
-
 	public function delete(int $id): void
 	{
 		$this->getTable()->where('id', $id)->delete();
 	}
-
 
 	public function deleteByItem(int $itemId): void
 	{

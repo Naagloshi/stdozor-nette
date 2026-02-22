@@ -15,14 +15,15 @@ use Contributte\Translation\Translator;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 
-
 final class MemberPresenter extends BasePresenter
 {
 	private ?ActiveRow $project = null;
-	private ?ActiveRow $membership = null;
-	private ?ActiveRow $targetMember = null;
-	private bool $isOwner = false;
 
+	private ?ActiveRow $membership = null;
+
+	private ?ActiveRow $targetMember = null;
+
+	private bool $isOwner = false;
 
 	public function __construct(
 		private ProjectRepository $projectRepository,
@@ -32,9 +33,7 @@ final class MemberPresenter extends BasePresenter
 		private CategoryPermissionRepository $categoryPermissionRepository,
 		private InvitationService $invitationService,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	// ---- Member list ----
 
@@ -59,7 +58,6 @@ final class MemberPresenter extends BasePresenter
 		$this->isOwner = in_array('owner', $roles, true);
 	}
 
-
 	public function renderDefault(int $projectId): void
 	{
 		$this->template->project = $this->project;
@@ -70,7 +68,6 @@ final class MemberPresenter extends BasePresenter
 			? $this->invitationRepository->findPendingByProject($projectId)
 			: [];
 	}
-
 
 	// ---- Invite ----
 
@@ -88,16 +85,14 @@ final class MemberPresenter extends BasePresenter
 		}
 	}
 
-
 	public function renderInvite(int $projectId): void
 	{
 		$this->template->project = $this->project;
 	}
 
-
 	protected function createComponentInviteForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addProtection();
 
 		$form->addEmail('email', $this->translator->translate('messages.project_member.form.email'))
@@ -127,7 +122,6 @@ final class MemberPresenter extends BasePresenter
 
 		return $form;
 	}
-
 
 	private function inviteFormSucceeded(Form $form, \stdClass $data): void
 	{
@@ -169,7 +163,6 @@ final class MemberPresenter extends BasePresenter
 		}
 	}
 
-
 	// ---- Change roles ----
 
 	public function actionChangeRoles(int $projectId, int $memberId): void
@@ -207,17 +200,15 @@ final class MemberPresenter extends BasePresenter
 		]);
 	}
 
-
 	public function renderChangeRoles(int $projectId, int $memberId): void
 	{
 		$this->template->project = $this->project;
 		$this->template->targetMember = $this->targetMember;
 	}
 
-
 	protected function createComponentChangeRolesForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addProtection();
 
 		$roleOptions = [];
@@ -247,7 +238,6 @@ final class MemberPresenter extends BasePresenter
 
 		return $form;
 	}
-
 
 	private function changeRolesFormSucceeded(Form $form, \stdClass $data): void
 	{
@@ -297,7 +287,6 @@ final class MemberPresenter extends BasePresenter
 		$this->redirect('default', $this->project->id);
 	}
 
-
 	// ---- Accept invitation ----
 
 	public function actionAccept(string $token): void
@@ -345,7 +334,6 @@ final class MemberPresenter extends BasePresenter
 		}
 	}
 
-
 	// ---- Signals ----
 
 	public function handleRemove(int $memberId): void
@@ -390,7 +378,6 @@ final class MemberPresenter extends BasePresenter
 		);
 		$this->redirect('default', $projectId);
 	}
-
 
 	public function handleCancelInvitation(int $invitationId): void
 	{

@@ -7,15 +7,12 @@ namespace App\Model\Service;
 use App\Model\Repository\CategoryRepository;
 use Nette\Database\Explorer;
 
-
 final class CategoryAmountCalculator
 {
 	public function __construct(
 		private CategoryRepository $categoryRepository,
 		private Explorer $database,
-	) {
-	}
-
+	) {}
 
 	/**
 	 * Recalculate actual_amount for a category and propagate up to parents/project.
@@ -45,7 +42,6 @@ final class CategoryAmountCalculator
 			$this->recalculateProjectTotal($category->project_id);
 		}
 	}
-
 
 	/**
 	 * Recalculate project.total_amount_cents from SUM of root categories' actual_amount.

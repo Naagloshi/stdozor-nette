@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Model\Enum;
 
-
 enum ProjectStatus: string
 {
 	case Planning = 'planning';
@@ -12,7 +11,6 @@ enum ProjectStatus: string
 	case Paused = 'paused';
 	case Completed = 'completed';
 	case Cancelled = 'cancelled';
-
 
 	public function label(): string
 	{
@@ -25,7 +23,6 @@ enum ProjectStatus: string
 		};
 	}
 
-
 	public function badgeClass(): string
 	{
 		return match ($this) {
@@ -36,7 +33,6 @@ enum ProjectStatus: string
 			self::Cancelled => 'bg-red-100 text-red-800',
 		};
 	}
-
 
 	/**
 	 * Sort order for project listing (planning first, cancelled last).
@@ -52,7 +48,6 @@ enum ProjectStatus: string
 		};
 	}
 
-
 	/**
 	 * @return array<string, string> for Nette Forms addSelect()
 	 */
@@ -62,6 +57,7 @@ enum ProjectStatus: string
 		foreach (self::cases() as $case) {
 			$options[$case->value] = $case->label();
 		}
+
 		return $options;
 	}
 }

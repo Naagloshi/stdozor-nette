@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Model\Enum;
 
-
 enum ProjectRole: string
 {
 	case Owner = 'owner';
 	case Supervisor = 'supervisor';
 	case Contractor = 'contractor';
 	case Investor = 'investor';
-
 
 	public function label(): string
 	{

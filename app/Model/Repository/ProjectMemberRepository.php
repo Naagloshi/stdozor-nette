@@ -8,20 +8,16 @@ use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-
 final class ProjectMemberRepository
 {
 	public function __construct(
 		private Explorer $database,
-	) {
-	}
-
+	) {}
 
 	public function getTable(): Selection
 	{
 		return $this->database->table('project_member');
 	}
-
 
 	public function findByProjectAndUser(int $projectId, int $userId): ?ActiveRow
 	{
@@ -30,7 +26,6 @@ final class ProjectMemberRepository
 			->where('user_id', $userId)
 			->fetch() ?: null;
 	}
-
 
 	/**
 	 * Create project owner membership.
@@ -47,7 +42,6 @@ final class ProjectMemberRepository
 		]);
 	}
 
-
 	/**
 	 * Check if user is owner of the project.
 	 */
@@ -59,12 +53,13 @@ final class ProjectMemberRepository
 		}
 
 		$roles = json_decode($member->roles, true) ?: [];
+
 		return in_array('owner', $roles, true);
 	}
 
-
 	/**
 	 * Get decoded roles for a member.
+	 *
 	 * @return string[]
 	 */
 	public function getRoles(ActiveRow $member): array
@@ -72,15 +67,14 @@ final class ProjectMemberRepository
 		return json_decode($member->roles, true) ?: [];
 	}
 
-
 	public function findById(int $id): ?ActiveRow
 	{
 		return $this->getTable()->get($id);
 	}
 
-
 	/**
 	 * Find all members of a project with user email.
+	 *
 	 * @return ActiveRow[]
 	 */
 	public function findByProject(int $projectId): array
@@ -90,7 +84,6 @@ final class ProjectMemberRepository
 			->order('invited_at ASC')
 			->fetchAll();
 	}
-
 
 	/**
 	 * Count members with owner role in a project.
@@ -104,19 +97,20 @@ final class ProjectMemberRepository
 		)->fetch()->cnt;
 	}
 
-
 	/**
 	 * Check if user is the permanent owner (project.owner_id).
 	 */
 	public function isPermanentOwner(int $projectId, int $userId): bool
 	{
 		$project = $this->database->table('project')->get($projectId);
+
 		return $project && $project->owner_id === $userId;
 	}
 
-
 	/**
 	 * Merge new roles into existing member's roles.
+	 *
+	 * @param string[] $newRoles
 	 */
 	public function addRoles(int $memberId, array $newRoles): void
 	{
@@ -133,9 +127,10 @@ final class ProjectMemberRepository
 		]);
 	}
 
-
 	/**
 	 * Replace all roles for a member.
+	 *
+	 * @param string[] $roles
 	 */
 	public function updateRoles(int $memberId, array $roles): void
 	{
@@ -143,7 +138,6 @@ final class ProjectMemberRepository
 			'roles' => json_encode(array_values($roles)),
 		]);
 	}
-
 
 	/**
 	 * Update global category access flag.
@@ -155,9 +149,10 @@ final class ProjectMemberRepository
 		]);
 	}
 
-
 	/**
 	 * Create a new member from invitation.
+	 *
+	 * @param string[] $roles
 	 */
 	public function createMember(
 		int $projectId,
@@ -176,7 +171,6 @@ final class ProjectMemberRepository
 			'accepted_at' => new \DateTime(),
 		]);
 	}
-
 
 	public function delete(int $id): void
 	{

@@ -8,9 +8,9 @@
 declare(strict_types=1);
 
 use App\Model\Repository\UserRepository;
+use Nette\Application\Request as AppRequest;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\Responses\TextResponse;
-use Nette\Application\Request as AppRequest;
 use Nette\Database\Explorer;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
@@ -28,7 +28,6 @@ $userRepo = $container->getByType(UserRepository::class);
 $passwords = $container->getByType(Passwords::class);
 /** @var Explorer $db */
 $db = $container->getByType(Explorer::class);
-
 
 /**
  * Run a Sign presenter action.
@@ -53,12 +52,11 @@ function runSign(
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
 
-
 $loggedInIdentity = new SimpleIdentity(1, ['ROLE_USER'], ['email' => 'x@x.cz', 'displayName' => 'x']);
-
 
 // === Login page ===
 
@@ -72,13 +70,11 @@ test('login page renders for unauthenticated user', function () use ($presenterF
 	Assert::contains('name="password"', $html);
 });
 
-
 test('login page redirects authenticated user', function () use ($presenterFactory, $loggedInIdentity) {
 	$response = runSign($presenterFactory, 'in', [], $loggedInIdentity);
 
 	Assert::type(RedirectResponse::class, $response);
 });
-
 
 // === Registration page ===
 
@@ -93,13 +89,11 @@ test('registration page renders for unauthenticated user', function () use ($pre
 	Assert::contains('name="agreeTerms"', $html);
 });
 
-
 test('registration page redirects authenticated user', function () use ($presenterFactory, $loggedInIdentity) {
 	$response = runSign($presenterFactory, 'up', [], $loggedInIdentity);
 
 	Assert::type(RedirectResponse::class, $response);
 });
-
 
 // === Forgot password page ===
 
@@ -112,13 +106,11 @@ test('forgot password page renders for unauthenticated user', function () use ($
 	Assert::contains('name="email"', $html);
 });
 
-
 test('forgot password page redirects authenticated user', function () use ($presenterFactory, $loggedInIdentity) {
 	$response = runSign($presenterFactory, 'forgotPassword', [], $loggedInIdentity);
 
 	Assert::type(RedirectResponse::class, $response);
 });
-
 
 // === Check email page ===
 
@@ -129,7 +121,6 @@ test('check email page renders', function () use ($presenterFactory) {
 	$html = (string) $response->getSource();
 	Assert::contains('checkEmail', strtolower($html) . 'checkEmail'); // page rendered
 });
-
 
 // === Resend verification page ===
 
@@ -142,13 +133,11 @@ test('resend verification page renders for unauthenticated user', function () us
 	Assert::contains('name="email"', $html);
 });
 
-
 test('resend verification page redirects authenticated user', function () use ($presenterFactory, $loggedInIdentity) {
 	$response = runSign($presenterFactory, 'resendVerification', [], $loggedInIdentity);
 
 	Assert::type(RedirectResponse::class, $response);
 });
-
 
 // === Logout ===
 
@@ -158,7 +147,6 @@ test('logout redirects to homepage', function () use ($presenterFactory, $logged
 	Assert::type(RedirectResponse::class, $response);
 });
 
-
 // === Reset password ===
 
 test('reset password without token redirects', function () use ($presenterFactory) {
@@ -167,7 +155,6 @@ test('reset password without token redirects', function () use ($presenterFactor
 	Assert::type(RedirectResponse::class, $response);
 });
 
-
 // === Email verification ===
 
 test('email verification with invalid token redirects with error', function () use ($presenterFactory) {
@@ -175,7 +162,6 @@ test('email verification with invalid token redirects with error', function () u
 
 	Assert::type(RedirectResponse::class, $response);
 });
-
 
 // === Form component structure tests ===
 
@@ -190,7 +176,6 @@ test('loginForm has email and password fields', function () use ($presenterFacto
 	Assert::true(isset($form['send']));
 });
 
-
 test('registrationForm has email, password, and terms fields', function () use ($presenterFactory) {
 	$presenter = $presenterFactory->createPresenter('Sign');
 	$presenter->autoCanonicalize = false;
@@ -202,7 +187,6 @@ test('registrationForm has email, password, and terms fields', function () use (
 	Assert::true(isset($form['agreeTerms']));
 	Assert::true(isset($form['send']));
 });
-
 
 // === Email verification flow (integration) ===
 

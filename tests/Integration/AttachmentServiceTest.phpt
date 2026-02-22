@@ -115,7 +115,6 @@ register_shutdown_function(function () use ($db, $userId, $projectId, $testTempD
 	}
 });
 
-
 /**
  * Helper: create a temporary file for FileUpload testing.
  */
@@ -132,7 +131,6 @@ function createTempFile(string $dir, string $name, string $content, ?string $mim
 		'error' => UPLOAD_ERR_OK,
 	]);
 }
-
 
 /**
  * Helper: create a minimal valid JPEG file.
@@ -153,7 +151,6 @@ function createTestJpeg(string $dir, string $name = 'test.jpg', int $width = 100
 	]);
 }
 
-
 // === Validation tests ===
 
 test('upload rejects file exceeding max size', function () use ($attachmentService, $testTempDir, $itemId, $categoryId, $projectId, $userId) {
@@ -171,7 +168,6 @@ test('upload rejects file exceeding max size', function () use ($attachmentServi
 	@unlink($testTempDir . '/big.pdf');
 });
 
-
 test('upload rejects invalid MIME type', function () use ($attachmentService, $testTempDir, $itemId, $categoryId, $projectId, $userId) {
 	$file = createTempFile($testTempDir, 'script.sh', '#!/bin/bash\necho hello');
 
@@ -181,7 +177,6 @@ test('upload rejects invalid MIME type', function () use ($attachmentService, $t
 		'Unsupported file type.',
 	);
 });
-
 
 test('upload rejects when max attachments reached', function () use ($attachmentService, $attachmentRepo, $db, $testTempDir, $itemId, $categoryId, $projectId, $userId) {
 	// Insert 10 fake attachment records to simulate max count
@@ -209,7 +204,6 @@ test('upload rejects when max attachments reached', function () use ($attachment
 	$db->table('attachment')->where('item_id', $itemId)->delete();
 });
 
-
 test('upload rejects failed upload (error code)', function () use ($attachmentService, $itemId, $categoryId, $projectId, $userId) {
 	$file = new FileUpload([
 		'name' => 'test.jpg',
@@ -225,7 +219,6 @@ test('upload rejects failed upload (error code)', function () use ($attachmentSe
 		'Upload failed.',
 	);
 });
-
 
 // === Successful upload tests ===
 
@@ -255,7 +248,6 @@ test('successful JPEG upload creates DB record and file', function () use ($atta
 	$attachmentService->deleteAttachment($attachment);
 });
 
-
 test('successful PDF upload creates DB record without image dimensions', function () use ($attachmentService, $testTempDir, $itemId, $categoryId, $projectId, $userId) {
 	$file = createTempFile($testTempDir, 'document.pdf', '%PDF-1.4 fake pdf content');
 
@@ -271,7 +263,6 @@ test('successful PDF upload creates DB record without image dimensions', functio
 	$attachmentService->deleteAttachment($attachment);
 });
 
-
 test('large image gets resized to max dimensions', function () use ($attachmentService, $testTempDir, $itemId, $categoryId, $projectId, $userId) {
 	// Create oversized image (3000x2000)
 	$file = createTestJpeg($testTempDir, 'large.jpg', 3000, 2000);
@@ -285,7 +276,6 @@ test('large image gets resized to max dimensions', function () use ($attachmentS
 	// Clean up
 	$attachmentService->deleteAttachment($attachment);
 });
-
 
 // === Delete tests ===
 
@@ -306,7 +296,6 @@ test('deleteAttachment removes file and DB record', function () use ($attachment
 	$found = $attachmentRepo->findById($attachmentId);
 	Assert::null($found);
 });
-
 
 test('deleteAllForItem removes all attachments for item', function () use ($attachmentService, $attachmentRepo, $testTempDir, $itemId, $categoryId, $projectId, $userId) {
 	// Upload 3 files
@@ -335,7 +324,6 @@ test('deleteAllForItem removes all attachments for item', function () use ($atta
 	Assert::same(0, $attachmentRepo->countByItem($itemId));
 });
 
-
 // === Helper method tests ===
 
 test('isImage returns true for image MIME types', function () use ($attachmentService) {
@@ -346,7 +334,6 @@ test('isImage returns true for image MIME types', function () use ($attachmentSe
 	Assert::false($attachmentService->isImage('application/pdf'));
 	Assert::false($attachmentService->isImage('application/zip'));
 });
-
 
 test('humanReadableSize formats sizes correctly', function () {
 	Assert::same('0 B', AttachmentService::humanReadableSize(0));

@@ -10,31 +10,27 @@ use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-
 final class ItemRepository
 {
 	public function __construct(
 		private Explorer $database,
 		private CategoryAmountCalculator $amountCalculator,
 		private AttachmentService $attachmentService,
-	) {
-	}
-
+	) {}
 
 	public function getTable(): Selection
 	{
 		return $this->database->table('item');
 	}
 
-
 	public function findById(int $id): ?ActiveRow
 	{
 		return $this->getTable()->get($id);
 	}
 
-
 	/**
 	 * Find all items for a category, sorted by item_date DESC, id DESC.
+	 *
 	 * @return ActiveRow[]
 	 */
 	public function findByCategory(int $categoryId): array
@@ -45,10 +41,11 @@ final class ItemRepository
 			->fetchAll();
 	}
 
-
 	/**
 	 * Batch load items for multiple categories at once.
+	 *
 	 * @param int[] $categoryIds
+	 *
 	 * @return array<int, ActiveRow[]> keyed by category_id
 	 */
 	public function findByCategoryIds(array $categoryIds): array
@@ -70,20 +67,24 @@ final class ItemRepository
 		return $result;
 	}
 
-
 	/**
 	 * Insert with automatic amount recalculation.
+	 *
+	 * @param array<string, mixed> $data
 	 */
 	public function insert(array $data): ActiveRow
 	{
 		$row = $this->getTable()->insert($data);
+		assert($row instanceof ActiveRow);
 		$this->amountCalculator->recalculate($row->category_id);
+
 		return $row;
 	}
 
-
 	/**
 	 * Update with automatic amount recalculation.
+	 *
+	 * @param array<string, mixed> $data
 	 */
 	public function update(int $id, array $data): void
 	{
@@ -93,7 +94,6 @@ final class ItemRepository
 			$this->amountCalculator->recalculate($item->category_id);
 		}
 	}
-
 
 	/**
 	 * Delete with attachment cleanup and automatic amount recalculation.
@@ -113,7 +113,6 @@ final class ItemRepository
 		$this->getTable()->where('id', $id)->delete();
 		$this->amountCalculator->recalculate($categoryId);
 	}
-
 
 	public function countByCategory(int $categoryId): int
 	{

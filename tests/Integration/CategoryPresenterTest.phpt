@@ -11,9 +11,9 @@ use App\Model\Repository\CategoryRepository;
 use App\Model\Repository\ProjectMemberRepository;
 use App\Model\Repository\ProjectRepository;
 use App\Model\Repository\UserRepository;
+use Nette\Application\Request as AppRequest;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\Responses\TextResponse;
-use Nette\Application\Request as AppRequest;
 use Nette\Database\Explorer;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
@@ -94,7 +94,6 @@ register_shutdown_function(function () use ($db, $ownerId, $otherId, $projectId)
 	$db->table('user')->where('id', $otherId)->delete();
 });
 
-
 /**
  * Run Category presenter action without auth.
  */
@@ -109,9 +108,9 @@ function runCategory(string $action, array $params = []): Nette\Application\Resp
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 /**
  * Run Category presenter action as logged-in user.
@@ -133,9 +132,9 @@ function runCategoryAs(int $userId, string $email, string $action, array $params
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 // === Auth guard tests ===
 
@@ -146,14 +145,12 @@ test('actionCreate redirects to login when not authenticated', function () use (
 	Assert::contains('prihlaseni', $response->getUrl());
 });
 
-
 test('actionEdit redirects to login when not authenticated', function () use ($categoryId) {
 	$response = runCategory('edit', ['id' => $categoryId]);
 
 	Assert::type(RedirectResponse::class, $response);
 	Assert::contains('prihlaseni', $response->getUrl());
 });
-
 
 // === Access control tests ===
 
@@ -166,7 +163,6 @@ test('actionCreate returns 403 for non-owner', function () use ($otherId, $other
 	);
 });
 
-
 test('actionEdit returns 403 for non-owner', function () use ($otherId, $otherEmail, $categoryId) {
 	Assert::exception(
 		fn() => runCategoryAs($otherId, $otherEmail, 'edit', ['id' => $categoryId]),
@@ -175,7 +171,6 @@ test('actionEdit returns 403 for non-owner', function () use ($otherId, $otherEm
 		403,
 	);
 });
-
 
 // === 404 tests ===
 
@@ -188,7 +183,6 @@ test('actionEdit returns 404 for nonexistent category', function () use ($ownerI
 	);
 });
 
-
 test('actionCreate returns 404 for nonexistent project', function () use ($ownerId, $ownerEmail) {
 	Assert::exception(
 		fn() => runCategoryAs($ownerId, $ownerEmail, 'create', ['projectId' => 999999]),
@@ -197,7 +191,6 @@ test('actionCreate returns 404 for nonexistent project', function () use ($owner
 		404,
 	);
 });
-
 
 // === Rendering tests ===
 
@@ -211,7 +204,6 @@ test('actionCreate renders form for owner', function () use ($ownerId, $ownerEma
 	Assert::contains('name="status"', $html);
 });
 
-
 test('actionCreate with parentId renders form', function () use ($ownerId, $ownerEmail, $projectId, $categoryId) {
 	$response = runCategoryAs($ownerId, $ownerEmail, 'create', ['projectId' => $projectId, 'parentId' => $categoryId]);
 
@@ -220,7 +212,6 @@ test('actionCreate with parentId renders form', function () use ($ownerId, $owne
 	Assert::contains('name="name"', $html);
 	Assert::contains('Test Category', $html); // parent category name in breadcrumb
 });
-
 
 test('actionEdit renders form with defaults for owner', function () use ($ownerId, $ownerEmail, $categoryId) {
 	$response = runCategoryAs($ownerId, $ownerEmail, 'edit', ['id' => $categoryId]);
@@ -231,7 +222,6 @@ test('actionEdit renders form with defaults for owner', function () use ($ownerI
 	Assert::contains('value="Test Category"', $html);
 });
 
-
 // === Form structure tests ===
 
 test('categoryForm has correct structure', function () use ($presenterFactory, $ownerId, $ownerEmail, $projectId) {
@@ -239,7 +229,9 @@ test('categoryForm has correct structure', function () use ($presenterFactory, $
 	$presenter->autoCanonicalize = false;
 
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Category', 'GET', ['action' => 'create', 'projectId' => $projectId]);
@@ -256,7 +248,6 @@ test('categoryForm has correct structure', function () use ($presenterFactory, $
 	Assert::true(isset($form['actualAmount']));
 	Assert::true(isset($form['send']));
 });
-
 
 // === Signal handler tests moved to ProjectPresenterTest.phpt ===
 // (delete, reorder, changeStatus are now signals on CategoryListControl component)

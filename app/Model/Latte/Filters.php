@@ -7,7 +7,6 @@ namespace App\Model\Latte;
 use App\Model\Enum\CategoryStatus;
 use App\Model\Enum\ProjectStatus;
 
-
 final class Filters
 {
 	/**
@@ -23,7 +22,6 @@ final class Filters
 		return number_format($cents / 100, 2, ',', "\u{00a0}") . "\u{00a0}" . $currency;
 	}
 
-
 	/**
 	 * Format amount (already in CZK, not cents) to human-readable string.
 	 * Example: 60001.02, 'CZK' → '60 001,02 CZK'
@@ -37,16 +35,15 @@ final class Filters
 		return number_format($amount, 2, ',', "\u{00a0}") . "\u{00a0}" . $currency;
 	}
 
-
 	/**
 	 * Get Tailwind badge classes for project status.
 	 */
 	public static function statusBadgeClass(string $status): string
 	{
 		$enum = ProjectStatus::tryFrom($status);
+
 		return $enum?->badgeClass() ?? 'bg-gray-100 text-gray-800';
 	}
-
 
 	/**
 	 * Get translated label for project status.
@@ -54,9 +51,9 @@ final class Filters
 	public static function statusLabel(string $status): string
 	{
 		$enum = ProjectStatus::tryFrom($status);
+
 		return $enum?->label() ?? $status;
 	}
-
 
 	/**
 	 * Get Tailwind badge classes for category status.
@@ -64,9 +61,9 @@ final class Filters
 	public static function categoryStatusBadgeClass(string $status): string
 	{
 		$enum = CategoryStatus::tryFrom($status);
+
 		return $enum?->badgeClass() ?? 'bg-gray-100 text-gray-800';
 	}
-
 
 	/**
 	 * Get translated label for category status.
@@ -74,9 +71,9 @@ final class Filters
 	public static function categoryStatusLabel(string $status): string
 	{
 		$enum = CategoryStatus::tryFrom($status);
+
 		return $enum?->label() ?? $status;
 	}
-
 
 	/**
 	 * Format decimal amount (from DB) to human-readable string.
@@ -90,7 +87,6 @@ final class Filters
 
 		return number_format((float) $amount, 2, ',', "\u{00a0}") . "\u{00a0}" . $currency;
 	}
-
 
 	/**
 	 * Format file size in bytes to human-readable string.

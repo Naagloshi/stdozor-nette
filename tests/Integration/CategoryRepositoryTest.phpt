@@ -63,7 +63,6 @@ register_shutdown_function(function () use ($db, $userId, $projectId, &$category
 	$db->table('user')->where('id', $userId)->delete();
 });
 
-
 test('insert creates category', function () use ($catRepo, $projectId, &$categoryIds) {
 	$cat = $catRepo->insert([
 		'name' => 'Základy',
@@ -82,7 +81,6 @@ test('insert creates category', function () use ($catRepo, $projectId, &$categor
 	Assert::same($projectId, $cat->project_id);
 });
 
-
 test('findById returns category', function () use ($catRepo, &$categoryIds) {
 	$cat = $catRepo->findById($categoryIds['root1']);
 
@@ -91,11 +89,9 @@ test('findById returns category', function () use ($catRepo, &$categoryIds) {
 	Assert::same('Zakládání stavby', $cat->description);
 });
 
-
 test('findById returns null for nonexistent id', function () use ($catRepo) {
 	Assert::null($catRepo->findById(999999));
 });
-
 
 test('update changes category fields', function () use ($catRepo, &$categoryIds) {
 	$catRepo->update($categoryIds['root1'], [
@@ -108,7 +104,6 @@ test('update changes category fields', function () use ($catRepo, &$categoryIds)
 	Assert::same('Základy - upraveno', $cat->name);
 	Assert::equal(150000.0, (float) $cat->estimated_amount);
 });
-
 
 test('insert child category', function () use ($catRepo, $projectId, &$categoryIds) {
 	$child = $catRepo->insert([
@@ -123,7 +118,6 @@ test('insert child category', function () use ($catRepo, $projectId, &$categoryI
 	$categoryIds['child1'] = $child->id;
 	Assert::same($categoryIds['root1'], $child->parent_id);
 });
-
 
 test('insert second root category', function () use ($catRepo, $projectId, &$categoryIds) {
 	$cat = $catRepo->insert([
@@ -140,7 +134,6 @@ test('insert second root category', function () use ($catRepo, $projectId, &$cat
 	Assert::same('in_progress', $cat->status);
 });
 
-
 test('findByProject returns all categories sorted', function () use ($catRepo, $projectId) {
 	$categories = $catRepo->findByProject($projectId);
 
@@ -153,7 +146,6 @@ test('findByProject returns all categories sorted', function () use ($catRepo, $
 	Assert::true($inProgressIdx < $plannedIdx, 'in_progress categories should come before planned');
 });
 
-
 test('findRootsByProject returns only root categories', function () use ($catRepo, $projectId) {
 	$roots = $catRepo->findRootsByProject($projectId);
 
@@ -164,7 +156,6 @@ test('findRootsByProject returns only root categories', function () use ($catRep
 	Assert::true(count($roots) >= 2);
 });
 
-
 test('findChildren returns direct children', function () use ($catRepo, &$categoryIds) {
 	$children = $catRepo->findChildren($categoryIds['root1']);
 
@@ -173,12 +164,10 @@ test('findChildren returns direct children', function () use ($catRepo, &$catego
 	Assert::same($categoryIds['root1'], $children[0]->parent_id);
 });
 
-
 test('findChildren returns empty for leaf category', function () use ($catRepo, &$categoryIds) {
 	$children = $catRepo->findChildren($categoryIds['child1']);
 	Assert::count(0, $children);
 });
-
 
 test('buildTree creates correct hierarchy', function () use ($catRepo, $projectId) {
 	$categories = $catRepo->findByProject($projectId);
@@ -203,31 +192,26 @@ test('buildTree creates correct hierarchy', function () use ($catRepo, $projectI
 	Assert::same('Výkopy', $rootWithChild['children'][0]['category']->name);
 });
 
-
 test('getNextDisplayOrder returns correct next value', function () use ($catRepo, $projectId) {
 	$nextOrder = $catRepo->getNextDisplayOrder($projectId, null, 'planned');
 	Assert::type('int', $nextOrder);
 	Assert::true($nextOrder >= 0);
 });
 
-
 test('countByProject returns correct count', function () use ($catRepo, $projectId) {
 	$count = $catRepo->countByProject($projectId);
 	Assert::true($count >= 3);
 });
-
 
 test('sumItemsAmount returns zero when no items exist', function () use ($catRepo, &$categoryIds) {
 	$sum = $catRepo->sumItemsAmount($categoryIds['root1']);
 	Assert::same('0', $sum);
 });
 
-
 test('sumSubcategoriesAmount returns zero for leaf', function () use ($catRepo, &$categoryIds) {
 	$sum = $catRepo->sumSubcategoriesAmount($categoryIds['child1']);
 	Assert::same('0', $sum);
 });
-
 
 test('swapOrder swaps display orders between neighbors', function () use ($catRepo, $projectId, &$categoryIds) {
 	// Create two planned root categories with sequential display_orders
@@ -260,7 +244,6 @@ test('swapOrder swaps display orders between neighbors', function () use ($catRe
 	Assert::same(10, $b->display_order);
 });
 
-
 test('swapOrder returns false at boundary', function () use ($catRepo, &$categoryIds) {
 	// Try to move the first item up — should fail
 	$cat = $catRepo->findById($categoryIds['swapB']); // now has display_order 10
@@ -268,7 +251,6 @@ test('swapOrder returns false at boundary', function () use ($catRepo, &$categor
 	// It might or might not swap depending on other categories' display_orders
 	Assert::type('bool', $swapped);
 });
-
 
 test('deleteRecursive deletes category and children', function () use ($catRepo, $projectId) {
 	// Create parent + child for deletion test

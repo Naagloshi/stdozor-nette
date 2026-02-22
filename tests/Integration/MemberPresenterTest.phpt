@@ -13,9 +13,9 @@ use App\Model\Repository\ProjectMemberRepository;
 use App\Model\Repository\ProjectRepository;
 use App\Model\Repository\UserRepository;
 use App\Model\Service\InvitationService;
+use Nette\Application\Request as AppRequest;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\Responses\TextResponse;
-use Nette\Application\Request as AppRequest;
 use Nette\Database\Explorer;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
@@ -111,7 +111,6 @@ register_shutdown_function(function () use ($db, $ownerId, $otherId, $thirdId, $
 	}
 });
 
-
 /**
  * Run Member presenter action without auth.
  */
@@ -126,9 +125,9 @@ function runMember(string $action, array $params = []): Nette\Application\Respon
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 /**
  * Run Member presenter action as logged-in user.
@@ -150,9 +149,9 @@ function runMemberAs(int $userId, string $email, string $action, array $params =
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 // === Auth guard tests ===
 
@@ -163,7 +162,6 @@ test('actionDefault redirects to login when not authenticated', function () use 
 	Assert::contains('prihlaseni', $response->getUrl());
 });
 
-
 test('actionInvite redirects to login when not authenticated', function () use ($projectId) {
 	$response = runMember('invite', ['projectId' => $projectId]);
 
@@ -171,14 +169,12 @@ test('actionInvite redirects to login when not authenticated', function () use (
 	Assert::contains('prihlaseni', $response->getUrl());
 });
 
-
 test('actionChangeRoles redirects to login when not authenticated', function () use ($projectId) {
 	$response = runMember('changeRoles', ['projectId' => $projectId, 'memberId' => 1]);
 
 	Assert::type(RedirectResponse::class, $response);
 	Assert::contains('prihlaseni', $response->getUrl());
 });
-
 
 // === Access control tests ===
 
@@ -190,7 +186,6 @@ test('actionDefault renders for project member', function () use ($ownerId, $own
 	Assert::contains('Member Test Projekt', $html);
 });
 
-
 test('actionDefault returns 403 for non-member', function () use ($otherId, $otherEmail, $projectId) {
 	Assert::exception(
 		fn() => runMemberAs($otherId, $otherEmail, 'default', ['projectId' => $projectId]),
@@ -199,7 +194,6 @@ test('actionDefault returns 403 for non-member', function () use ($otherId, $oth
 		403,
 	);
 });
-
 
 test('actionInvite returns 403 for non-owner member', function () use ($otherId, $otherEmail, $projectId, $db, $memberRepo) {
 	// Add other as viewer
@@ -222,7 +216,6 @@ test('actionInvite returns 403 for non-owner member', function () use ($otherId,
 	$memberRepo->findByProjectAndUser($projectId, $otherId)?->delete();
 });
 
-
 // === Rendering tests ===
 
 test('actionDefault renders member list with owner data', function () use ($ownerId, $ownerEmail, $projectId) {
@@ -233,7 +226,6 @@ test('actionDefault renders member list with owner data', function () use ($owne
 	Assert::contains($ownerEmail, $html);
 });
 
-
 test('actionInvite renders invite form for owner', function () use ($ownerId, $ownerEmail, $projectId) {
 	$response = runMemberAs($ownerId, $ownerEmail, 'invite', ['projectId' => $projectId]);
 
@@ -242,7 +234,6 @@ test('actionInvite renders invite form for owner', function () use ($ownerId, $o
 	Assert::contains('name="email"', $html);
 });
 
-
 // === Form structure tests ===
 
 test('inviteForm has correct fields', function () use ($presenterFactory, $ownerId, $ownerEmail, $projectId) {
@@ -250,7 +241,9 @@ test('inviteForm has correct fields', function () use ($presenterFactory, $owner
 	$presenter->autoCanonicalize = false;
 
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Member', 'GET', ['action' => 'invite', 'projectId' => $projectId]);
@@ -265,7 +258,6 @@ test('inviteForm has correct fields', function () use ($presenterFactory, $owner
 	Assert::true(isset($form['categories']));
 	Assert::true(isset($form['send']));
 });
-
 
 // === Signal tests ===
 
@@ -283,7 +275,9 @@ test('handleRemove removes a member and redirects', function () use ($presenterF
 	$presenter = $presenterFactory->createPresenter('Member');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Member', 'GET', [
@@ -297,7 +291,6 @@ test('handleRemove removes a member and redirects', function () use ($presenterF
 	Assert::type(RedirectResponse::class, $response);
 	Assert::null($memberRepo->findById($otherMember->id));
 });
-
 
 test('handleRemove returns 403 for non-owner', function () use ($presenterFactory, $otherId, $otherEmail, $projectId, $ownerId, $db, $memberRepo) {
 	// Add other as viewer
@@ -315,7 +308,9 @@ test('handleRemove returns 403 for non-owner', function () use ($presenterFactor
 	$presenter = $presenterFactory->createPresenter('Member');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$otherId, ['ROLE_USER'], ['email' => $otherEmail, 'displayName' => $otherEmail],
+		$otherId,
+		['ROLE_USER'],
+		['email' => $otherEmail, 'displayName' => $otherEmail],
 	));
 
 	Assert::exception(function () use ($presenter, $projectId, $ownerMember) {
@@ -332,14 +327,15 @@ test('handleRemove returns 403 for non-owner', function () use ($presenterFactor
 	$otherMember->delete();
 });
 
-
 test('handleRemove returns 403 when trying to remove self', function () use ($presenterFactory, $ownerId, $ownerEmail, $projectId, $memberRepo) {
 	$ownerMember = $memberRepo->findByProjectAndUser($projectId, $ownerId);
 
 	$presenter = $presenterFactory->createPresenter('Member');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	Assert::exception(function () use ($presenter, $projectId, $ownerMember) {
@@ -352,7 +348,6 @@ test('handleRemove returns 403 when trying to remove self', function () use ($pr
 		$presenter->run($request);
 	}, Nette\Application\BadRequestException::class, null, 403);
 });
-
 
 test('handleRemove returns 403 when trying to remove permanent owner', function () use ($presenterFactory, $ownerId, $ownerEmail, $projectId, $thirdId, $db, $memberRepo) {
 	// Add third user as second owner
@@ -371,7 +366,9 @@ test('handleRemove returns 403 when trying to remove permanent owner', function 
 	$presenter = $presenterFactory->createPresenter('Member');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$thirdId, ['ROLE_USER'], ['email' => 'third@test.cz', 'displayName' => 'third'],
+		$thirdId,
+		['ROLE_USER'],
+		['email' => 'third@test.cz', 'displayName' => 'third'],
 	));
 
 	Assert::exception(function () use ($presenter, $projectId, $ownerMember) {
@@ -388,7 +385,6 @@ test('handleRemove returns 403 when trying to remove permanent owner', function 
 	$thirdMember->delete();
 });
 
-
 test('handleCancelInvitation deletes invitation and redirects', function () use ($presenterFactory, $ownerId, $ownerEmail, $projectId, $invitationRepo) {
 	$invitation = $invitationRepo->insert([
 		'email' => 'cancel-test@test.cz',
@@ -404,7 +400,9 @@ test('handleCancelInvitation deletes invitation and redirects', function () use 
 	$presenter = $presenterFactory->createPresenter('Member');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Member', 'GET', [
@@ -418,7 +416,6 @@ test('handleCancelInvitation deletes invitation and redirects', function () use 
 	Assert::type(RedirectResponse::class, $response);
 	Assert::null($invitationRepo->findById($invitation->id));
 });
-
 
 // === Accept tests ===
 
@@ -436,7 +433,9 @@ test('actionAccept with valid token for logged-in user creates member', function
 	$presenter = $presenterFactory->createPresenter('Member');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$thirdId, ['ROLE_USER'], ['email' => $thirdEmail, 'displayName' => $thirdEmail],
+		$thirdId,
+		['ROLE_USER'],
+		['email' => $thirdEmail, 'displayName' => $thirdEmail],
 	));
 
 	$request = new AppRequest('Member', 'GET', [
@@ -460,12 +459,13 @@ test('actionAccept with valid token for logged-in user creates member', function
 	$memberRepo->delete($member->id);
 });
 
-
 test('actionAccept with invalid token redirects with error', function () use ($presenterFactory, $ownerId, $ownerEmail) {
 	$presenter = $presenterFactory->createPresenter('Member');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Member', 'GET', [
@@ -476,7 +476,6 @@ test('actionAccept with invalid token redirects with error', function () use ($p
 
 	Assert::type(RedirectResponse::class, $response);
 });
-
 
 test('actionAccept for unauthenticated user stores token and redirects to login', function () use ($presenterFactory, $projectId, $invitationRepo) {
 	$invitation = $invitationRepo->insert([

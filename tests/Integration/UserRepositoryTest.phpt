@@ -31,7 +31,6 @@ register_shutdown_function(function () use ($db, &$userId) {
 	}
 });
 
-
 test('insert creates user and profile', function () use ($repo, $db, $testEmail, &$userId) {
 	$user = $repo->insert([
 		'email' => $testEmail,
@@ -51,7 +50,6 @@ test('insert creates user and profile', function () use ($repo, $db, $testEmail,
 	Assert::notNull($profile);
 });
 
-
 test('findById returns user row', function () use ($repo, &$userId, $testEmail) {
 	$user = $repo->findById($userId);
 
@@ -59,11 +57,9 @@ test('findById returns user row', function () use ($repo, &$userId, $testEmail) 
 	Assert::same($testEmail, $user->email);
 });
 
-
 test('findById returns null for nonexistent id', function () use ($repo) {
 	Assert::null($repo->findById(999999));
 });
-
 
 test('findByEmail returns user row', function () use ($repo, $testEmail, &$userId) {
 	$user = $repo->findByEmail($testEmail);
@@ -72,11 +68,9 @@ test('findByEmail returns user row', function () use ($repo, $testEmail, &$userI
 	Assert::same($userId, $user->id);
 });
 
-
 test('findByEmail returns null for nonexistent email', function () use ($repo) {
 	Assert::null($repo->findByEmail('nobody-' . uniqid() . '@test.cz'));
 });
-
 
 test('getProfile returns profile for existing user', function () use ($repo, &$userId) {
 	$profile = $repo->getProfile($userId);
@@ -84,7 +78,6 @@ test('getProfile returns profile for existing user', function () use ($repo, &$u
 	Assert::notNull($profile);
 	Assert::same($userId, $profile->user_id);
 });
-
 
 test('updateProfile updates profile fields', function () use ($repo, &$userId) {
 	$repo->updateProfile($userId, [
@@ -101,7 +94,6 @@ test('updateProfile updates profile fields', function () use ($repo, &$userId) {
 	Assert::same('Test bio text', $profile->bio);
 });
 
-
 test('updateProfile sets fields to null', function () use ($repo, &$userId) {
 	$repo->updateProfile($userId, [
 		'first_name' => null,
@@ -117,7 +109,6 @@ test('updateProfile sets fields to null', function () use ($repo, &$userId) {
 	Assert::null($profile->bio);
 });
 
-
 test('setVerified marks user as verified', function () use ($repo, $db, &$userId) {
 	$repo->setVerified($userId);
 
@@ -125,14 +116,12 @@ test('setVerified marks user as verified', function () use ($repo, $db, &$userId
 	Assert::true((bool) $user->is_verified);
 });
 
-
 test('updatePassword changes user password hash', function () use ($repo, $db, &$userId) {
 	$repo->updatePassword($userId, '$2y$10$newhash');
 
 	$user = $db->table('user')->get($userId);
 	Assert::same('$2y$10$newhash', $user->password);
 });
-
 
 test('deleteUnverified removes user, profile, and tokens', function () use ($repo, $db) {
 	// Create a temporary user to delete

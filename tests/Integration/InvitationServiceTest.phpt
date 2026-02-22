@@ -98,7 +98,6 @@ register_shutdown_function(function () use ($db, $ownerId, $accepterId, $project
 	}
 });
 
-
 // === createInvitation tests ===
 
 test('createInvitation creates invitation with valid token', function () use ($service, $invitationRepo, $projectId, $ownerId) {
@@ -126,7 +125,6 @@ test('createInvitation creates invitation with valid token', function () use ($s
 	$invitationRepo->delete($invitation->id);
 });
 
-
 test('createInvitation throws exception for duplicate email+project', function () use ($service, $invitationRepo, $projectId, $ownerId) {
 	$email = 'dup-test-' . uniqid() . '@test.cz';
 
@@ -140,7 +138,6 @@ test('createInvitation throws exception for duplicate email+project', function (
 	// Clean up
 	$invitationRepo->delete($invitation->id);
 });
-
 
 // === verifyToken tests ===
 
@@ -161,12 +158,10 @@ test('verifyToken returns invitation for valid token', function () use ($service
 	$invitationRepo->delete($invitation->id);
 });
 
-
 test('verifyToken returns null for nonexistent token', function () use ($service) {
 	$result = $service->verifyToken('nonexistent_token_12345678901234567890123456789012');
 	Assert::null($result);
 });
-
 
 test('verifyToken returns null for expired invitation', function () use ($service, $invitationRepo, $projectId, $ownerId) {
 	// Insert directly with past expiry
@@ -188,7 +183,6 @@ test('verifyToken returns null for expired invitation', function () use ($servic
 	$invitationRepo->delete($invitation->id);
 });
 
-
 test('verifyToken returns null for used invitation', function () use ($service, $invitationRepo, $projectId, $ownerId) {
 	$invitation = $invitationRepo->insert([
 		'email' => 'used-' . uniqid() . '@test.cz',
@@ -209,7 +203,6 @@ test('verifyToken returns null for used invitation', function () use ($service, 
 	// Clean up
 	$invitationRepo->delete($invitation->id);
 });
-
 
 // === acceptInvitation tests ===
 
@@ -236,7 +229,6 @@ test('acceptInvitation creates new member for new user', function () use ($servi
 	// Clean up
 	$memberRepo->delete($member->id);
 });
-
 
 test('acceptInvitation merges roles for existing member', function () use ($service, $invitationRepo, $memberRepo, $projectId, $ownerId, $accepterId, $db) {
 	// Create accepter as existing member with contractor role
@@ -268,7 +260,6 @@ test('acceptInvitation merges roles for existing member', function () use ($serv
 	$existingMember->delete();
 });
 
-
 test('acceptInvitation creates category permissions for contractor', function () use ($service, $invitationRepo, $memberRepo, $catPermRepo, $projectId, $ownerId, $accepterId, $categoryId) {
 	$invitation = $service->createInvitation(
 		$projectId,
@@ -289,7 +280,6 @@ test('acceptInvitation creates category permissions for contractor', function ()
 	$memberRepo->delete($member->id);
 });
 
-
 test('acceptInvitation does not create category permissions for owner role', function () use ($service, $invitationRepo, $memberRepo, $catPermRepo, $projectId, $ownerId, $accepterId, $categoryId) {
 	$invitation = $service->createInvitation(
 		$projectId,
@@ -309,7 +299,6 @@ test('acceptInvitation does not create category permissions for owner role', fun
 	// Clean up
 	$memberRepo->delete($member->id);
 });
-
 
 // === cancelInvitation tests ===
 

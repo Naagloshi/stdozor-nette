@@ -10,7 +10,6 @@ use Nette\Http\FileUpload;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Image;
 
-
 final class AttachmentService
 {
 	private const MaxFileSize = 10 * 1024 * 1024; // 10 MB
@@ -35,13 +34,10 @@ final class AttachmentService
 		'application/vnd.oasis.opendocument.presentation',
 	];
 
-
 	public function __construct(
 		private AttachmentRepository $attachmentRepository,
 		private string $uploadDirectory,
-	) {
-	}
-
+	) {}
 
 	public function uploadAttachment(
 		FileUpload $file,
@@ -49,8 +45,7 @@ final class AttachmentService
 		int $categoryId,
 		int $projectId,
 		int $userId,
-	): ActiveRow
-	{
+	): ActiveRow {
 		$this->validateUpload($file, $itemId);
 
 		// Create storage directory
@@ -102,7 +97,6 @@ final class AttachmentService
 		]);
 	}
 
-
 	public function deleteAttachment(ActiveRow $attachment): void
 	{
 		$filePath = $attachment->file_path;
@@ -126,7 +120,6 @@ final class AttachmentService
 		// Delete DB record
 		$this->attachmentRepository->delete($attachment->id);
 	}
-
 
 	public function deleteAllForItem(int $itemId): void
 	{
@@ -155,12 +148,10 @@ final class AttachmentService
 		$this->attachmentRepository->deleteByItem($itemId);
 	}
 
-
 	public function isImage(string $mimeType): bool
 	{
 		return str_starts_with($mimeType, 'image/');
 	}
-
 
 	public static function humanReadableSize(int $bytes): string
 	{
@@ -173,7 +164,6 @@ final class AttachmentService
 
 		return round($bytes / 1_048_576, 1) . ' MB';
 	}
-
 
 	private function validateUpload(FileUpload $file, int $itemId): void
 	{
@@ -195,7 +185,6 @@ final class AttachmentService
 			throw new \RuntimeException('Maximum number of attachments reached (10).');
 		}
 	}
-
 
 	private function isDirectoryEmpty(string $dir): bool
 	{

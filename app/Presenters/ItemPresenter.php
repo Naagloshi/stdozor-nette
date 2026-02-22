@@ -14,16 +14,19 @@ use Contributte\Translation\Translator;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 
-
 final class ItemPresenter extends BasePresenter
 {
 	private ?ActiveRow $project = null;
-	private ?ActiveRow $category = null;
-	private ?ActiveRow $item = null;
-	private ?ActiveRow $membership = null;
-	private bool $canEditAmount = false;
-	private bool $canEditFlags = false;
 
+	private ?ActiveRow $category = null;
+
+	private ?ActiveRow $item = null;
+
+	private ?ActiveRow $membership = null;
+
+	private bool $canEditAmount = false;
+
+	private bool $canEditFlags = false;
 
 	public function __construct(
 		private ItemRepository $itemRepository,
@@ -33,9 +36,7 @@ final class ItemPresenter extends BasePresenter
 		private AttachmentRepository $attachmentRepository,
 		private AttachmentService $attachmentService,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	public function actionCreate(int $categoryId): void
 	{
@@ -71,7 +72,6 @@ final class ItemPresenter extends BasePresenter
 		$this->canEditFlags = $isOwner || in_array('supervisor', $roles, true);
 	}
 
-
 	public function renderCreate(int $categoryId): void
 	{
 		$this->template->project = $this->project;
@@ -79,7 +79,6 @@ final class ItemPresenter extends BasePresenter
 		$this->template->canEditAmount = $this->canEditAmount;
 		$this->template->canEditFlags = $this->canEditFlags;
 	}
-
 
 	public function actionEdit(int $id): void
 	{
@@ -129,7 +128,6 @@ final class ItemPresenter extends BasePresenter
 		]);
 	}
 
-
 	public function renderEdit(int $id): void
 	{
 		$this->template->project = $this->project;
@@ -139,10 +137,9 @@ final class ItemPresenter extends BasePresenter
 		$this->template->canEditFlags = $this->canEditFlags;
 	}
 
-
 	protected function createComponentItemForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addProtection();
 
 		$form->addTextArea('description', $this->translator->translate('messages.item.form.description'))
@@ -190,7 +187,6 @@ final class ItemPresenter extends BasePresenter
 		return $form;
 	}
 
-
 	private function itemFormSucceeded(Form $form, \stdClass $data): void
 	{
 		$values = [
@@ -200,7 +196,7 @@ final class ItemPresenter extends BasePresenter
 		];
 
 		if ($this->canEditAmount && isset($data->amount)) {
-			$values['amount'] = $data->amount !== '' && $data->amount !== null
+			$values['amount'] = $data->amount !== ''
 				? (string) $data->amount
 				: null;
 		}
@@ -255,7 +251,6 @@ final class ItemPresenter extends BasePresenter
 
 		$this->redirect('Project:show', $this->project->id);
 	}
-
 
 	public function handleDeleteAttachment(int $attachmentId): void
 	{

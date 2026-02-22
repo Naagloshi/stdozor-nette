@@ -10,7 +10,6 @@ use Contributte\Translation\Translator;
 use Nette\Application\UI\Form;
 use Nette\Security\Passwords;
 
-
 final class ProfilePresenter extends BasePresenter
 {
 	public function __construct(
@@ -18,9 +17,7 @@ final class ProfilePresenter extends BasePresenter
 		private Passwords $passwords,
 		private PwnedPasswordChecker $pwnedChecker,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	public function actionDefault(): void
 	{
@@ -30,7 +27,6 @@ final class ProfilePresenter extends BasePresenter
 		$this->template->userRow = $this->userRepository->findById($userId);
 		$this->template->profile = $this->userRepository->getProfile($userId);
 	}
-
 
 	public function actionEdit(): void
 	{
@@ -52,10 +48,9 @@ final class ProfilePresenter extends BasePresenter
 		]);
 	}
 
-
 	protected function createComponentEditProfileForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 
 		$form->addEmail('email', $this->translator->translate('messages.entity.user.email'))
 			->setDisabled();
@@ -83,25 +78,29 @@ final class ProfilePresenter extends BasePresenter
 		$form->addPassword('newPassword', $this->translator->translate('messages.profile.form.new_password'))
 			->setRequired(false)
 			->setHtmlAttribute('autocomplete', 'new-password');
-		$form['newPassword']
+		/** @var \Nette\Forms\Controls\TextInput $newPassword */
+		$newPassword = $form['newPassword'];
+		$newPassword
 			->addCondition($form::Filled)
 				->addRule($form::MinLength, $this->translator->translate('messages.validators.password.min_length'), 16);
 
 		$form->addPassword('newPasswordConfirm', $this->translator->translate('messages.profile.form.new_password_confirm'))
 			->setRequired(false)
 			->setHtmlAttribute('autocomplete', 'new-password');
-		$form['newPasswordConfirm']
-			->addConditionOn($form['newPassword'], $form::Filled)
+		/** @var \Nette\Forms\Controls\TextInput $newPasswordConfirm */
+		$newPasswordConfirm = $form['newPasswordConfirm'];
+		$newPasswordConfirm
+			->addConditionOn($newPassword, $form::Filled)
 				->setRequired($this->translator->translate('messages.profile.form.new_password_confirm'))
-				->addRule($form::Equal, 'Hesla se neshodují.', $form['newPassword']);
+				->addRule($form::Equal, 'Hesla se neshodují.', $newPassword);
 
 		$form->addSubmit('send', $this->translator->translate('messages.action.save'));
 		$form->addProtection();
 
 		$form->onSuccess[] = $this->editProfileFormSucceeded(...);
+
 		return $form;
 	}
-
 
 	private function editProfileFormSucceeded(Form $form, \stdClass $data): void
 	{
@@ -128,9 +127,12 @@ final class ProfilePresenter extends BasePresenter
 			}
 
 			if ($this->pwnedChecker->isCompromised($data->newPassword)) {
-				$form['newPassword']->addError(
+				/** @var \Nette\Forms\Controls\TextInput $newPasswordControl */
+				$newPasswordControl = $form['newPassword'];
+				$newPasswordControl->addError(
 					$this->translator->translate('messages.validators.password.compromised'),
 				);
+
 				return;
 			}
 

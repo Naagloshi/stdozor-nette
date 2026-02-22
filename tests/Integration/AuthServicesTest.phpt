@@ -35,7 +35,6 @@ $passwordReset = $container->getByType(PasswordResetService::class);
 /** @var Nette\Database\Explorer $db */
 $db = $container->getByType(Nette\Database\Explorer::class);
 
-
 // --- Setup: create a test user ---
 
 $testEmail = 'test-auth-' . uniqid() . '@test.cz';
@@ -51,7 +50,6 @@ $user = $userRepo->insert([
 ]);
 $userId = $user->id;
 
-
 // --- Cleanup function ---
 
 function cleanup(Nette\Database\Explorer $db, int $userId): void
@@ -64,7 +62,6 @@ function cleanup(Nette\Database\Explorer $db, int $userId): void
 
 register_shutdown_function('cleanup', $db, $userId);
 
-
 // === UserAuthenticator tests ===
 
 test('authenticate throws exception for unknown email', function () use ($authenticator) {
@@ -74,7 +71,6 @@ test('authenticate throws exception for unknown email', function () use ($authen
 	);
 });
 
-
 test('authenticate throws exception for wrong password', function () use ($authenticator, $testEmail) {
 	Assert::exception(
 		fn() => $authenticator->authenticate($testEmail, 'wrong-password'),
@@ -82,14 +78,12 @@ test('authenticate throws exception for wrong password', function () use ($authe
 	);
 });
 
-
 test('authenticate throws exception for unverified user', function () use ($authenticator, $testEmail, $testPassword) {
 	Assert::exception(
 		fn() => $authenticator->authenticate($testEmail, $testPassword),
 		AuthenticationException::class,
 	);
 });
-
 
 // === EmailVerificationService tests ===
 
@@ -99,7 +93,6 @@ test('createToken generates 64-char hex token', function () use ($emailVerificat
 	Assert::same(64, strlen($token));
 	Assert::true(ctype_xdigit($token));
 });
-
 
 test('verify marks user as verified and token as used', function () use ($emailVerification, $userId, $db) {
 	$token = $emailVerification->createToken($userId);
@@ -113,7 +106,6 @@ test('verify marks user as verified and token as used', function () use ($emailV
 	Assert::true((bool) $tokenRow->used);
 });
 
-
 test('verify throws exception for already used token', function () use ($emailVerification, $userId) {
 	$token = $emailVerification->createToken($userId);
 	$emailVerification->verify($token);
@@ -124,14 +116,12 @@ test('verify throws exception for already used token', function () use ($emailVe
 	);
 });
 
-
 test('verify throws exception for invalid token', function () use ($emailVerification) {
 	Assert::exception(
 		fn() => $emailVerification->verify('nonexistent-token'),
 		RuntimeException::class,
 	);
 });
-
 
 test('verify throws exception for expired token', function () use ($emailVerification, $userId, $db) {
 	$token = $emailVerification->createToken($userId);
@@ -147,7 +137,6 @@ test('verify throws exception for expired token', function () use ($emailVerific
 	);
 });
 
-
 // === UserAuthenticator - after verification ===
 
 test('authenticate returns SimpleIdentity for verified user', function () use ($authenticator, $testEmail, $testPassword) {
@@ -157,7 +146,6 @@ test('authenticate returns SimpleIdentity for verified user', function () use ($
 	Assert::same($testEmail, $identity->email);
 	Assert::same(['ROLE_USER'], $identity->getRoles());
 });
-
 
 test('authenticate sets displayName from profile', function () use ($authenticator, $userRepo, $testEmail, $testPassword, $userId) {
 	$userRepo->updateProfile($userId, [
@@ -169,7 +157,6 @@ test('authenticate sets displayName from profile', function () use ($authenticat
 	Assert::same('Jan Tester', $identity->displayName);
 });
 
-
 test('authenticate falls back to email when profile has no name', function () use ($authenticator, $userRepo, $testEmail, $testPassword, $userId) {
 	$userRepo->updateProfile($userId, [
 		'first_name' => null,
@@ -180,7 +167,6 @@ test('authenticate falls back to email when profile has no name', function () us
 	Assert::same($testEmail, $identity->displayName);
 });
 
-
 // === PasswordResetService tests ===
 
 test('createResetToken returns 60-char token', function () use ($passwordReset, $userId) {
@@ -190,7 +176,6 @@ test('createResetToken returns 60-char token', function () use ($passwordReset, 
 	Assert::true(ctype_xdigit($token));
 });
 
-
 test('validateTokenAndFetchUser returns user for valid token', function () use ($passwordReset, $userId) {
 	$token = $passwordReset->createResetToken($userId);
 	$user = $passwordReset->validateTokenAndFetchUser($token);
@@ -199,13 +184,11 @@ test('validateTokenAndFetchUser returns user for valid token', function () use (
 	Assert::same($userId, $user->id);
 });
 
-
 test('validateTokenAndFetchUser returns null for invalid token', function () use ($passwordReset) {
 	$result = $passwordReset->validateTokenAndFetchUser('invalid-token-that-does-not-exist-in-db');
 
 	Assert::null($result);
 });
-
 
 test('validateTokenAndFetchUser returns null for tampered token', function () use ($passwordReset, $userId) {
 	$token = $passwordReset->createResetToken($userId);
@@ -216,7 +199,6 @@ test('validateTokenAndFetchUser returns null for tampered token', function () us
 
 	Assert::null($result);
 });
-
 
 test('validateTokenAndFetchUser returns null for expired token', function () use ($passwordReset, $userId, $db) {
 	$token = $passwordReset->createResetToken($userId);
@@ -231,7 +213,6 @@ test('validateTokenAndFetchUser returns null for expired token', function () use
 	Assert::null($result);
 });
 
-
 test('removeResetRequest deletes the token from DB', function () use ($passwordReset, $userId, $db) {
 	$token = $passwordReset->createResetToken($userId);
 	$selector = substr($token, 0, 20);
@@ -242,7 +223,6 @@ test('removeResetRequest deletes the token from DB', function () use ($passwordR
 
 	Assert::same(0, $db->table('reset_password_request')->where('selector', $selector)->count());
 });
-
 
 test('createResetToken deletes old tokens for same user', function () use ($passwordReset, $userId, $db) {
 	$token1 = $passwordReset->createResetToken($userId);

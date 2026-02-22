@@ -6,12 +6,11 @@ namespace App;
 
 use Nette\Bootstrap\Configurator;
 
-
 class Bootstrap
 {
 	public static function boot(): Configurator
 	{
-		$configurator = new Configurator;
+		$configurator = new Configurator();
 		$appDir = dirname(__DIR__);
 
 		$configurator->setDebugMode(true);

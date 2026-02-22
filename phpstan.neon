@@ -1,0 +1,24 @@
+includes:
+	- vendor/phpstan/phpstan-nette/extension.neon
+	- vendor/phpstan/phpstan-nette/rules.neon
+
+parameters:
+	level: 6
+	paths:
+		- app
+	excludePaths:
+		- app/Bootstrap.php
+	tmpDir: temp/phpstan
+	ignoreErrors:
+		# Nette Database Explorer — ActiveRow uses __get() magic for column access
+		-
+			identifier: property.notFound
+			path: app/*
+		# Nette Database Explorer — Selection generic type T not specified
+		-
+			identifier: missingType.generics
+			path: app/Model/Repository/*
+		# Nette template render() accepts parameters in practice
+		-
+			identifier: arguments.count
+			path: app/Controls/*

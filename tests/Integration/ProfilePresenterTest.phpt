@@ -9,9 +9,9 @@ declare(strict_types=1);
 
 use App\Model\Repository\UserRepository;
 use App\Presenters\ProfilePresenter;
+use Nette\Application\Request as AppRequest;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\Responses\TextResponse;
-use Nette\Application\Request as AppRequest;
 use Nette\Database\Explorer;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
@@ -49,7 +49,6 @@ register_shutdown_function(function () use ($db, $userId) {
 	$db->table('user')->where('id', $userId)->delete();
 });
 
-
 /**
  * Run a presenter action and return the response.
  */
@@ -64,9 +63,9 @@ function runPresenter(string $action, array $params = []): Nette\Application\Res
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 /**
  * Run a presenter action as logged-in user.
@@ -88,9 +87,9 @@ function runPresenterLoggedIn(string $action, int $userId, string $email, array 
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 // === Auth guard tests ===
 
@@ -101,14 +100,12 @@ test('actionDefault redirects to login when not authenticated', function () {
 	Assert::contains('prihlaseni', $response->getUrl());
 });
 
-
 test('actionEdit redirects to login when not authenticated', function () {
 	$response = runPresenter('edit');
 
 	Assert::type(RedirectResponse::class, $response);
 	Assert::contains('prihlaseni', $response->getUrl());
 });
-
 
 // === Profile view tests ===
 
@@ -119,7 +116,6 @@ test('actionDefault renders profile page for logged-in user', function () use ($
 	$html = (string) $response->getSource();
 	Assert::contains($testEmail, $html);
 });
-
 
 test('actionDefault shows personal data when profile is filled', function () use ($userRepo, $userId, $testEmail) {
 	$userRepo->updateProfile($userId, [
@@ -138,7 +134,6 @@ test('actionDefault shows personal data when profile is filled', function () use
 	Assert::contains('Testovací biografie', $html);
 });
 
-
 test('actionDefault shows "not set" for empty profile fields', function () use ($userRepo, $userId, $testEmail) {
 	$userRepo->updateProfile($userId, [
 		'first_name' => null,
@@ -153,7 +148,6 @@ test('actionDefault shows "not set" for empty profile fields', function () use (
 	// "Nevyplněno" should appear for empty fields
 	Assert::contains('Nevyplněno', $html);
 });
-
 
 // === Profile edit form tests ===
 
@@ -173,7 +167,6 @@ test('actionEdit renders form with all required fields', function () use ($userI
 	Assert::contains('name="newPasswordConfirm"', $html);
 });
 
-
 test('actionEdit pre-fills form with current profile data', function () use ($userRepo, $userId, $testEmail) {
 	$userRepo->updateProfile($userId, [
 		'first_name' => 'Prefill',
@@ -191,14 +184,12 @@ test('actionEdit pre-fills form with current profile data', function () use ($us
 	Assert::contains('Bio text', $html);
 });
 
-
 test('email field is disabled in edit form', function () use ($userId, $testEmail) {
 	$response = runPresenterLoggedIn('edit', $userId, $testEmail);
 	$html = (string) $response->getSource();
 
 	Assert::contains('disabled', $html);
 });
-
 
 // === Form component tests ===
 
@@ -207,7 +198,9 @@ test('editProfileForm has correct structure', function () use ($presenterFactory
 	$presenter->autoCanonicalize = false;
 
 	$presenter->getUser()->login(new SimpleIdentity(
-		$userId, ['ROLE_USER'], ['email' => $testEmail, 'displayName' => $testEmail],
+		$userId,
+		['ROLE_USER'],
+		['email' => $testEmail, 'displayName' => $testEmail],
 	));
 
 	// Run to initialize presenter
@@ -228,7 +221,6 @@ test('editProfileForm has correct structure', function () use ($presenterFactory
 	Assert::true(isset($form['send']));
 });
 
-
 // === Business logic tests (via direct repository verification) ===
 
 test('profile update via repository works correctly', function () use ($userRepo, $userId) {
@@ -245,7 +237,6 @@ test('profile update via repository works correctly', function () use ($userRepo
 	Assert::same('+420777888999', $profile->phone);
 	Assert::same('Direct update bio', $profile->bio);
 });
-
 
 test('password change requires correct current password verification', function () use ($passwords, $testPassword, $userRepo, $userId) {
 	// Verify the current password works

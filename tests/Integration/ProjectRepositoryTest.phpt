@@ -51,7 +51,6 @@ register_shutdown_function(function () use ($db, $userId, &$projectId) {
 	$db->table('user')->where('id', $userId)->delete();
 });
 
-
 test('insert creates project', function () use ($projectRepo, &$projectId, $userId) {
 	$project = $projectRepo->insert([
 		'name' => 'Testovací stavba',
@@ -73,7 +72,6 @@ test('insert creates project', function () use ($projectRepo, &$projectId, $user
 	Assert::same(500000, $project->estimated_amount_cents);
 });
 
-
 test('findById returns project', function () use ($projectRepo, &$projectId) {
 	$project = $projectRepo->findById($projectId);
 
@@ -82,11 +80,9 @@ test('findById returns project', function () use ($projectRepo, &$projectId) {
 	Assert::same('Testovací 123, Praha', $project->address);
 });
 
-
 test('findById returns null for nonexistent id', function () use ($projectRepo) {
 	Assert::null($projectRepo->findById(999999));
 });
-
 
 test('update changes project fields', function () use ($projectRepo, &$projectId) {
 	$projectRepo->update($projectId, [
@@ -102,7 +98,6 @@ test('update changes project fields', function () use ($projectRepo, &$projectId
 	Assert::same(750000, $project->estimated_amount_cents);
 });
 
-
 test('createOwner creates membership with owner role', function () use ($memberRepo, &$projectId, $userId) {
 	$member = $memberRepo->createOwner($projectId, $userId);
 
@@ -112,7 +107,6 @@ test('createOwner creates membership with owner role', function () use ($memberR
 	Assert::true((bool) $member->has_global_category_access);
 });
 
-
 test('findByProjectAndUser returns member', function () use ($memberRepo, &$projectId, $userId) {
 	$member = $memberRepo->findByProjectAndUser($projectId, $userId);
 
@@ -120,21 +114,17 @@ test('findByProjectAndUser returns member', function () use ($memberRepo, &$proj
 	Assert::same($userId, $member->user_id);
 });
 
-
 test('findByProjectAndUser returns null for non-member', function () use ($memberRepo, &$projectId) {
 	Assert::null($memberRepo->findByProjectAndUser($projectId, 999999));
 });
-
 
 test('isOwner returns true for owner', function () use ($memberRepo, &$projectId, $userId) {
 	Assert::true($memberRepo->isOwner($projectId, $userId));
 });
 
-
 test('isOwner returns false for non-member', function () use ($memberRepo, &$projectId) {
 	Assert::false($memberRepo->isOwner($projectId, 999999));
 });
-
 
 test('getRoles returns decoded roles array', function () use ($memberRepo, &$projectId, $userId) {
 	$member = $memberRepo->findByProjectAndUser($projectId, $userId);
@@ -143,7 +133,6 @@ test('getRoles returns decoded roles array', function () use ($memberRepo, &$pro
 	Assert::type('array', $roles);
 	Assert::contains('owner', $roles);
 });
-
 
 test('findByUser returns projects for member', function () use ($projectRepo, &$projectId, $userId) {
 	$projects = $projectRepo->findByUser($userId);
@@ -159,17 +148,14 @@ test('findByUser returns projects for member', function () use ($projectRepo, &$
 	Assert::true($found, 'Project should be found in user projects');
 });
 
-
 test('findByUser returns empty for non-member', function () use ($projectRepo) {
 	$projects = $projectRepo->findByUser(999999);
 	Assert::same([], $projects);
 });
 
-
 test('getCategoryCount returns zero for project without categories', function () use ($projectRepo, &$projectId) {
 	Assert::same(0, $projectRepo->getCategoryCount($projectId));
 });
-
 
 test('delete removes project and cascades to members', function () use ($projectRepo, $memberRepo, $db, $userId) {
 	// Create a temporary project to delete

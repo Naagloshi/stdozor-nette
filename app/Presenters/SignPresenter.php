@@ -14,7 +14,6 @@ use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
 use Nette\Security\Passwords;
 
-
 final class SignPresenter extends BasePresenter
 {
 	public function __construct(
@@ -25,16 +24,13 @@ final class SignPresenter extends BasePresenter
 		private PwnedPasswordChecker $pwnedChecker,
 		private MailService $mailService,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	protected function beforeRender(): void
 	{
 		parent::beforeRender();
 		$this->setLayout(__DIR__ . '/templates/@layout-security.latte');
 	}
-
 
 	// ---- Login ----
 
@@ -45,10 +41,9 @@ final class SignPresenter extends BasePresenter
 		}
 	}
 
-
 	protected function createComponentLoginForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addEmail('email', $this->translator->translate('messages.security.login.email'))
 			->setRequired($this->translator->translate('messages.security.registration.email_required'))
 			->setHtmlAttribute('autofocus');
@@ -60,9 +55,9 @@ final class SignPresenter extends BasePresenter
 		$form->addProtection();
 
 		$form->onSuccess[] = $this->loginFormSucceeded(...);
+
 		return $form;
 	}
-
 
 	private function loginFormSucceeded(Form $form, \stdClass $data): void
 	{
@@ -89,7 +84,6 @@ final class SignPresenter extends BasePresenter
 		$this->redirect('Project:default');
 	}
 
-
 	// ---- Registration ----
 
 	public function actionUp(): void
@@ -99,10 +93,9 @@ final class SignPresenter extends BasePresenter
 		}
 	}
 
-
 	protected function createComponentRegistrationForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addEmail('email', $this->translator->translate('messages.security.registration.email'))
 			->setRequired($this->translator->translate('messages.security.registration.email_required'))
 			->setHtmlAttribute('autofocus');
@@ -120,9 +113,9 @@ final class SignPresenter extends BasePresenter
 		$form->addProtection();
 
 		$form->onSuccess[] = $this->registrationFormSucceeded(...);
+
 		return $form;
 	}
-
 
 	private function registrationFormSucceeded(Form $form, \stdClass $data): void
 	{
@@ -130,9 +123,12 @@ final class SignPresenter extends BasePresenter
 
 		// HIBP check (non-blocking if API unavailable)
 		if ($this->pwnedChecker->isCompromised($data->plainPassword)) {
-			$form['plainPassword']->addError(
+			/** @var \Nette\Forms\Controls\BaseControl $plainPasswordControl */
+			$plainPasswordControl = $form['plainPassword'];
+			$plainPasswordControl->addError(
 				$this->translator->translate('messages.validators.password.compromised'),
 			);
+
 			return;
 		}
 
@@ -140,9 +136,12 @@ final class SignPresenter extends BasePresenter
 		$existingUser = $this->userRepository->findByEmail($email);
 		if ($existingUser) {
 			if ((bool) $existingUser->is_verified) {
-				$form['email']->addError(
+				/** @var \Nette\Forms\Controls\BaseControl $emailControl */
+				$emailControl = $form['email'];
+				$emailControl->addError(
 					$this->translator->translate('messages.security.registration.email_already_exists'),
 				);
+
 				return;
 			}
 
@@ -180,7 +179,6 @@ final class SignPresenter extends BasePresenter
 		$this->redirect('Sign:in');
 	}
 
-
 	// ---- Logout ----
 
 	public function actionOut(): void
@@ -192,7 +190,6 @@ final class SignPresenter extends BasePresenter
 		);
 		$this->redirect('Homepage:default');
 	}
-
 
 	// ---- Email Verification ----
 
@@ -214,7 +211,6 @@ final class SignPresenter extends BasePresenter
 		}
 	}
 
-
 	// ---- Forgot Password ----
 
 	public function actionForgotPassword(): void
@@ -224,10 +220,9 @@ final class SignPresenter extends BasePresenter
 		}
 	}
 
-
 	protected function createComponentForgotPasswordForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addEmail('email', $this->translator->translate('messages.security.reset_password.request.email'))
 			->setRequired($this->translator->translate('messages.security.registration.email_required'))
 			->setHtmlAttribute('autofocus');
@@ -236,9 +231,9 @@ final class SignPresenter extends BasePresenter
 		$form->addProtection();
 
 		$form->onSuccess[] = $this->forgotPasswordFormSucceeded(...);
+
 		return $form;
 	}
-
 
 	private function forgotPasswordFormSucceeded(Form $form, \stdClass $data): void
 	{
@@ -260,13 +255,9 @@ final class SignPresenter extends BasePresenter
 		$this->redirect('Sign:checkEmail');
 	}
 
-
 	// ---- Check Email (info page after reset request) ----
 
-	public function actionCheckEmail(): void
-	{
-	}
-
+	public function actionCheckEmail(): void {}
 
 	// ---- Reset Password ----
 
@@ -299,10 +290,9 @@ final class SignPresenter extends BasePresenter
 		}
 	}
 
-
 	protected function createComponentResetPasswordForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addPassword('plainPassword', $this->translator->translate('messages.security.reset_password.reset.new_password'))
 			->setRequired($this->translator->translate('messages.validators.password.min_length'))
 			->addRule($form::MinLength, $this->translator->translate('messages.validators.password.min_length'), 16)
@@ -316,9 +306,9 @@ final class SignPresenter extends BasePresenter
 		$form->addProtection();
 
 		$form->onSuccess[] = $this->resetPasswordFormSucceeded(...);
+
 		return $form;
 	}
-
 
 	private function resetPasswordFormSucceeded(Form $form, \stdClass $data): void
 	{
@@ -335,9 +325,12 @@ final class SignPresenter extends BasePresenter
 
 		// HIBP check
 		if ($this->pwnedChecker->isCompromised($data->plainPassword)) {
-			$form['plainPassword']->addError(
+			/** @var \Nette\Forms\Controls\BaseControl $plainPasswordControl */
+			$plainPasswordControl = $form['plainPassword'];
+			$plainPasswordControl->addError(
 				$this->translator->translate('messages.validators.password.compromised'),
 			);
+
 			return;
 		}
 
@@ -356,7 +349,6 @@ final class SignPresenter extends BasePresenter
 		$this->redirect('Sign:in');
 	}
 
-
 	// ---- Resend Verification ----
 
 	public function actionResendVerification(): void
@@ -366,10 +358,9 @@ final class SignPresenter extends BasePresenter
 		}
 	}
 
-
 	protected function createComponentResendVerificationForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addEmail('email', $this->translator->translate('messages.security.registration.email'))
 			->setRequired($this->translator->translate('messages.security.registration.email_required'))
 			->setHtmlAttribute('autofocus');
@@ -378,9 +369,9 @@ final class SignPresenter extends BasePresenter
 		$form->addProtection();
 
 		$form->onSuccess[] = $this->resendVerificationFormSucceeded(...);
+
 		return $form;
 	}
-
 
 	private function resendVerificationFormSucceeded(Form $form, \stdClass $data): void
 	{

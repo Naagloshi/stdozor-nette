@@ -13,27 +13,23 @@ use Contributte\Translation\Translator;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 
-
 final class ProjectPresenter extends BasePresenter
 {
 	private ?ActiveRow $project = null;
-	private ?ActiveRow $membership = null;
 
+	private ?ActiveRow $membership = null;
 
 	public function __construct(
 		private ProjectRepository $projectRepository,
 		private ProjectMemberRepository $memberRepository,
 		private ICategoryListControlFactory $categoryListFactory,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	public function actionDefault(): void
 	{
 		$this->requireLogin();
 	}
-
 
 	public function renderDefault(): void
 	{
@@ -42,12 +38,10 @@ final class ProjectPresenter extends BasePresenter
 		);
 	}
 
-
 	public function actionCreate(): void
 	{
 		$this->requireLogin();
 	}
-
 
 	public function actionShow(int $id): void
 	{
@@ -67,7 +61,6 @@ final class ProjectPresenter extends BasePresenter
 		}
 	}
 
-
 	public function renderShow(int $id): void
 	{
 		// Reload project for fresh amounts after signal handlers (delete, reorder, etc.)
@@ -82,7 +75,6 @@ final class ProjectPresenter extends BasePresenter
 		$this->template->isOwner = in_array('owner', $roles, true);
 		$this->template->status = $status;
 	}
-
 
 	public function actionEdit(int $id): void
 	{
@@ -115,27 +107,27 @@ final class ProjectPresenter extends BasePresenter
 
 		// Lock currency if project has recorded amounts
 		if ($this->project->total_amount_cents > 0) {
-			$form['currency']->setDisabled();
+			/** @var \Nette\Forms\Controls\BaseControl $currencyControl */
+			$currencyControl = $form['currency'];
+			$currencyControl->setDisabled();
 		}
 	}
-
 
 	public function renderEdit(int $id): void
 	{
 		$this->template->project = $this->project;
 	}
 
-
 	protected function createComponentCategoryList(): CategoryListControl
 	{
 		$roles = $this->memberRepository->getRoles($this->membership);
+
 		return $this->categoryListFactory->create(
 			$this->project->id,
 			in_array('owner', $roles, true),
 			$roles,
 		);
 	}
-
 
 	public function handleDelete(int $id): void
 	{
@@ -158,10 +150,9 @@ final class ProjectPresenter extends BasePresenter
 		$this->redirect('default');
 	}
 
-
 	protected function createComponentProjectForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addProtection();
 
 		$form->addText('name', $this->translator->translate('messages.project.form.name'))
@@ -203,7 +194,6 @@ final class ProjectPresenter extends BasePresenter
 
 		return $form;
 	}
-
 
 	private function projectFormSucceeded(Form $form, \stdClass $data): void
 	{

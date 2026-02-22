@@ -7,17 +7,15 @@ namespace App\Model\Security;
 use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 
-
 final class PasswordResetService
 {
 	public function __construct(
 		private Explorer $database,
-	) {
-	}
-
+	) {}
 
 	/**
 	 * Create a password reset token (selector/verifier pattern).
+	 *
 	 * @return string full token (selector + verifier) for use in URL
 	 */
 	public function createResetToken(int $userId): string
@@ -41,9 +39,9 @@ final class PasswordResetService
 		return $selector . $verifier; // 60 chars total
 	}
 
-
 	/**
 	 * Validate a reset token and return the associated user.
+	 *
 	 * @return ActiveRow|null user row, or null if token is invalid
 	 */
 	public function validateTokenAndFetchUser(string $fullToken): ?ActiveRow
@@ -70,7 +68,6 @@ final class PasswordResetService
 
 		return $request->ref('user', 'user_id');
 	}
-
 
 	/**
 	 * Remove the reset request after successful password change.

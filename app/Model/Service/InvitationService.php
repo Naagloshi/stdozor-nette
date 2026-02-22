@@ -11,12 +11,10 @@ use App\Model\Security\MailService;
 use Contributte\Translation\Translator;
 use Nette\Database\Table\ActiveRow;
 
-
 final class InvitationService
 {
 	private const TokenLength = 32; // bin2hex → 64 chars
 	private const ExpiryDays = 7;
-
 
 	public function __construct(
 		private ProjectInvitationRepository $invitationRepository,
@@ -24,14 +22,14 @@ final class InvitationService
 		private CategoryPermissionRepository $categoryPermissionRepository,
 		private MailService $mailService,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	/**
 	 * Create a new invitation. Does NOT send the email — call sendInvitationEmail() after.
+	 *
 	 * @param string[] $roles
 	 * @param int[] $categoryIds
+	 *
 	 * @throws \RuntimeException if active invitation already exists for this email+project
 	 */
 	public function createInvitation(
@@ -62,7 +60,6 @@ final class InvitationService
 		]);
 	}
 
-
 	/**
 	 * Send invitation email. Called by presenter which has access to link generation.
 	 */
@@ -79,7 +76,6 @@ final class InvitationService
 			],
 		);
 	}
-
 
 	/**
 	 * Verify token validity. Returns invitation if valid, null otherwise.
@@ -107,10 +103,10 @@ final class InvitationService
 		return $invitation;
 	}
 
-
 	/**
 	 * Accept invitation for a logged-in user.
 	 * Creates new member or merges roles for existing member.
+	 *
 	 * @throws \RuntimeException if invitation is invalid
 	 */
 	public function acceptInvitation(ActiveRow $invitation, int $userId): ActiveRow
@@ -169,7 +165,6 @@ final class InvitationService
 		return $member;
 	}
 
-
 	/**
 	 * Cancel (delete) a pending invitation.
 	 */
@@ -178,9 +173,9 @@ final class InvitationService
 		$this->invitationRepository->delete($invitationId);
 	}
 
-
 	/**
 	 * Add category permissions from invitation.
+	 *
 	 * @param int[] $categoryIds
 	 */
 	private function addCategoryPermissions(int $memberId, array $categoryIds, int $grantedById): void

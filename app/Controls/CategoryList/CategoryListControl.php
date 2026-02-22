@@ -15,26 +15,32 @@ use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 
-
 final class CategoryListControl extends Control
 {
 	private string $currency = '';
 
 	// Category form modal state
 	private bool $showCategoryForm = false;
+
 	private ?int $editCategoryId = null;
+
 	private ?int $categoryParentId = null;
 
 	// Item form modal state
 	private bool $showItemForm = false;
+
 	private ?int $editItemId = null;
+
 	private ?int $itemCategoryId = null;
 
 	// Role-derived flags
 	private bool $canEditAmount;
+
 	private bool $canEditFlags;
 
-
+	/**
+	 * @param string[] $memberRoles
+	 */
 	public function __construct(
 		private int $projectId,
 		private bool $isOwner,
@@ -49,7 +55,6 @@ final class CategoryListControl extends Control
 		$this->canEditAmount = $isOwner;
 		$this->canEditFlags = $isOwner || in_array('supervisor', $memberRoles, true);
 	}
-
 
 	public function render(?string $currency = null): void
 	{
@@ -104,7 +109,6 @@ final class CategoryListControl extends Control
 		$this->template->render(__DIR__ . '/CategoryListControl.latte');
 	}
 
-
 	public function handleDelete(int $id): void
 	{
 		$this->ensureOwner();
@@ -127,7 +131,6 @@ final class CategoryListControl extends Control
 		$this->ajaxRedirect();
 	}
 
-
 	public function handleReorder(int $id, string $direction): void
 	{
 		$this->ensureOwner();
@@ -148,7 +151,6 @@ final class CategoryListControl extends Control
 		$this->ajaxRedirect();
 	}
 
-
 	public function handleChangeStatus(int $id, string $status): void
 	{
 		$this->ensureOwner();
@@ -163,6 +165,7 @@ final class CategoryListControl extends Control
 				'error',
 			);
 			$this->ajaxRedirect();
+
 			return;
 		}
 
@@ -199,7 +202,6 @@ final class CategoryListControl extends Control
 		);
 		$this->ajaxRedirect();
 	}
-
 
 	public function handleDeleteAttachment(int $id): void
 	{
@@ -255,7 +257,6 @@ final class CategoryListControl extends Control
 		$this->ajaxRedirect();
 	}
 
-
 	public function handleDeleteItem(int $id): void
 	{
 		$this->ensureOwner();
@@ -286,7 +287,6 @@ final class CategoryListControl extends Control
 		);
 		$this->ajaxRedirect();
 	}
-
 
 	// ── Category form signals ──────────────────────────────────────────
 
@@ -325,7 +325,6 @@ final class CategoryListControl extends Control
 		$this->redrawControl('categoryFormModal');
 	}
 
-
 	public function handleEditCategory(int $id): void
 	{
 		$this->ensureOwner();
@@ -350,10 +349,9 @@ final class CategoryListControl extends Control
 		$this->redrawControl('categoryFormModal');
 	}
 
-
 	protected function createComponentCategoryForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addProtection();
 
 		$form->addHidden('editId');
@@ -395,7 +393,6 @@ final class CategoryListControl extends Control
 
 		return $form;
 	}
-
 
 	private function categoryFormSucceeded(Form $form, \stdClass $data): void
 	{
@@ -482,7 +479,6 @@ final class CategoryListControl extends Control
 		$this->ajaxRedirect();
 	}
 
-
 	// ── Item form signals ───────────────────────────────────────────────
 
 	public function handleShowItemForm(int $categoryId): void
@@ -516,7 +512,6 @@ final class CategoryListControl extends Control
 
 		$this->redrawControl('itemFormModal');
 	}
-
 
 	public function handleEditItem(int $id): void
 	{
@@ -566,10 +561,9 @@ final class CategoryListControl extends Control
 		$this->redrawControl('itemFormModal');
 	}
 
-
 	protected function createComponentItemForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addProtection();
 
 		$form->addHidden('editId');
@@ -627,7 +621,6 @@ final class CategoryListControl extends Control
 		return $form;
 	}
 
-
 	private function itemFormSucceeded(Form $form, \stdClass $data): void
 	{
 		$editId = $data->editId !== '' ? (int) $data->editId : null;
@@ -640,7 +633,7 @@ final class CategoryListControl extends Control
 		];
 
 		if ($this->canEditAmount && isset($data->amount)) {
-			$values['amount'] = $data->amount !== '' && $data->amount !== null
+			$values['amount'] = $data->amount !== ''
 				? (string) $data->amount
 				: null;
 		}
@@ -698,7 +691,6 @@ final class CategoryListControl extends Control
 		$this->ajaxRedirect();
 	}
 
-
 	/**
 	 * AJAX-aware redirect: redraw snippets for AJAX requests, redirect for standard requests.
 	 */
@@ -714,7 +706,6 @@ final class CategoryListControl extends Control
 		}
 	}
 
-
 	private function ensureOwner(): void
 	{
 		if (!$this->isOwner) {
@@ -724,7 +715,6 @@ final class CategoryListControl extends Control
 			);
 		}
 	}
-
 
 	private function loadCategory(int $id): ActiveRow
 	{

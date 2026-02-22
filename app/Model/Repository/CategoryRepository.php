@@ -8,52 +8,52 @@ use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-
 final class CategoryRepository
 {
 	public function __construct(
 		private Explorer $database,
-	) {
-	}
-
+	) {}
 
 	public function getTable(): Selection
 	{
 		return $this->database->table('category');
 	}
 
-
 	public function findById(int $id): ?ActiveRow
 	{
 		return $this->getTable()->get($id);
 	}
 
-
+	/**
+	 * @param array<string, mixed> $data
+	 */
 	public function insert(array $data): ActiveRow
 	{
 		return $this->getTable()->insert($data);
 	}
 
-
+	/**
+	 * @param array<string, mixed> $data
+	 */
 	public function update(int $id, array $data): void
 	{
 		$this->getTable()->where('id', $id)->update($data);
 	}
-
 
 	public function delete(int $id): void
 	{
 		$this->getTable()->where('id', $id)->delete();
 	}
 
-
 	/**
 	 * Find all categories for a project, sorted by status group then display_order.
+	 *
 	 * @return ActiveRow[]
 	 */
 	public function findByProject(int $projectId): array
 	{
-		return $this->database->query('
+		/** @var ActiveRow[] $result */
+		$result = $this->database->query('
 			SELECT * FROM category
 			WHERE project_id = ?
 			ORDER BY
@@ -66,16 +66,19 @@ final class CategoryRepository
 				display_order,
 				id
 		', $projectId, 'in_progress', 'planned', 'completed')->fetchAll();
-	}
 
+		return $result;
+	}
 
 	/**
 	 * Find root categories (parent_id IS NULL) for a project.
+	 *
 	 * @return ActiveRow[]
 	 */
 	public function findRootsByProject(int $projectId): array
 	{
-		return $this->database->query('
+		/** @var ActiveRow[] $result */
+		$result = $this->database->query('
 			SELECT * FROM category
 			WHERE project_id = ? AND parent_id IS NULL
 			ORDER BY
@@ -88,16 +91,19 @@ final class CategoryRepository
 				display_order,
 				id
 		', $projectId, 'in_progress', 'planned', 'completed')->fetchAll();
-	}
 
+		return $result;
+	}
 
 	/**
 	 * Find direct children of a category.
+	 *
 	 * @return ActiveRow[]
 	 */
 	public function findChildren(int $categoryId): array
 	{
-		return $this->database->query('
+		/** @var ActiveRow[] $result */
+		$result = $this->database->query('
 			SELECT * FROM category
 			WHERE parent_id = ?
 			ORDER BY
@@ -110,15 +116,17 @@ final class CategoryRepository
 				display_order,
 				id
 		', $categoryId, 'in_progress', 'planned', 'completed')->fetchAll();
-	}
 
+		return $result;
+	}
 
 	/**
 	 * Get next display_order value for new category in a specific status group.
 	 */
 	public function getNextDisplayOrder(int $projectId, ?int $parentId, string $status): int
 	{
-		$row = $this->database->query('
+		$row = $this->database->query(
+			'
 			SELECT COALESCE(MAX(display_order), -1) + 1 AS next_order
 			FROM category
 			WHERE project_id = ? AND status = ?
@@ -128,7 +136,6 @@ final class CategoryRepository
 
 		return $row ? (int) $row->next_order : 0;
 	}
-
 
 	/**
 	 * Reindex display_orders within a status group to maintain sequential 0, 1, 2, ...
@@ -148,9 +155,9 @@ final class CategoryRepository
 		}
 	}
 
-
 	/**
 	 * Swap display_order with neighbor in same status group.
+	 *
 	 * @return bool true if swap succeeded
 	 */
 	public function swapOrder(ActiveRow $category, string $direction): bool
@@ -198,7 +205,6 @@ final class CategoryRepository
 		return true;
 	}
 
-
 	/**
 	 * Sum item amounts for a category.
 	 */
@@ -208,9 +214,9 @@ final class CategoryRepository
 			'SELECT COALESCE(SUM(amount), 0) AS total FROM item WHERE category_id = ?',
 			$categoryId,
 		)->fetch();
+
 		return $row ? (string) $row->total : '0';
 	}
-
 
 	/**
 	 * Sum actual_amount of direct child categories.
@@ -221,12 +227,13 @@ final class CategoryRepository
 			'SELECT COALESCE(SUM(actual_amount), 0) AS total FROM category WHERE parent_id = ?',
 			$categoryId,
 		)->fetch();
+
 		return $row ? (string) $row->total : '0';
 	}
 
-
 	/**
 	 * Recursively delete category with all children.
+	 *
 	 * @return int|null parent_id of deleted category (for redirect)
 	 */
 	public function deleteRecursive(int $categoryId): ?int
@@ -255,7 +262,6 @@ final class CategoryRepository
 		return $parentId;
 	}
 
-
 	/**
 	 * Count categories for a project.
 	 */
@@ -266,11 +272,12 @@ final class CategoryRepository
 			->count('*');
 	}
 
-
 	/**
 	 * Build tree structure from flat array of categories.
+	 *
 	 * @param ActiveRow[] $categories
-	 * @return array tree with 'category' and 'children' keys
+	 *
+	 * @return array<int, array{category: ActiveRow, children: array<mixed>}> tree with 'category' and 'children' keys
 	 */
 	public function buildTree(array $categories): array
 	{

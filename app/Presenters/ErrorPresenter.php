@@ -15,14 +15,11 @@ use Nette\Http\IRequest;
 use Nette\Http\IResponse;
 use Tracy\ILogger;
 
-
 final class ErrorPresenter implements IPresenter
 {
 	public function __construct(
 		private ILogger $logger,
-	) {
-	}
-
+	) {}
 
 	public function run(Request $request): Response
 	{
@@ -30,6 +27,7 @@ final class ErrorPresenter implements IPresenter
 
 		if ($exception instanceof BadRequestException) {
 			[$module, , $sep] = Helpers::splitName($request->getPresenterName());
+
 			return new ForwardResponse($request->setPresenterName($module . $sep . 'Error4xx'));
 		}
 

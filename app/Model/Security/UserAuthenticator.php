@@ -12,16 +12,13 @@ use Nette\Security\IIdentity;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
 
-
 final class UserAuthenticator implements Authenticator
 {
 	public function __construct(
 		private UserRepository $userRepository,
 		private Passwords $passwords,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	public function authenticate(string $user, string $password): IIdentity
 	{
@@ -51,7 +48,7 @@ final class UserAuthenticator implements Authenticator
 		}
 
 		$profile = $this->userRepository->getProfile($row->id);
-		$displayName = trim(($profile?->first_name ?? '') . ' ' . ($profile?->last_name ?? ''));
+		$displayName = trim(($profile->first_name ?? '') . ' ' . ($profile->last_name ?? ''));
 		if ($displayName === '') {
 			$displayName = $row->email;
 		}

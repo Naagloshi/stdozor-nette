@@ -6,12 +6,11 @@ namespace App\Router;
 
 use Nette\Application\Routers\RouteList;
 
-
 final class RouterFactory
 {
 	public static function createRouter(): RouteList
 	{
-		$router = new RouteList;
+		$router = new RouteList();
 
 		// Auth
 		$router->addRoute('prihlaseni', 'Sign:in');

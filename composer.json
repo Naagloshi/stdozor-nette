@@ -24,7 +24,9 @@
 	"require-dev": {
 		"nette/tester": "^2.5",
 		"phpstan/phpstan": "^2.0",
-		"mockery/mockery": "^1.6"
+		"mockery/mockery": "^1.6",
+		"phpstan/phpstan-nette": "^2.0",
+		"friendsofphp/php-cs-fixer": "^3.94"
 	},
 	"autoload": {
 		"psr-4": {
@@ -38,7 +40,9 @@
 	},
 	"scripts": {
 		"tester": "vendor/bin/tester tests -s -C",
-		"phpstan": "vendor/bin/phpstan analyse"
+		"phpstan": "vendor/bin/phpstan analyse",
+		"cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+		"cs-fix": "vendor/bin/php-cs-fixer fix"
 	},
 	"minimum-stability": "stable",
 	"config": {

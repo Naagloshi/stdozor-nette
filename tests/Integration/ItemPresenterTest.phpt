@@ -12,9 +12,9 @@ use App\Model\Repository\ItemRepository;
 use App\Model\Repository\ProjectMemberRepository;
 use App\Model\Repository\ProjectRepository;
 use App\Model\Repository\UserRepository;
+use Nette\Application\Request as AppRequest;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\Responses\TextResponse;
-use Nette\Application\Request as AppRequest;
 use Nette\Database\Explorer;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
@@ -111,7 +111,6 @@ register_shutdown_function(function () use ($db, $ownerId, $otherId, $projectId)
 	$db->table('user')->where('id', $otherId)->delete();
 });
 
-
 /**
  * Run Item presenter action without auth.
  */
@@ -126,9 +125,9 @@ function runItem(string $action, array $params = []): Nette\Application\Response
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 /**
  * Run Item presenter action as logged-in user.
@@ -150,9 +149,9 @@ function runItemAs(int $userId, string $email, string $action, array $params = [
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 // === Auth guard tests ===
 
@@ -163,14 +162,12 @@ test('actionCreate redirects to login when not authenticated', function () use (
 	Assert::contains('prihlaseni', $response->getUrl());
 });
 
-
 test('actionEdit redirects to login when not authenticated', function () use ($itemId) {
 	$response = runItem('edit', ['id' => $itemId]);
 
 	Assert::type(RedirectResponse::class, $response);
 	Assert::contains('prihlaseni', $response->getUrl());
 });
-
 
 // === Access control tests ===
 
@@ -182,7 +179,6 @@ test('actionCreate returns 403 for non-member', function () use ($otherId, $othe
 		403,
 	);
 });
-
 
 test('actionEdit returns 403 for non-owner', function () use ($otherId, $otherEmail, $itemId, $projectId, $memberRepo, $db) {
 	// Add other user as viewer (not owner)
@@ -204,7 +200,6 @@ test('actionEdit returns 403 for non-owner', function () use ($otherId, $otherEm
 	$memberRepo->findByProjectAndUser($projectId, $otherId)?->delete();
 });
 
-
 // === 404 tests ===
 
 test('actionCreate returns 404 for nonexistent category', function () use ($ownerId, $ownerEmail) {
@@ -216,7 +211,6 @@ test('actionCreate returns 404 for nonexistent category', function () use ($owne
 	);
 });
 
-
 test('actionEdit returns 404 for nonexistent item', function () use ($ownerId, $ownerEmail) {
 	Assert::exception(
 		fn() => runItemAs($ownerId, $ownerEmail, 'edit', ['id' => 999999]),
@@ -225,7 +219,6 @@ test('actionEdit returns 404 for nonexistent item', function () use ($ownerId, $
 		404,
 	);
 });
-
 
 // === Rendering tests ===
 
@@ -242,7 +235,6 @@ test('actionCreate renders form for owner', function () use ($ownerId, $ownerEma
 	Assert::contains('name="includeInConstructionLog"', $html);
 });
 
-
 test('actionEdit renders form with defaults for owner', function () use ($ownerId, $ownerEmail, $itemId) {
 	$response = runItemAs($ownerId, $ownerEmail, 'edit', ['id' => $itemId]);
 
@@ -253,7 +245,6 @@ test('actionEdit renders form with defaults for owner', function () use ($ownerI
 	Assert::contains('2026-02-20', $html);
 });
 
-
 // === Form structure tests ===
 
 test('itemForm has all fields for owner', function () use ($presenterFactory, $ownerId, $ownerEmail, $categoryId) {
@@ -261,7 +252,9 @@ test('itemForm has all fields for owner', function () use ($presenterFactory, $o
 	$presenter->autoCanonicalize = false;
 
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Item', 'GET', ['action' => 'create', 'categoryId' => $categoryId]);
@@ -279,7 +272,6 @@ test('itemForm has all fields for owner', function () use ($presenterFactory, $o
 	Assert::true(isset($form['send']));
 });
 
-
 test('itemForm hides amount and flags for viewer', function () use ($presenterFactory, $otherId, $otherEmail, $categoryId, $projectId, $db, $memberRepo) {
 	// Add other user as viewer
 	$db->table('project_member')->insert([
@@ -293,7 +285,9 @@ test('itemForm hides amount and flags for viewer', function () use ($presenterFa
 	$presenter->autoCanonicalize = false;
 
 	$presenter->getUser()->login(new SimpleIdentity(
-		$otherId, ['ROLE_USER'], ['email' => $otherEmail, 'displayName' => $otherEmail],
+		$otherId,
+		['ROLE_USER'],
+		['email' => $otherEmail, 'displayName' => $otherEmail],
 	));
 
 	$request = new AppRequest('Item', 'GET', ['action' => 'create', 'categoryId' => $categoryId]);

@@ -12,9 +12,9 @@ use App\Model\Repository\ItemRepository;
 use App\Model\Repository\ProjectMemberRepository;
 use App\Model\Repository\ProjectRepository;
 use App\Model\Repository\UserRepository;
+use Nette\Application\Request as AppRequest;
 use Nette\Application\Responses\RedirectResponse;
 use Nette\Application\Responses\TextResponse;
-use Nette\Application\Request as AppRequest;
 use Nette\Database\Explorer;
 use Nette\Security\Passwords;
 use Nette\Security\SimpleIdentity;
@@ -91,7 +91,6 @@ register_shutdown_function(function () use ($db, $ownerId, $otherId, $projectId)
 	$db->table('user')->where('id', $otherId)->delete();
 });
 
-
 /**
  * Run presenter action without auth.
  */
@@ -106,9 +105,9 @@ function runProject(string $action, array $params = []): Nette\Application\Respo
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 /**
  * Run presenter action as logged-in user.
@@ -130,9 +129,9 @@ function runProjectAs(int $userId, string $email, string $action, array $params 
 		'GET',
 		array_merge(['action' => $action], $params),
 	);
+
 	return $presenter->run($request);
 }
-
 
 // === Auth guard tests ===
 
@@ -143,14 +142,12 @@ test('actionDefault redirects to login when not authenticated', function () {
 	Assert::contains('prihlaseni', $response->getUrl());
 });
 
-
 test('actionCreate redirects to login when not authenticated', function () {
 	$response = runProject('create');
 
 	Assert::type(RedirectResponse::class, $response);
 	Assert::contains('prihlaseni', $response->getUrl());
 });
-
 
 test('actionShow redirects to login when not authenticated', function () use ($projectId) {
 	$response = runProject('show', ['id' => $projectId]);
@@ -159,14 +156,12 @@ test('actionShow redirects to login when not authenticated', function () use ($p
 	Assert::contains('prihlaseni', $response->getUrl());
 });
 
-
 test('actionEdit redirects to login when not authenticated', function () use ($projectId) {
 	$response = runProject('edit', ['id' => $projectId]);
 
 	Assert::type(RedirectResponse::class, $response);
 	Assert::contains('prihlaseni', $response->getUrl());
 });
-
 
 // === Rendering tests ===
 
@@ -178,7 +173,6 @@ test('actionDefault renders project list for logged-in user', function () use ($
 	Assert::contains('Presenter Test Projekt', $html);
 });
 
-
 test('actionCreate renders form', function () use ($ownerId, $ownerEmail) {
 	$response = runProjectAs($ownerId, $ownerEmail, 'create');
 
@@ -187,7 +181,6 @@ test('actionCreate renders form', function () use ($ownerId, $ownerEmail) {
 	Assert::contains('name="name"', $html);
 	Assert::contains('name="description"', $html);
 });
-
 
 test('actionShow renders project detail for member', function () use ($ownerId, $ownerEmail, $projectId) {
 	$response = runProjectAs($ownerId, $ownerEmail, 'show', ['id' => $projectId]);
@@ -198,7 +191,6 @@ test('actionShow renders project detail for member', function () use ($ownerId, 
 	Assert::contains('Testovací ulice 1', $html);
 });
 
-
 test('actionShow returns 403 for non-member', function () use ($otherId, $otherEmail, $projectId) {
 	Assert::exception(
 		fn() => runProjectAs($otherId, $otherEmail, 'show', ['id' => $projectId]),
@@ -207,7 +199,6 @@ test('actionShow returns 403 for non-member', function () use ($otherId, $otherE
 		403,
 	);
 });
-
 
 test('actionShow returns 404 for nonexistent project', function () use ($ownerId, $ownerEmail) {
 	Assert::exception(
@@ -218,7 +209,6 @@ test('actionShow returns 404 for nonexistent project', function () use ($ownerId
 	);
 });
 
-
 test('actionEdit renders for owner', function () use ($ownerId, $ownerEmail, $projectId) {
 	$response = runProjectAs($ownerId, $ownerEmail, 'edit', ['id' => $projectId]);
 
@@ -227,7 +217,6 @@ test('actionEdit renders for owner', function () use ($ownerId, $ownerEmail, $pr
 	Assert::contains('name="name"', $html);
 	Assert::contains('value="Presenter Test Projekt"', $html);
 });
-
 
 test('actionEdit returns 403 for non-owner', function () use ($otherId, $otherEmail, $projectId) {
 	Assert::exception(
@@ -238,7 +227,6 @@ test('actionEdit returns 403 for non-owner', function () use ($otherId, $otherEm
 	);
 });
 
-
 // === Form structure tests ===
 
 test('projectForm has correct structure', function () use ($presenterFactory, $ownerId, $ownerEmail) {
@@ -246,7 +234,9 @@ test('projectForm has correct structure', function () use ($presenterFactory, $o
 	$presenter->autoCanonicalize = false;
 
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Project', 'GET', ['action' => 'create']);
@@ -267,7 +257,6 @@ test('projectForm has correct structure', function () use ($presenterFactory, $o
 	Assert::true(isset($form['send']));
 });
 
-
 // === CategoryListControl signal tests ===
 
 test('categoryList-delete signal deletes category and redirects', function () use ($catRepo, $projectId, $ownerId, $ownerEmail, $presenterFactory) {
@@ -283,7 +272,9 @@ test('categoryList-delete signal deletes category and redirects', function () us
 	$presenter = $presenterFactory->createPresenter('Project');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Project', 'GET', [
@@ -298,7 +289,6 @@ test('categoryList-delete signal deletes category and redirects', function () us
 	Assert::null($catRepo->findById($tempCat->id));
 });
 
-
 test('categoryList-changeStatus signal changes status and redirects', function () use ($catRepo, $projectId, $ownerId, $ownerEmail, $presenterFactory) {
 	$cat = $catRepo->insert([
 		'name' => 'Signal Status Change',
@@ -312,7 +302,9 @@ test('categoryList-changeStatus signal changes status and redirects', function (
 	$presenter = $presenterFactory->createPresenter('Project');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Project', 'GET', [
@@ -334,7 +326,6 @@ test('categoryList-changeStatus signal changes status and redirects', function (
 	$catRepo->delete($cat->id);
 });
 
-
 test('categoryList-changeStatus rejects invalid transition', function () use ($catRepo, $projectId, $ownerId, $ownerEmail, $presenterFactory) {
 	$cat = $catRepo->insert([
 		'name' => 'Signal Invalid Transition',
@@ -348,7 +339,9 @@ test('categoryList-changeStatus rejects invalid transition', function () use ($c
 	$presenter = $presenterFactory->createPresenter('Project');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Project', 'GET', [
@@ -370,7 +363,6 @@ test('categoryList-changeStatus rejects invalid transition', function () use ($c
 	$catRepo->delete($cat->id);
 });
 
-
 test('categoryList-reorder signal returns redirect', function () use ($catRepo, $projectId, $ownerId, $ownerEmail, $presenterFactory) {
 	$cat = $catRepo->insert([
 		'name' => 'Signal Reorder',
@@ -384,7 +376,9 @@ test('categoryList-reorder signal returns redirect', function () use ($catRepo, 
 	$presenter = $presenterFactory->createPresenter('Project');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Project', 'GET', [
@@ -401,7 +395,6 @@ test('categoryList-reorder signal returns redirect', function () use ($catRepo, 
 	// Clean up
 	$catRepo->delete($cat->id);
 });
-
 
 test('categoryList-delete signal returns 403 for non-owner', function () use ($catRepo, $projectId, $otherId, $otherEmail, $ownerId, $ownerEmail, $presenterFactory, $memberRepo, $db) {
 	$cat = $catRepo->insert([
@@ -424,7 +417,9 @@ test('categoryList-delete signal returns 403 for non-owner', function () use ($c
 	$presenter = $presenterFactory->createPresenter('Project');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$otherId, ['ROLE_USER'], ['email' => $otherEmail, 'displayName' => $otherEmail],
+		$otherId,
+		['ROLE_USER'],
+		['email' => $otherEmail, 'displayName' => $otherEmail],
 	));
 
 	Assert::exception(function () use ($presenter, $projectId, $cat) {
@@ -441,7 +436,6 @@ test('categoryList-delete signal returns 403 for non-owner', function () use ($c
 	$catRepo->delete($cat->id);
 	$memberRepo->findByProjectAndUser($projectId, $otherId)?->delete();
 });
-
 
 // === CategoryListControl deleteItem signal tests ===
 
@@ -467,7 +461,9 @@ test('categoryList-deleteItem signal deletes item and redirects', function () us
 	$presenter = $presenterFactory->createPresenter('Project');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$ownerId, ['ROLE_USER'], ['email' => $ownerEmail, 'displayName' => $ownerEmail],
+		$ownerId,
+		['ROLE_USER'],
+		['email' => $ownerEmail, 'displayName' => $ownerEmail],
 	));
 
 	$request = new AppRequest('Project', 'GET', [
@@ -484,7 +480,6 @@ test('categoryList-deleteItem signal deletes item and redirects', function () us
 	// Clean up
 	$catRepo->delete($cat->id);
 });
-
 
 test('categoryList-deleteItem signal returns 403 for non-owner', function () use ($catRepo, $itemRepo, $projectId, $otherId, $otherEmail, $ownerId, $presenterFactory, $memberRepo, $db) {
 	$cat = $catRepo->insert([
@@ -515,7 +510,9 @@ test('categoryList-deleteItem signal returns 403 for non-owner', function () use
 	$presenter = $presenterFactory->createPresenter('Project');
 	$presenter->autoCanonicalize = false;
 	$presenter->getUser()->login(new SimpleIdentity(
-		$otherId, ['ROLE_USER'], ['email' => $otherEmail, 'displayName' => $otherEmail],
+		$otherId,
+		['ROLE_USER'],
+		['email' => $otherEmail, 'displayName' => $otherEmail],
 	));
 
 	Assert::exception(function () use ($presenter, $projectId, $item) {

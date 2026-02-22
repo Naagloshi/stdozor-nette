@@ -7,17 +7,15 @@ namespace App\Model\Security;
 use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 
-
 final class EmailVerificationService
 {
 	public function __construct(
 		private Explorer $database,
-	) {
-	}
-
+	) {}
 
 	/**
 	 * Create a verification token for the given user.
+	 *
 	 * @return string the 64-char hex token
 	 */
 	public function createToken(int $userId): string
@@ -35,10 +33,11 @@ final class EmailVerificationService
 		return $token;
 	}
 
-
 	/**
 	 * Verify a token and mark the user as verified.
+	 *
 	 * @return ActiveRow the user row
+	 *
 	 * @throws \RuntimeException on invalid/expired/used token
 	 */
 	public function verify(string $tokenString): ActiveRow

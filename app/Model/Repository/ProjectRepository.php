@@ -8,29 +8,26 @@ use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-
 final class ProjectRepository
 {
 	public function __construct(
 		private Explorer $database,
-	) {
-	}
-
+	) {}
 
 	public function getTable(): Selection
 	{
 		return $this->database->table('project');
 	}
 
-
 	public function findById(int $id): ?ActiveRow
 	{
 		return $this->getTable()->get($id);
 	}
 
-
 	/**
 	 * Find all projects where user is a member, ordered by status then created_at DESC.
+	 *
+	 * @return array<\Nette\Database\Row>
 	 */
 	public function findByUser(int $userId): array
 	{
@@ -52,24 +49,26 @@ final class ProjectRepository
 		', 'planning', 'active', 'paused', 'completed', 'cancelled', $userId)->fetchAll();
 	}
 
-
+	/**
+	 * @param array<string, mixed> $data
+	 */
 	public function insert(array $data): ActiveRow
 	{
 		return $this->getTable()->insert($data);
 	}
 
-
+	/**
+	 * @param array<string, mixed> $data
+	 */
 	public function update(int $id, array $data): void
 	{
 		$this->getTable()->where('id', $id)->update($data);
 	}
 
-
 	public function delete(int $id): void
 	{
 		$this->getTable()->where('id', $id)->delete();
 	}
-
 
 	public function getCategoryCount(int $projectId): int
 	{

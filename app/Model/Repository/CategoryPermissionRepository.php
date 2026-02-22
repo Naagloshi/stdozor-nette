@@ -8,23 +8,20 @@ use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
-
 final class CategoryPermissionRepository
 {
 	public function __construct(
 		private Explorer $database,
-	) {
-	}
-
+	) {}
 
 	public function getTable(): Selection
 	{
 		return $this->database->table('category_permission');
 	}
 
-
 	/**
 	 * Get all permissions for a member.
+	 *
 	 * @return ActiveRow[]
 	 */
 	public function findByMember(int $projectMemberId): array
@@ -33,7 +30,6 @@ final class CategoryPermissionRepository
 			->where('project_member_id', $projectMemberId)
 			->fetchAll();
 	}
-
 
 	/**
 	 * Grant category access to a member.
@@ -57,7 +53,6 @@ final class CategoryPermissionRepository
 		]);
 	}
 
-
 	/**
 	 * Revoke all category permissions for a member.
 	 */
@@ -68,9 +63,9 @@ final class CategoryPermissionRepository
 			->delete();
 	}
 
-
 	/**
 	 * Get flat array of category IDs that a member has access to.
+	 *
 	 * @return int[]
 	 */
 	public function getCategoryIdsForMember(int $projectMemberId): array

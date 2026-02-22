@@ -13,13 +13,13 @@ use Contributte\Translation\Translator;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 
-
 final class CategoryPresenter extends BasePresenter
 {
 	private ?ActiveRow $project = null;
-	private ?ActiveRow $category = null;
-	private ?int $parentId = null;
 
+	private ?ActiveRow $category = null;
+
+	private ?int $parentId = null;
 
 	public function __construct(
 		private CategoryRepository $categoryRepository,
@@ -27,9 +27,7 @@ final class CategoryPresenter extends BasePresenter
 		private ProjectMemberRepository $memberRepository,
 		private CategoryAmountCalculator $amountCalculator,
 		private Translator $translator,
-	) {
-	}
-
+	) {}
 
 	public function actionCreate(int $projectId, ?int $parentId = null): void
 	{
@@ -57,7 +55,6 @@ final class CategoryPresenter extends BasePresenter
 		}
 	}
 
-
 	public function renderCreate(int $projectId, ?int $parentId = null): void
 	{
 		$this->template->project = $this->project;
@@ -66,7 +63,6 @@ final class CategoryPresenter extends BasePresenter
 			$this->template->parentCategory = $this->categoryRepository->findById($this->parentId);
 		}
 	}
-
 
 	public function actionEdit(int $id): void
 	{
@@ -94,17 +90,15 @@ final class CategoryPresenter extends BasePresenter
 		]);
 	}
 
-
 	public function renderEdit(int $id): void
 	{
 		$this->template->category = $this->category;
 		$this->template->project = $this->project;
 	}
 
-
 	protected function createComponentCategoryForm(): Form
 	{
-		$form = new Form;
+		$form = new Form();
 		$form->addProtection();
 
 		$form->addText('name', $this->translator->translate('messages.category.form.name'))
@@ -136,7 +130,6 @@ final class CategoryPresenter extends BasePresenter
 
 		return $form;
 	}
-
 
 	private function categoryFormSucceeded(Form $form, \stdClass $data): void
 	{

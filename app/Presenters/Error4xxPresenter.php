@@ -7,7 +7,6 @@ namespace App\Presenters;
 use Nette\Application\BadRequestException;
 use Nette\Application\Request;
 
-
 final class Error4xxPresenter extends BasePresenter
 {
 	public function startup(): void
@@ -18,7 +17,6 @@ final class Error4xxPresenter extends BasePresenter
 			$this->error();
 		}
 	}
-
 
 	public function renderDefault(BadRequestException $exception): void
 	{
